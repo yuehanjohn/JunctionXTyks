@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/*
+  AEI design language — "lab report, live".
+  Instrument-quiet chrome; petrol accent for interactive elements only;
+  green/amber/red carry susceptibility semantics and nothing else.
+*/
+:root {
+  --background: #f5f6f7;
+  --foreground: #14171c;
+  --card: #ffffff;
+  --card-foreground: #14171c;
+  --muted: #eef0f2;
+  --muted-foreground: #5b6472;
+  --border: #e3e6ea;
+  --primary: #0f6b7c;
+  --primary-foreground: #ffffff;
+  --success: #177245;
+  --warning: #a85b00;
+  --danger: #b3261e;
+  --ring: #0f6b7c;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}

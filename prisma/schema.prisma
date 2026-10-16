@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Patient {
+  id       String    @id
+  sex      String
+  birthYear Int
+  cultures Culture[]
+}
+
+model Culture {
+  id         String    @id
+  patientId  String
+  sampleType String
+  ward       String
+  takenAt    DateTime
+  patient    Patient   @relation(fields: [patientId], references: [id])
+  isolates   Isolate[]
+
+  @@index([takenAt])
+  @@index([ward, takenAt])
+  @@index([sampleType])
+}
+
+model Isolate {
+  id              String          @id
+  cultureId       String
+  organism        String
+  culture         Culture         @relation(fields: [cultureId], references: [id])
+  susceptibilities Susceptibility[]
+
+  @@index([cultureId])
+  @@index([organism])
+}
+
+model Susceptibility {
+  id        String  @id
+  isolateId String
+  antibiotic String
+  result    String // "S" | "I" | "R"
+  isolate   Isolate @relation(fields: [isolateId], references: [id])
+
+  @@index([isolateId])
+  @@index([antibiotic])
+}
