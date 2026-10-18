@@ -1,7 +1,7 @@
 // HTTP journey smoke: probe every page + API against a running server
-// (default http://localhost:3777). Usage: npx tsx scripts/smoke-http.ts [baseUrl]
+// (default http://localhost:3000). Usage: npx tsx scripts/smoke-http.ts [baseUrl]
 
-const BASE = process.argv[2] ?? "http://localhost:3777";
+const BASE = process.argv[2] ?? "http://localhost:3000";
 
 interface Probe {
   path: string;

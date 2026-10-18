@@ -34,7 +34,7 @@ All GET, all `force-dynamic`, JSON: `/api/meta`, `/api/overview`, `/api/heatmap?
 
 - Next.js 15 (App Router) + TypeScript strict + Tailwind CSS v4
 - Prisma ORM. Datasource is **SQLite** for the zero-setup mock-up — switch `provider` to `"postgresql"` in `prisma/schema.prisma` and set `DATABASE_URL` for production; no query changes needed.
-- recharts for trend charts. Dev server on port **3777**.
+- recharts for trend charts. Dev server on port **3000**.
 
 ## Data
 
@@ -53,13 +53,13 @@ susceptibilities.csv  susceptibility_id,isolate_id,antibiotic,result
 pnpm install
 pnpm db:reset   # push schema + seed (imports ./data CSVs; generates synthetic CSVs if absent)
 pnpm test       # vitest: unit tests (stats math) + integration tests (service layer vs seeded DB)
-pnpm dev        # dev server: http://localhost:3777
+pnpm dev        # dev server: http://localhost:3000
 ```
 
 Production (recommended — the stats cache warms at boot and pages load from the prebuilt bundle):
 
 ```bash
-pnpm build && pnpm start   # http://localhost:3777
+pnpm build && pnpm start   # http://localhost:3000
 ```
 
 HTTP journey smoke against a running server: `npx tsx scripts/smoke-http.ts`.

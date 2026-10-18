@@ -1,0 +1,11 @@
+# cuts from events film/draft.mp4.events.json (time s, frame, timecode, source)
+5.000	frame 150	0:05.00	event cut 'hide #s1 show #s2'
+11.000	frame 330	0:11.00	event cut 'hide #s2 show #s3'
+16.000	frame 480	0:16.00	event cut 'hide #s3 show #s4'
+20.000	frame 600	0:20.00	event cut 'hide #s4 show #s5'
+28.000	frame 840	0:28.00	event cut 'hide #s5 show #s6'
+38.000	frame 1140	0:38.00	event cut 'hide #s6 show #s7'
+48.000	frame 1440	0:48.00	event cut 'hide #s7 show #s8'
+50.000	frame 1500	0:50.00	event show '#cursor'
+55.500	frame 1665	0:55.50	event cut 'hide #s8 show #s9'
+62.000	frame 1860	1:02.00	event cut 'hide #s9 show #s10'
