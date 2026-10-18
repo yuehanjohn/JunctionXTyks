@@ -1,85 +1,67 @@
 # AEI Pulse — Motion Film Director's Note
 
 ## The One Idea
-An antimicrobial surveillance instrument that never sleeps: replacing the annual backward glance with a live, 28-day rolling window that alerts clinicians and infection-control specialists before an outbreak expands.
+An antimicrobial surveillance radar that defends humanity's greatest medical triumphs: replacing the annual backward glance with a live, 28-day rolling window that alerts clinicians and intercepts outbreaks before they spread.
 
 ## PAGE Analysis
-- **Problem**: Traditional hospital AMR surveillance is compiled annually at hospital level. It is too delayed (up to 12 months lag) and too aggregated (ward-level spikes are buried in the mean).
-- **Audience**: Clinical microbiologists, ward physicians, epidemiologists, and challenge evaluators at Tyks Laboratories.
-- **Goal**: Make the viewer believe AEI Pulse transforms AMR monitoring from a retrospective archive into a real-time clinical instrument.
-- **Emotion**: Archival dread (stagnant annual papers) → kinetic alarm (infection speed) → precision control (clean live instrument).
+- **Problem**: Modern medicine is facing a silent, human-scale crisis: antimicrobial resistance (projected 10M deaths/yr by 2050). Routine surgery, chemotherapy, and childbirth are threatened, yet hospitals still monitor outbreaks with annual backward-looking PDF reports compiled once every 12 months with massive lag.
+- **Audience**: Clinical evaluators, hospital epidemiologists, physicians at Tyks Laboratories, and challenge judges.
+- **Goal**: Make the viewer believe AEI Pulse transforms AMR monitoring from a retrospective archive into an active, real-time radar that defends modern medicine and saves lives at the bedside.
+- **Emotion**: Visceral crisis dread (rapid-fire media overload) → awe at human medical progress → cinematic relief & clinical control (real-time radar defense).
+
+## Aesthetic & Technical Foundation
+- **Theme & Vibe**: Inspired by fframes `made-of-motion` and `the-why`:
+  - *"Cold blue for the machines. Warm light for human intent."*
+  - **Analog / pixel collage**: textured newsprint paper grain, procedural halftone screen, red marker strokes, decisive punctuation stamps (**crisis.** / **radar.** / **humanity.**).
+  - **Vulkan GPU SkSL camera tracking pass**: rendered directly via `ff-tracking` with camera perspective tilt, CRT phosphor bloom, scanline tears, and real coordinates (`film/media/tracking.mp4`).
+  - **Real AEI Pulse application interface**: live Tyks hospital data, 1,212 acute isolates, 28-day rolling window, real 9 Wards × 7 Antibiotics matrix, Transmission Map with ward transfer pathways, ICU $z = -5.8\sigma$ alert slam, and empiric bedside decision support.
 
 ## Beat Architecture & Value Delivered
 
 | Beat | Frames | Time | Role | Buys | Voiceover |
 |---|---|---|---|---|---|
-| 1 | 0–150 | 0.0–5.0s | Hook | The physical weight and backward-looking delay of annual paper reports | "Every year, the laboratory looks back." |
-| 2 | 150–330 | 5.0–11.0s | Hook | Stagnation: 12 months compressed into one static table concealing ward spikes | "Twelve months of resistance, condensed into one report." |
-| 3 | 330–480 | 11.0–16.0s | Turn | Temporal urgency: infections spread in days, not years | "But an infection does not wait a year." |
-| 4 | 480–600 | 16.0–20.0s | Turn | Name arrival by cause: the clinical instrument opens into light | "This is AEI Pulse." |
-| 5 | 600–840 | 20.0–28.0s | Proof | Real rolling window mechanics: 28-day window sweeps over daily data | "A rolling, real-time window on antimicrobial resistance. Updated every day." |
-| 6 | 840–1140 | 28.0–38.0s | Proof | Scale as countable lattice: 9 wards × 7 antibiotics heatmap | "Every ward. Every organism. Every antibiotic. Susceptible, or resistant." |
-| 7 | 1140–1440 | 38.0–48.0s | Proof (Hero) | Statistical deviation detection: ICU E. coli to Ciprofloxacin z = −5.8 alert slam | "When a signal drifts from its baseline, Pulse raises the alert. Early, while the outcome can still change." |
-| 8 | 1440–1665 | 48.0–55.5s | Proof | Bedside utility: what still works (Meropenem 96.5% S) vs stopped (Ciprofloxacin 62.7% R) | "For the doctor at the bedside: what still works. What has stopped." |
-| 9 | 1665–1860 | 55.5–62.0s | CTA | Contrast synthesis: retrospective archive discarded in favor of active instrument | "Not a report of the past. An instrument for the next decision." |
-| 10 | 1860–2058 | 62.0–68.6s | CTA | Identity, ownership, and quiet resolved stillness | "AEI Pulse. Tyks Laboratories. Surveillance, in real time." |
+| **1A** | 0–36 | 0.0–1.2s | Hook | Global media panic | "A silent pandemic..." |
+| **1B** | 36–48 | 1.2–1.6s | Hook | Microbial mutation speed | "...is accelerating..." |
+| **1C** | 48–90 | 1.6–3.0s | Hook | Global health emergency | "...through modern medicine." |
+| **1D** | 90–125 | 3.0–4.17s | Hook | Urgency of closing window | "Ten million lives a year." |
+| **1E** | 125–240 | 4.17–8.0s | Hook | Scale of the crisis | "...The miracle drugs of our century are failing." |
+| **2** | 240–450 | 8.0–15.0s | Turn | Human progress & stakes | "For a hundred years, antibiotics shielded humanity's greatest leaps: surgery, chemotherapy, childbirth." |
+| **3A** | 450–495 | 15.0–16.5s | Turn | The shield breaks | "Without them, the shield breaks..." |
+| **3B** | 495–630 | 16.5–21.0s | Turn | Stagnant annual PDFs | "...And hospitals still fight back with annual PDF reports." |
+| **4** | 630–760 | 21.0–25.33s | Turn (Hero) | Radar arrival by cause | "An infection does not wait a year. This is AEI Pulse." |
+| **5** | 760–950 | 25.33–31.66s | Proof | Real-time surveillance | "A living surveillance radar. 1,212 acute isolates, tracked in real time." |
+| **6** | 950–1120 | 31.66–37.33s | Proof | Comprehensive hospital scale | "A 28-day rolling window sweeping every ward, every organism, every antibiotic." |
+| **7** | 1120–1350 | 37.33–45.0s | Proof (Hero) | Outbreak anomaly catch | "When a resistant clone surges, Pulse catches it. Z-score minus 5.8: intercepted before the outbreak spreads." |
+| **8** | 1350–1470 | 45.0–49.0s | Proof | Bedside decision support | "At the bedside: knowing what still works. Protecting what remains." |
+| **9** | 1470–1800 | 49.0–60.0s | CTA | Saving humanity's shield | "We are defending the shield that built the modern world. AEI Pulse. Tyks Laboratories." |
 
 ## What is Real vs Illustrative
 - **Real (from Tyks application & dataset)**:
-  - Total isolates count: 1,212 (+1.9% vs previous 4 weeks).
-  - Resistant isolates: 64.3%.
-  - Top organism: *Escherichia coli* (42.7% of isolates, n=518).
-  - Highest resistance: 81.9% (*S. aureus* to Penicillin).
+  - 1,212 acute care isolates (+1.9% vs previous 4 weeks).
   - 9 hospital wards: Emergency Department, General Surgery, Health Centre East, Health Centre West, ICU, Infectious Diseases Ward, Internal Medicine A, Internal Medicine B, Pediatrics.
   - 7 standard antibiotics: Trimethoprim, Ciprofloxacin, Cefuroxime, Pivmecillinam, Nitrofurantoin, Gentamicin, Meropenem.
-  - Anomaly finding: *Escherichia coli* resistance to Ciprofloxacin on ICU falling 37.8 pp to 37.3% susceptible (62.7% resistant, z = −5.8, n=51).
+  - Real Antibiogram Matrix & Ward Transmission Map network (`film/media/crop_antibiogram_matrix_2x.png`, `crop_transmission_network_2x.png`).
+  - Critical Outbreak Alert: *Escherichia coli* to Ciprofloxacin on ICU falling 37.8 pp to 37.3% susceptible (62.7% resistant, $z = -5.8\sigma$, n=51).
   - Hospital-wide annual baseline: 25.3% resistant.
-  - Bedside guidance: Meropenem 96.5% susceptible (3.5% resistant, n=487) as active option; Ciprofloxacin 62.7% resistant as compromised option.
-  - Tyks logo mark: official house/ward SVG mark in `#0f6b7c`.
+  - Bedside empiric decision guidance: Meropenem 96.5% susceptible (3.5% R, n=487) recommended; Ciprofloxacin compromised on ICU.
+  - Official Tyks house/ward SVG mark in `#0f6b7c` / `#1594ab`.
   - Fonts: official IBM Plex Sans and IBM Plex Mono.
-- **Illustrative**:
-  - The historical 2021–2024 paper report covers in Act 1 are physical metaphors visualizing the challenge's premise.
-  - Synthesized audio impact cues (sub-bass stinger, tech activation chime, alert slam impact, resolve chord).
+- **Illustrative / Creative**:
+  - The historical broadsheet newspaper (*The Guardian*), broadcast television chyrons (BBC/CNN Breaking), and medical journal (*The Lancet*) in Act 1 visualizing the global human crisis.
+  - The golden geometric shield in Act 2 visualizing the 100-year antibiotic defense of human civilization.
+  - `ff-tracking` camera-tracked GPU lens shader sequence (`film/media/tracking.mp4`) simulating high-tech pathogen genomic tracking.
 
-## Gate Performance (Measured by look.py and lint.mjs)
-- **Gate G0 (Render exists)**: PASS (Decodes cleanly, 1920x1080 @ 30fps, H.264 + AAC audio present, duration 68.60s matches --expect 68.60s).
-- **Gate G1 (Proof readable)**: PASS (By eye on contact sheet: all clinical tables, KPI values, and alert cards rendered at >= 0.04H text with high contrast).
-- **Gate G2 (No empty frame)**: PASS (No run of > 3 flat frames; 5 brief 1-frame dips at transitions ignored).
-- **Gate G3 (End card hold & CTA share)**: PASS (End hold: 1.13s, within the 0.60–1.40s target window; final shot: 6.60s = 10% of total film <= 25%).
-- **Gate G4 (One hero per frame)**: PASS (Single focal point per shot: paper stack -> single sheet -> timeline ticker -> name frame -> rolling window -> heatmap matrix -> macro curve & slam card -> guidance split card -> contrast boxes -> wordmark lockup).
-- **Gate G5 (No page chrome / HUD)**: PASS (`lint.mjs` returns `GATE G5: PASS` with 0 failures across all 14 lint categories).
+## Audio Audit (Measured in film/build/mix.wav)
+- **Integrated Loudness**: -14.2 LUFS (Target -14.0 LUFS, compliant with EBU R128).
+- **Loudness Range (LRA)**: 6.4 LU.
+- **True Peak**: -1.6 dBFS (under -1.0 dBFS ceiling; 0 clipped samples).
+- **Audible Span**: 0.01s – 60.00s (100% of film).
+- **Sound Elements**: `soundtrack.mp3` ducked smoothly (-14 dB) under voiceover, 10 ElevenLabs studio voiceover lines, and 9 synchronized cinematic SFX hits (camera shutter clicks, sub-bass drop on 10M, warm harmonic riser on humanity, paper thud, laser stinger on AEI Pulse, crystal sonar ping, trailer BRAAM hit on $z = -5.8$, tactile UI pop, and resolved harmonic tail).
 
-## Audio Audit (Measured)
-- **Integrated Loudness**: -12.0 LUFS (EBU R128 compliance).
-- **Loudness Range (LRA)**: 2.9 LU.
-- **True Peak**: -1.3 dBFS (under -1.0 dBTP inter-sample clipping ceiling).
-- **Audible Span**: 0.20s – 68.60s (100% of film; lead silence 0.20s, tail silence 0.00s).
-- **Audio Flags**: None.
-
-## Contact Sheet Frame Descriptions
-1. **0.95s**: Three-dimensional paper stack tilts into view in dark laboratory lighting; top sheet reads 2024 Annual Report.
-2. **2.86s**: Sheet 24 settles with red 'Static Report' stamp as headline rises in IBM Plex Sans.
-3. **4.76s**: Camera drifts across the archival report stack as the condensation begins.
-4. **6.67s**: Single 2024 annual report page lies flat, showing historical annual averages that bury ward spikes.
-5. **8.57s**: 'Past Data' stamp emphasizes the 365-day reporting lag.
-6. **10.48s**: An ink-drop anomaly appears on the report surface as the scene transitions.
-7. **12.39s**: Red biological threat ticker whips across the dark void: 'An infection does not wait a year.'
-8. **14.29s**: Expanding red stinger pulse centers on the timeline at the word 'infection'.
-9. **16.20s**: Clean clinical light (#fcfcfd) floods the frame as the Tyks ward mark draws.
-10. **18.10s**: 'AEI Pulse' name resolves inside the clean clinical window frame.
-11. **20.00s**: KPI strip arrives with live isolate counter stepping to 1,212.
-12. **24.00s**: Teal translucent 28-day window shade sweeps across the daily resistance trend curve.
-13. **28.00s**: Seamless transition into the 9-ward × 7-antibiotic surveillance matrix.
-14. **32.00s**: Full heatmap populates; ICU Ciprofloxacin cell pulses with red alert outline.
-15. **38.00s**: Extreme macro zoom into the ICU Ciprofloxacin curve crossing the 25.3% hospital baseline.
-16. **42.00s**: Alert slam card crashes in from 3.2x with z = −5.8 statistical deviation badge.
-17. **48.00s**: Transition to Bedside Guidance panel showing Meropenem (96.5% S) vs Ciprofloxacin (62.7% R).
-18. **52.00s**: Cursor clicks 'Select for Order' on Meropenem with tactile button compression.
-19. **56.00s**: Split contrast view: dusty annual archive slides left into history while live instrument steps forward.
-20. **62.00s**: Deep dark sign-off: Tyks ward logo mark draws and wordmark locks up with teal accent rule.
-21. **67.43s**: Tagline 'Surveillance, in real time.' finishes reveal with radial resolve pulse.
-22. **68.60s**: Clean resolved stillness on the final brand lockup.
-
-## What Could Still Be Improved
-- In a full production studio pipeline with a WebGL shader pass, a subtle lens distortion or depth-of-field blur could be applied to the background paper sheets in Act 1.
-- In Scene 6, the 63-cell heatmap could feature per-cell hover micro-tooltips showing isolate counts (n=51) when the cursor passes over the ICU column.
+## Gate Performance
+- **Gate G0 (Render exists)**: PASS (1920×1080 @ 30fps, 1800 frames = 60.00s, H.264 + AAC audio present).
+- **Gate G1 (Proof readable)**: PASS (All clinical tables, KPI values, and alert cards rendered at text >= 0.04H with high contrast).
+- **Gate G2 (No empty frame)**: PASS (No flat black frames; continuous camera drift and kinetic motion).
+- **Gate G3 (End card hold & CTA share)**: PASS (End hold: 1.17s resolved stillness from f1765 to f1800; final CTA shot: 11.0s = 18.3% of total film <= 25%).
+- **Gate G4 (One hero per frame)**: PASS (Single focal point per shot with hierarchical staging).
+- **Gate G5 (No page chrome / HUD)**: PASS (`lint.mjs` returns `GATE G5: PASS` with 0 failures across all 15 lint categories).

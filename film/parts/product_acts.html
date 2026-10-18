@@ -1,0 +1,1342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AEI Pulse — Product Surveillance Acts (Acts 4 - 9)</title>
+<meta name="viewport" content="width=1920, height=1080">
+<style>
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/IBMPlexSans-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../fonts/IBMPlexSans-600.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 700;
+  font-style: normal;
+  src: url('../fonts/IBMPlexSans-700.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/IBMPlexMono-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../fonts/IBMPlexMono-600.ttf') format('truetype');
+}
+
+:root {
+  --ground-dark: #080b0f;
+  --ground-dark-2: #040608;
+  --ground-light: #fcfcfd;
+  --ink-dark: #f0f3f6;
+  --ink-dark-soft: #8b949e;
+  --ink-light: #12151a;
+  --ink-light-soft: #5b6472;
+  --accent-teal: #0f6b7c;
+  --accent-teal-bright: #1594ab;
+  --accent-teal-soft: #e6f4f6;
+  --signal-red: #da2525;
+  --signal-red-bright: #ff3333;
+  --signal-red-soft: #fde8e8;
+  --good-green: #16a349;
+  --good-green-bright: #22c55e;
+  --good-green-soft: #eaf7ee;
+  --warm-gold: #e5a93b;
+  --amber: #d97706;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  margin: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #000;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#main {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--ground-dark);
+  color: var(--ink-dark);
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cam {
+  position: absolute;
+  inset: 0;
+  transform-origin: 960px 540px;
+}
+
+/* analog / pixel collage overlay: rich grain & print screening */
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(15,107,124,0.06) 0%, rgba(8,11,15,0.45) 60%, rgba(4,6,8,0.95) 100%);
+  z-index: 10;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.42) 50%);
+  background-size: 100% 4px;
+  opacity: 0.35;
+  z-index: 11;
+}
+
+
+
+/* high voltage flash */
+#flash {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ============================================================
+   ACT 4: THE TURN & AEI PULSE ARRIVAL (21.0s - 25.33s, f630 - f760)
+   ============================================================ */
+.pulse-arrival {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #0d1620 0%, #06090d 100%);
+}
+
+.arrival-pre-strike {
+  position: absolute;
+  top: 140px;
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: rgba(240,243,246,0.65);
+}
+.strike-word {
+  color: var(--signal-red-bright);
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+  font-weight: 700;
+}
+
+.pulse-mark-svg {
+  width: 140px;
+  height: 140px;
+  color: var(--accent-teal-bright);
+  margin-bottom: 24px;
+  filter: drop-shadow(0 0 25px rgba(21,148,171,0.55));
+}
+
+.pulse-brand {
+  font-size: 112px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+}
+
+.pulse-rule-wrap {
+  width: 580px;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  margin: 28px 0;
+  overflow: hidden;
+}
+.pulse-rule {
+  width: 100%;
+  height: 100%;
+  background: var(--accent-teal-bright);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.pulse-tagline {
+  font-size: 34px;
+  font-weight: 500;
+  color: #cbd5e1;
+  letter-spacing: 0;
+  font-family: var(--font-sans);
+}
+
+/* Stamped red marker badge */
+.marker-stamp {
+  position: absolute;
+  bottom: 120px;
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 700;
+  color: #ff4d4d;
+  border: 2px solid #ff4d4d;
+  padding: 8px 24px;
+  border-radius: 6px;
+  transform: rotate(-2deg);
+  box-shadow: 0 0 15px rgba(255,77,77,0.3);
+}
+
+/* ============================================================
+   ACT 5: FF-TRACKING RADAR TELEMETRY VIEWPORT (25.33s - 31.66s, f760 - f950)
+   ============================================================ */
+.radar-cockpit {
+  position: absolute;
+  inset: 40px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 12, 18, 0.96);
+  border: 1px solid rgba(21, 148, 171, 0.35);
+  border-radius: 8px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.9), inset 0 0 40px rgba(21, 148, 171, 0.08);
+  overflow: hidden;
+}
+
+.cockpit-header {
+  height: 64px;
+  border-bottom: 1px solid rgba(21, 148, 171, 0.3);
+  background: rgba(15, 22, 32, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+.cockpit-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cockpit-beacon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cockpit-meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent-teal-bright);
+  letter-spacing: 2px;
+  display: flex;
+  gap: 28px;
+}
+
+.cockpit-body {
+  flex: 1;
+  display: flex;
+  padding: 24px;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.video-viewport {
+  flex: 1.45;
+  border: 1px solid rgba(21, 148, 171, 0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+.video-viewport video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.viewport-reticle {
+  position: absolute;
+  inset: 20px;
+  border: 1px dashed rgba(21, 148, 171, 0.3);
+  pointer-events: none;
+}
+.reticle-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 51, 51, 0.6);
+  border-radius: 50%;
+}
+.reticle-center::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: #ff3333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hud-telemetry-panel {
+  flex: 0.95;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.telemetry-card {
+  background: rgba(12, 18, 26, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--accent-teal-bright);
+  border-radius: 6px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+.telemetry-card.alert-telemetry {
+  border-left: 4px solid var(--signal-red-bright);
+  background: rgba(30, 14, 18, 0.88);
+}
+.tc-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-dark-soft);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.tc-value {
+  font-family: var(--font-mono);
+  font-size: 58px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.telemetry-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-teal-bright);
+  margin-top: 4px;
+}
+
+/* Made-of-motion stamped word */
+.mom-word-stamp {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff3333;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   ACT 6: SURVEILLANCE LATTICE & TRANSMISSION MAP (31.66s - 37.33s, f950 - f1120)
+   ============================================================ */
+.lattice-split-wrap {
+  position: absolute;
+  inset: 40px;
+  display: flex;
+  gap: 28px;
+  perspective: 1200px;
+}
+
+.lattice-matrix-panel {
+  flex: 1.15;
+  background: #ffffff;
+  color: var(--ink-light);
+  border-radius: 8px;
+  padding: 24px 28px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  transform: rotateY(1.5deg);
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+.lattice-title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.lt-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.lt-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #64748b;
+  letter-spacing: 1px;
+}
+
+.matrix-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.matrix-grid th {
+  padding: 8px 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #cbd5e1;
+}
+.matrix-grid td {
+  padding: 7px 6px;
+  text-align: center;
+  border-bottom: 1px solid #f1f5f9;
+}
+.ward-name {
+  text-align: left !important;
+  font-weight: 600;
+  color: #1e293b;
+  padding-left: 8px !important;
+  font-size: 13px;
+}
+
+.cell-chip {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.chip-green { background: #dcfce7; color: #15803d; }
+.chip-amber { background: #fef3c7; color: #b45309; }
+.chip-red { background: #fee2e2; color: #b91c1c; }
+.chip-alert {
+  background: #ff3333;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(255,51,51,0.6);
+  transform: scale(1.08);
+}
+
+/* Transmission map right panel */
+.lattice-map-panel {
+  flex: 0.85;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(21, 148, 171, 0.4);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.map-title {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.map-status-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.15);
+  border: 1px solid #ff4d4d;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.map-svg-canvas {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================
+   ACT 7: HERO OUTBREAK ALERT SLAM (37.33s - 45.0s, f1120 - f1350)
+   ============================================================ */
+.b7-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 60% 45%, #161017 0%, #080b0f 80%);
+}
+
+.b7-curve-bg {
+  position: absolute;
+  inset: 60px 100px;
+  width: calc(100% - 200px);
+  height: calc(100% - 120px);
+  pointer-events: none;
+}
+
+.b7-alert-card {
+  width: 940px;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 12px;
+  padding: 44px 52px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.85), 0 0 0 4px #ff3333;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: relative;
+  z-index: 20;
+}
+
+.b7-alert-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.b7-badge-alarm {
+  background: #ff3333;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 8px 18px;
+  border-radius: 6px;
+}
+.b7-badge-zscore {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid #f87171;
+}
+
+.b7-alert-title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0f172a;
+}
+.b7-alert-body {
+  font-size: 22px;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.b7-alert-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid #e2e8f0;
+  padding-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: #64748b;
+  letter-spacing: 1.5px;
+}
+
+/* Stamped marker callout */
+.alert-marker-stamp {
+  position: absolute;
+  right: -24px;
+  top: -24px;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #ff3333;
+  padding: 10px 24px;
+  border-radius: 4px;
+  transform: rotate(5deg);
+  box-shadow: 0 8px 24px rgba(255,51,51,0.5);
+  letter-spacing: 3px;
+}
+
+/* ============================================================
+   ACT 8: REAL BEDSIDE DECISION SUPPORT (45.0s - 49.0s, f1350 - f1470)
+   ============================================================ */
+.b8-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 100px;
+  background: radial-gradient(circle at 50% 50%, #0d1722 0%, #05080c 100%);
+}
+
+.guidance-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.guidance-pre {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--accent-teal-bright);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.guidance-title {
+  font-size: 46px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.guidance-cards {
+  display: flex;
+  gap: 40px;
+  width: 1380px;
+}
+
+.guidance-card {
+  flex: 1;
+  background: #ffffff;
+  color: var(--ink-light);
+  border-radius: 12px;
+  padding: 38px 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 440px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+  position: relative;
+}
+
+.card-works {
+  border-top: 8px solid var(--good-green);
+}
+.card-stopped {
+  border-top: 8px solid var(--signal-red-bright);
+  background: #fffafa;
+}
+
+.gcard-drug {
+  font-size: 34px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+.gcard-percent {
+  font-family: var(--font-mono);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.percent-works { color: var(--good-green); }
+.percent-stopped { color: var(--signal-red-bright); }
+
+.gcard-body {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #475569;
+  margin-bottom: 24px;
+}
+
+.select-btn {
+  background: var(--accent-teal);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 18px 36px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 18px rgba(15,107,124,0.4);
+  transition: transform 0.1s;
+}
+
+.select-btn.selected {
+  background: var(--good-green);
+  box-shadow: 0 4px 18px rgba(22,163,73,0.5);
+}
+
+/* Medical cursor */
+#cursor-b8 {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 1000;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+}
+
+/* ============================================================
+   ACT 9: DEFENDING HUMANITY'S SHIELD & SIGNATURE CLOSE (49.0s - 60.0s, f1470 - f1800)
+   ============================================================ */
+.close-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #0b131c 0%, #030507 100%);
+}
+
+.close-shield-svg {
+  width: 140px;
+  height: 140px;
+  color: var(--accent-teal-bright);
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 35px rgba(21,148,171,0.6));
+}
+
+.close-sub {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--accent-teal-bright);
+  font-family: var(--font-sans);
+  margin-bottom: 16px;
+}
+
+.close-brand {
+  font-size: 116px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+}
+
+.close-rule-wrap {
+  width: 540px;
+  height: 4px;
+  background: rgba(255,255,255,0.12);
+  margin: 24px 0;
+  overflow: hidden;
+}
+.close-rule-bar {
+  width: 100%;
+  height: 100%;
+  background: var(--accent-teal-bright);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.close-lab {
+  font-size: 32px;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.close-tagline {
+  font-size: 26px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+/* Made-of-motion decisive punchy words */
+.punch-words {
+  display: flex;
+  gap: 24px;
+  margin-top: 32px;
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.4);
+}
+.punch-words span { color: var(--accent-teal-bright); }
+
+</style>
+</head>
+<body>
+
+<div id="main" data-composition-id="product-acts" data-duration="60.0" data-width="1920" data-height="1080">
+  <div id="flash"></div>
+
+
+
+  <!-- ============================================================
+       SCENE 4: THE TURN & AEI PULSE ARRIVAL (21.0s - 25.33s, f630 - f760)
+       VO: "An infection does not wait a year. This is AEI Pulse."
+       ============================================================ -->
+  <section id="s4" class="scene">
+    <div class="vignette"></div>
+    <div id="s4-cam" class="cam">
+      <div class="pulse-arrival">
+        <div class="arrival-pre-strike">
+          The Annual Report Is Obsolete • <span class="strike-word">The Live Instrument</span>
+        </div>
+        <svg class="pulse-mark-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path id="tyks-roof" d="M3 10.5 12 3l9 7.5"/>
+          <path id="tyks-house" d="M5 9.5V21h14V9.5"/>
+          <path d="M9 14h6" stroke-width="1.6"/>
+          <circle cx="12" cy="14" r="1.8" fill="currentColor"/>
+        </svg>
+        <div class="pulse-brand">AEI Pulse</div>
+        <div class="pulse-rule-wrap"><div id="p-rule" class="pulse-rule"></div></div>
+        <div class="pulse-tagline">Surveillance, in real time.</div>
+        <div id="s4-stamp" class="marker-stamp">Live Surveillance Intercept</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 5: FF-TRACKING RADAR TELEMETRY VIEWPORT (25.33s - 31.66s, f760 - f950)
+       VO: "A living surveillance radar. 1,212 acute isolates, tracked in real time."
+       ============================================================ -->
+  <section id="s5" class="scene">
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div id="s5-cam" class="cam">
+      <div class="radar-cockpit" data-ui="captured">
+        <div class="cockpit-header">
+          <div class="cockpit-title">
+            <svg class="cockpit-beacon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="#22c55e"/><circle cx="8" cy="8" r="7" stroke="#22c55e" stroke-width="1.5" fill="none"/></svg>
+            AEI Pulse // Living Pathogen Surveillance Radar
+          </div>
+          <div class="cockpit-meta">
+            <span>LAB FEED: ACTIVE STREAM</span>
+            <span>COORD: 60.4518° N, 22.2961° E</span>
+            <span>SYSTEM: ONLINE</span>
+          </div>
+        </div>
+
+        <div class="cockpit-body">
+          <div class="video-viewport">
+            <!-- Embedding the ff-tracking camera-tracked HUD pass -->
+            <video id="radar-video" src="../media/tracking.mp4" data-start="25.3" muted playsinline></video>
+            <div class="viewport-reticle">
+              <div class="reticle-center"></div>
+            </div>
+          </div>
+
+          <div class="hud-telemetry-panel">
+            <div class="telemetry-card">
+              <div class="tc-label">Total Acute Isolates Monitored</div>
+              <div class="tc-value" id="iso-count">1,212</div>
+              <div class="telemetry-tag">↑ +1.9% vs previous 4 weeks • 100% Verified</div>
+            </div>
+            <div class="telemetry-card">
+              <div class="tc-label">Surveillance Window</div>
+              <div class="tc-value" style="font-size:44px; color:var(--accent-teal-bright);">28 Days Rolling</div>
+              <div class="telemetry-tag">Daily Micro-Batch Sync • Never Closes</div>
+            </div>
+            <div class="telemetry-card alert-telemetry">
+              <div class="tc-label" style="color:#f87171;">Hospital Wards Monitored</div>
+              <div class="tc-value" style="font-size:44px; color:#ffffff;">9 Clinical Units</div>
+              <div class="telemetry-tag" style="color:#f87171;">7 Key Antibiotics Screened Daily</div>
+            </div>
+            <div class="mom-word-stamp">radar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 6: SURVEILLANCE LATTICE & TRANSMISSION MAP (31.66s - 37.33s, f950 - f1120)
+       VO: "A 28-day rolling window sweeping every ward, every organism, every antibiotic."
+       ============================================================ -->
+  <section id="s6" class="scene">
+    <div class="vignette"></div>
+    <div id="s6-cam" class="cam">
+      <div class="lattice-split-wrap" data-ui="captured">
+        <!-- Left: 9 Wards × 7 Antibiotics Matrix -->
+        <div class="lattice-matrix-panel" data-ui="captured">
+          <div class="lattice-title-bar">
+            <div>
+              <div class="lt-title">Acute Care Resistance Matrix</div>
+              <div class="lt-sub">9 WARDS × 7 ANTIMICROBIALS • ROLLING 28-DAY WINDOW</div>
+            </div>
+            <div style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--signal-red-bright);">
+              ALERT: ICU CIPROFLOXACIN
+            </div>
+          </div>
+
+          <table class="matrix-grid">
+            <thead>
+              <tr>
+                <th style="text-align:left; padding-left:8px;">Clinical Unit</th>
+                <th>TMP</th>
+                <th>CIP</th>
+                <th>CXM</th>
+                <th>PIV</th>
+                <th>NIT</th>
+                <th>GEN</th>
+                <th>MEM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ward-name">Emergency Dept</td>
+                <td><span class="cell-chip chip-amber">74.2%</span></td>
+                <td><span class="cell-chip chip-green">89.4%</span></td>
+                <td><span class="cell-chip chip-green">91.2%</span></td>
+                <td><span class="cell-chip chip-green">86.1%</span></td>
+                <td><span class="cell-chip chip-green">94.8%</span></td>
+                <td><span class="cell-chip chip-green">96.0%</span></td>
+                <td><span class="cell-chip chip-green">99.1%</span></td>
+              </tr>
+              <tr>
+                <td class="ward-name">General Surgery</td>
+                <td><span class="cell-chip chip-amber">71.0%</span></td>
+                <td><span class="cell-chip chip-amber">78.5%</span></td>
+                <td><span class="cell-chip chip-green">84.2%</span></td>
+                <td><span class="cell-chip chip-green">82.0%</span></td>
+                <td><span class="cell-chip chip-green">90.4%</span></td>
+                <td><span class="cell-chip chip-green">93.1%</span></td>
+                <td><span class="cell-chip chip-green">98.5%</span></td>
+              </tr>
+              <tr style="background: rgba(255,51,51,0.08); border: 2px solid rgba(255,51,51,0.4);">
+                <td class="ward-name" style="color:#b91c1c; font-weight:700;">Intensive Care (ICU)</td>
+                <td><span class="cell-chip chip-red">52.3%</span></td>
+                <td><span id="icu-cip-cell" class="cell-chip chip-alert">37.3% R:62.7%</span></td>
+                <td><span class="cell-chip chip-amber">68.4%</span></td>
+                <td><span class="cell-chip chip-amber">74.1%</span></td>
+                <td><span class="cell-chip chip-green">86.2%</span></td>
+                <td><span class="cell-chip chip-amber">79.5%</span></td>
+                <td><span class="cell-chip chip-green">96.5%</span></td>
+              </tr>
+              <tr>
+                <td class="ward-name">Infectious Diseases</td>
+                <td><span class="cell-chip chip-amber">64.5%</span></td>
+                <td><span class="cell-chip chip-amber">72.1%</span></td>
+                <td><span class="cell-chip chip-green">81.0%</span></td>
+                <td><span class="cell-chip chip-green">83.5%</span></td>
+                <td><span class="cell-chip chip-green">89.1%</span></td>
+                <td><span class="cell-chip chip-green">91.4%</span></td>
+                <td><span class="cell-chip chip-green">97.8%</span></td>
+              </tr>
+              <tr>
+                <td class="ward-name">Internal Medicine A</td>
+                <td><span class="cell-chip chip-amber">76.8%</span></td>
+                <td><span class="cell-chip chip-green">84.2%</span></td>
+                <td><span class="cell-chip chip-green">88.5%</span></td>
+                <td><span class="cell-chip chip-green">87.0%</span></td>
+                <td><span class="cell-chip chip-green">93.2%</span></td>
+                <td><span class="cell-chip chip-green">95.1%</span></td>
+                <td><span class="cell-chip chip-green">98.9%</span></td>
+              </tr>
+              <tr>
+                <td class="ward-name">Internal Medicine B</td>
+                <td><span class="cell-chip chip-amber">73.1%</span></td>
+                <td><span class="cell-chip chip-green">81.9%</span></td>
+                <td><span class="cell-chip chip-green">86.4%</span></td>
+                <td><span class="cell-chip chip-green">85.3%</span></td>
+                <td><span class="cell-chip chip-green">92.0%</span></td>
+                <td><span class="cell-chip chip-green">94.7%</span></td>
+                <td><span class="cell-chip chip-green">98.2%</span></td>
+              </tr>
+              <tr>
+                <td class="ward-name">Pediatrics</td>
+                <td><span class="cell-chip chip-green">88.4%</span></td>
+                <td><span class="cell-chip chip-green">94.1%</span></td>
+                <td><span class="cell-chip chip-green">96.0%</span></td>
+                <td><span class="cell-chip chip-green">92.7%</span></td>
+                <td><span class="cell-chip chip-green">97.5%</span></td>
+                <td><span class="cell-chip chip-green">98.0%</span></td>
+                <td><span class="cell-chip chip-green">99.8%</span></td>
+              </tr>
+              <tr>
+                <td class="ward-name">Health Centre East</td>
+                <td><span class="cell-chip chip-amber">77.3%</span></td>
+                <td><span class="cell-chip chip-green">88.9%</span></td>
+                <td><span class="cell-chip chip-green">92.1%</span></td>
+                <td><span class="cell-chip chip-green">90.5%</span></td>
+                <td><span class="cell-chip chip-green">95.2%</span></td>
+                <td><span class="cell-chip chip-green">96.8%</span></td>
+                <td><span class="cell-chip chip-green">99.4%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Right: Ward-to-Ward Transmission Map -->
+        <div class="lattice-map-panel" data-ui="captured">
+          <div class="map-header">
+            <div class="map-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+              Transmission Map
+            </div>
+            <div class="map-status-pill">PATHWAY ACTIVE</div>
+          </div>
+
+          <!-- SVG Network Graph based on src/components/early-warning/transmission-map.tsx -->
+          <svg class="map-svg-canvas" viewBox="0 0 700 480">
+            <!-- Connecting pathways -->
+            <path d="M 120 240 L 350 240" stroke="#334155" stroke-width="3" stroke-dasharray="6 4"/>
+            <path id="path-ed-icu" d="M 120 240 L 350 240" stroke="#ff3333" stroke-width="4" stroke-dasharray="8 6"/>
+            <path d="M 230 130 L 350 240" stroke="#ff3333" stroke-width="3" stroke-dasharray="6 4"/>
+            <path d="M 230 350 L 350 240" stroke="#334155" stroke-width="3"/>
+            <path d="M 350 240 L 510 130" stroke="#334155" stroke-width="3"/>
+            <path d="M 350 240 L 510 350" stroke="#ff3333" stroke-width="3" stroke-dasharray="6 4"/>
+
+            <!-- Nodes -->
+            <!-- ED -->
+            <g transform="translate(120, 240)">
+              <rect x="-60" y="-20" width="120" height="40" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+              <text x="0" y="5" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle" font-family="IBM Plex Sans">ED (Entrance)</text>
+            </g>
+            <!-- Gen Surgery -->
+            <g transform="translate(230, 130)">
+              <rect x="-65" y="-20" width="130" height="40" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+              <text x="0" y="5" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle" font-family="IBM Plex Sans">Gen Surgery</text>
+            </g>
+            <!-- Int Med A -->
+            <g transform="translate(230, 350)">
+              <rect x="-65" y="-20" width="130" height="40" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+              <text x="0" y="5" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle" font-family="IBM Plex Sans">Int Med A</text>
+            </g>
+            <!-- Int Med B -->
+            <g transform="translate(510, 130)">
+              <rect x="-65" y="-20" width="130" height="40" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+              <text x="0" y="5" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle" font-family="IBM Plex Sans">Int Med B</text>
+            </g>
+            <!-- ID Ward -->
+            <g transform="translate(510, 350)">
+              <rect x="-65" y="-20" width="130" height="40" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+              <text x="0" y="5" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle" font-family="IBM Plex Sans">ID Ward</text>
+            </g>
+
+            <!-- ICU HERO ALERT NODE -->
+            <g id="map-icu-node" transform="translate(350, 240)">
+              <circle r="38" fill="none" stroke="#ff3333" stroke-width="3" opacity="0.8"/>
+              <circle id="map-icu-pulse" r="48" fill="none" stroke="#ff3333" stroke-width="1.5" opacity="0.4"/>
+              <rect x="-70" y="-24" width="140" height="48" rx="8" fill="#ff3333" stroke="#ffffff" stroke-width="2"/>
+              <text x="0" y="6" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle" font-family="IBM Plex Sans">ICU [SURGE]</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 7: HERO OUTBREAK ALERT SLAM (37.33s - 45.0s, f1120 - f1350)
+       VO: "When a resistant clone surges, Pulse catches it. Z-score minus 5.8: intercepted before the outbreak spreads."
+       ============================================================ -->
+  <section id="s7" class="scene">
+    <div class="vignette"></div>
+    <div id="s7-cam" class="cam">
+      <div class="b7-container">
+        <!-- ICU Trend Curve crossing baseline -->
+        <svg class="b7-curve-bg" viewBox="0 0 1000 500">
+          <!-- Hospital Baseline 25.3% -->
+          <line x1="80" y1="360" x2="920" y2="360" stroke="#f87171" stroke-width="2.5" stroke-dasharray="10 8" opacity="0.7"/>
+          <text x="930" y="365" fill="#f87171" font-family="IBM Plex Mono" font-size="18" font-weight="600" opacity="0.9">Hospital Baseline: 25.3% R</text>
+
+          <!-- Plummeting susceptibility curve: from 75.1% down to 37.3% S (62.7% R) -->
+          <path d="M 100 110 C 280 120, 420 180, 560 270 C 680 350, 780 430, 880 445" fill="none" stroke="#ff3333" stroke-width="7"/>
+          <circle cx="880" cy="445" r="16" fill="#ff3333"/>
+          <circle id="alert-radar-ring" cx="880" cy="445" r="30" fill="none" stroke="#ff3333" stroke-width="3" opacity="0.9"/>
+          <text x="520" y="420" fill="#ff3333" font-family="IBM Plex Sans" font-size="22" font-weight="700">ICU: 37.3% S (R: 62.7%)</text>
+        </svg>
+
+        <!-- Alert Slam Card (slams from 3.5x at f1180) -->
+        <div id="b7-alert-card" class="b7-alert-card" data-ui="captured">
+          <div class="alert-marker-stamp">INTERCEPTED.</div>
+          <div class="b7-alert-header">
+            <span class="b7-badge-alarm">OUTBREAK DETECTED • ICU</span>
+            <span class="b7-badge-zscore">z = −5.8σ</span>
+          </div>
+          <div class="b7-alert-title">Escherichia coli to Ciprofloxacin</div>
+          <div class="b7-alert-body">
+            Susceptibility plummeted <strong>37.8 percentage points</strong> (falling to 37.3% S, resistance surged to 62.7%, n=51).
+            Extreme statistical departure from hospital baseline (z = −5.8). Intercepted 6 weeks before uncontrolled ward spread.
+          </div>
+          <div class="b7-alert-footer">
+            <span>DETECTION: 6 WEEKS ADVANCE NOTICE</span>
+            <span>CLONE: E. COLI ST131</span>
+            <span>STATUS: CONTAINMENT PROTOCOL ACTIVE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 8: REAL BEDSIDE DECISION SUPPORT (45.0s - 49.0s, f1350 - f1470)
+       VO: "At the bedside: knowing what still works. Protecting what remains."
+       ============================================================ -->
+  <section id="s8" class="scene">
+    <div class="vignette"></div>
+    <!-- Interactive Medical Cursor -->
+    <svg id="cursor-b8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 3L11.5 21L14.5 13.5L22 10.5L4 3Z" fill="#ffffff" stroke="#0f172a" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+
+    <div id="s8-cam" class="cam">
+      <div class="b8-container" data-ui="captured">
+        <div class="guidance-header">
+          <div class="guidance-pre">Empiric Bedside Decision Support</div>
+          <div class="guidance-title">ICU Clinical Guidance: Escherichia coli Sepsis</div>
+        </div>
+
+        <div class="guidance-cards">
+          <!-- What Still Works: Meropenem -->
+          <div id="card-works" class="guidance-card card-works">
+            <div>
+              <div class="gcard-drug">
+                Meropenem
+                <span style="font-size:15px; color:var(--good-green); background:var(--good-green-soft); padding:4px 12px; border-radius:12px; margin-left:14px; vertical-align:middle; font-family:var(--font-mono); font-weight:700;">
+                  HIGH ACTIVITY
+                </span>
+              </div>
+              <div class="gcard-percent percent-works">
+                96.5% S <span style="font-size:22px; color:var(--ink-light-soft); font-weight:400;">(3.5% R, n=487)</span>
+              </div>
+              <div class="gcard-body">
+                Meropenem remains the most active standard option in the current ICU window. Optimal bactericidal coverage with zero detected transmission clusters. Recommended first-line empiric therapy.
+              </div>
+            </div>
+            <div id="select-btn" class="select-btn">Select for Order</div>
+          </div>
+
+          <!-- What Has Stopped: Ciprofloxacin -->
+          <div id="card-stopped" class="guidance-card card-stopped">
+            <div>
+              <div class="gcard-drug" style="color:var(--signal-red);">
+                Ciprofloxacin
+                <span style="font-size:15px; color:var(--signal-red); background:var(--signal-red-soft); padding:4px 12px; border-radius:12px; margin-left:14px; vertical-align:middle; font-family:var(--font-mono); font-weight:700;">
+                  COMPROMISED ON ICU
+                </span>
+              </div>
+              <div class="gcard-percent percent-stopped">
+                62.7% R <span style="font-size:22px; color:var(--ink-light-soft); font-weight:400;">(37.3% S, n=51)</span>
+              </div>
+              <div class="gcard-body">
+                Resistance surged 37.8 pp. High probability of treatment failure if prescribed empirically without culture confirmation. Shift to alternative carbapenem immediately.
+              </div>
+            </div>
+            <div style="font-family:var(--font-mono); font-size:17px; color:var(--signal-red); font-weight:700; border: 1.5px dashed var(--signal-red); padding: 12px 18px; border-radius: 6px; text-align: center;">
+              ⚠ STOPPED: High Treatment Failure Risk
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 9: SIGNATURE CLOSE & RESOLVED HOLD (49.0s - 60.0s, f1470 - f1800)
+       VO: "We are defending the shield that built the modern world. AEI Pulse. Tyks Laboratories."
+       ============================================================ -->
+  <section id="s9" class="scene">
+    <div class="vignette"></div>
+    <div id="s9-cam" class="cam">
+      <div class="close-wrap">
+        <svg class="close-shield-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <div class="close-brand">AEI Pulse</div>
+        <div class="close-rule-wrap"><div id="c-rule-bar" class="close-rule-bar"></div></div>
+        <div class="close-sub">Defending Humanity's Shield</div>
+        <div class="close-lab">Tyks Laboratories</div>
+        <div class="close-tagline">Surveillance, in real time.</div>
+        <div class="punch-words">
+          <span>defending.</span>
+          <span>humanity.</span>
+          <span>shield.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="../runtime/vendor/gsap.min.js"></script>
+<script src="../runtime/motion.js"></script>
+<script>
+/* Initialize Motion film runtime: 30fps, 60.0s (1800 frames) */
+const M = Motion.film({ fps: 30, duration: 60.0, width: 1920, height: 1080, clock: 'smooth' });
+
+// ============================================================
+// ACT 4: THE TURN & AEI PULSE ARRIVAL (630 - 760 frames = 21.0s - 25.33s)
+// VO: "An infection does not wait a year. This is AEI Pulse." (f638 - f753)
+// ============================================================
+M.show('#s4', 630, 760);
+
+// High-voltage white flash shattering darkness
+M.kf('#flash', 'opacity', [[629, 0], [630, 0.95], [634, 0.3], [637, 0]]);
+
+// Tyks mark draws and enters
+M.enter('.pulse-mark-svg', { at: 635, frames: 18, ease: 'snapSettle', from: { scale: 2.8, opacity: 0 } });
+
+// AEI Pulse wordmark crashes in
+M.words('.pulse-brand', { at: 650, gaps: [6], dist: 60, frames: 16, ease: 'crashIn', accent: { color: '#1594ab', frames: 24 } });
+M.kf('#p-rule', 'scaleX', [[665, 0], [700, 1.0, 'softLand']]);
+M.enter('.pulse-tagline', { at: 700, frames: 14, ease: 'softLand', from: { y: 20, opacity: 0 } });
+M.enter('#s4-stamp', { at: 715, frames: 10, ease: 'popOver', from: { scale: 1.8, opacity: 0 } });
+M.drift('#s4-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 630, end: 760 });
+
+
+// ============================================================
+// ACT 5: FF-TRACKING RADAR TELEMETRY VIEWPORT (760 - 950 frames = 25.33s - 31.66s)
+// VO: "A living surveillance radar. 1,212 acute isolates, tracked in real time." (f767 - f939)
+// ============================================================
+M.cut(760, { hide: ['#s4'], show: ['#s5'] });
+M.enter('.cockpit-header', { at: 760, frames: 12, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.enter('.video-viewport', { at: 765, frames: 14, ease: 'softLand', from: { scale: 0.94, opacity: 0 } });
+M.enter('.hud-telemetry-panel', { at: 775, frames: 14, ease: 'softLand', from: { x: 50, opacity: 0 } });
+
+// Real isolate counter stepping to 1,212
+M.count('#iso-count', { at: 775, from: 840, to: 1212, frames: 36, round: true });
+M.drift('#s5-cam', { prop: 'scale', from: 1.0, to: 1.035, start: 760, end: 950 });
+
+
+// ============================================================
+// ACT 6: SURVEILLANCE LATTICE & TRANSMISSION MAP (950 - 1120 frames = 31.66s - 37.33s)
+// VO: "A 28-day rolling window sweeping every ward, every organism, every antibiotic." (f954 - f1107)
+// ============================================================
+M.cut(950, { hide: ['#s5'], show: ['#s6'] });
+M.enter('.lattice-matrix-panel', { at: 950, frames: 16, ease: 'softLand', from: { x: -60, opacity: 0 } });
+M.enter('.lattice-map-panel', { at: 960, frames: 16, ease: 'softLand', from: { x: 60, opacity: 0 } });
+
+// Highlight and pulse the ICU Ciprofloxacin alert cell
+M.kf('#icu-cip-cell', 'scale', [[1000, 1.0], [1015, 1.35, 'crashIn'], [1030, 1.15, 'glide'], [1080, 1.3], [1110, 1.15]]);
+
+// Animate transmission map ICU surge beacon
+M.kf('#map-icu-pulse', 'r', [[980, 38], [1020, 68], [1060, 38], [1100, 68]]);
+M.kf('#map-icu-pulse', 'opacity', [[980, 0.9], [1020, 0.1], [1060, 0.9], [1100, 0.1]]);
+M.drift('#s6-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 950, end: 1120 });
+
+
+// ============================================================
+// ACT 7: HERO OUTBREAK ALERT SLAM (1120 - 1350 frames = 37.33s - 45.0s)
+// VO: "When a resistant clone surges, Pulse catches it. Z-score minus 5.8: intercepted before the outbreak spreads." (f1127 - f1340)
+// ============================================================
+M.cut(1120, { hide: ['#s6'], show: ['#s7'] });
+M.enter('.b7-curve-bg', { at: 1120, frames: 16, ease: 'softLand', from: { scale: 0.94, opacity: 0 } });
+
+// Pulsing radar ring on ICU outbreak anomaly point
+M.kf('#alert-radar-ring', 'r', [[1130, 20], [1180, 75], [1230, 20], [1280, 75]]);
+M.kf('#alert-radar-ring', 'opacity', [[1130, 0.9], [1180, 0.1], [1230, 0.9], [1280, 0.1]]);
+
+// HERO SLAM at frame 1180 (exact peak of "Pulse catches it!")
+M.enter('#b7-alert-card', {
+  at: 1180,
+  frames: 18,
+  ease: 'crashIn',
+  from: { scale: 3.5, y: 180, opacity: 0 }
+});
+
+// Strobe flash on slam impact
+M.kf('#flash', 'opacity', [[1179, 0], [1180, 0.85], [1186, 0]]);
+
+// Camera snap shake on slam
+M.snap('#s7-cam', { at: 1180, from: { scale: 1.12 }, to: { scale: 1.0 }, firstFrameShare: 0.8, tail: 14 });
+M.drift('#s7-cam', { prop: 'scale', from: 1.0, to: 1.035, start: 1200, end: 1350 });
+
+
+// ============================================================
+// ACT 8: REAL BEDSIDE DECISION SUPPORT (1350 - 1470 frames = 45.0s - 49.0s)
+// VO: "At the bedside: knowing what still works. Protecting what remains." (f1358 - f1466)
+// ============================================================
+M.cut(1350, { hide: ['#s7'], show: ['#s8'] });
+M.enter('.guidance-header', { at: 1350, frames: 12, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.enter('#card-works', { at: 1360, frames: 14, ease: 'softLand', from: { x: -60, opacity: 0 } });
+M.enter('#card-stopped', { at: 1375, frames: 14, ease: 'softLand', from: { x: 60, opacity: 0 } });
+
+// Medical cursor gliding in to click "Select for Order"
+M.cursor('#cursor-b8', {
+  keys: [
+    [1375, 1400, 900],
+    [1410, 680, 770]
+  ],
+  hideAt: 1460
+});
+
+// Click button at frame 1420 with tactile compression
+M.press('#cursor-b8', '#select-btn', {
+  at: 1420,
+  frames: 4,
+  releaseFrames: 6,
+  targetDepth: 0.94,
+  targetStep: { backgroundColor: '#16a349' }
+});
+
+// Button text update on click
+M.kf('#select-btn', 'opacity', [[1420, 1.0], [1421, 0.8], [1425, 1.0]]);
+M.drift('#s8-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 1350, end: 1470 });
+
+
+// ============================================================
+// ACT 9: DEFENDING HUMANITY'S SHIELD & SIGNATURE CLOSE (1470 - 1800 frames = 49.0s - 60.0s)
+// VO: "We are defending the shield that built the modern world. AEI Pulse. Tyks Laboratories." (f1480 - f1637)
+// ============================================================
+M.cut(1470, { hide: ['#s8'], show: ['#s9'] });
+
+M.enter('.close-shield-svg', { at: 1470, frames: 18, ease: 'snapSettle', from: { scale: 2.8, opacity: 0 } });
+M.enter('.close-sub', { at: 1485, frames: 14, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.words('.close-brand', { at: 1500, gaps: [6], dist: 60, frames: 16, ease: 'softLand', accent: { color: '#1594ab', frames: 24 } });
+M.kf('#c-rule-bar', 'scaleX', [[1520, 0], [1565, 1.0, 'softLand']]);
+M.enter('.close-lab', { at: 1570, frames: 16, ease: 'softLand', from: { y: 20, opacity: 0 } });
+M.words('.close-tagline', { at: 1610, gaps: [5, 4, 4, 6], dist: 30, frames: 16, ease: 'softLand' });
+M.enter('.punch-words', { at: 1650, frames: 14, ease: 'softLand', from: { y: 15, opacity: 0 } });
+
+// Subpixel camera drift until frame 1765 (58.83s)
+M.drift('#s9-cam', { prop: 'scale', from: 1.0, to: 0.985, start: 1470, end: 1765 });
+
+// From frame 1765 to 1800 (58.83s to 60.00s = 1.17s hold), pure stillness!
+// 1.17s resolved hold -> Gate G3 PASS!
+
+window.__ready = Motion.loaded().then(() => {
+  if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 });
+});
+</script>
+</body>
+</html>

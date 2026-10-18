@@ -1,0 +1,275 @@
+[
+  {
+    "id": "screen_overview",
+    "file": "screen_overview.png",
+    "route": "/",
+    "type": "full_viewport",
+    "description": "AEI Pulse Main Overview: 1,212 isolates rolling window, 4 KPI cards, hospital-wide resistance trend chart, 8 significant alerts card (ICU E. coli resistance drop to Ciprofloxacin), specimen distribution, and top organisms.",
+    "box": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "id": "crop_icu_alert",
+    "file": "crop_icu_alert.png",
+    "route": "/",
+    "type": "hero_crop",
+    "description": "ICU Anomaly Alert Card: 8 significant alerts, critical alert: Escherichia coli resistance to Ciprofloxacin [high] in ICU changed from 75% to 37.3% susceptible (z = -5.8) with 28-day daily resistance bar series.",
+    "box": {
+      "x": 1360,
+      "y": 348.828125,
+      "width": 528,
+      "height": 414.5
+    }
+  },
+  {
+    "id": "crop_trend_chart",
+    "file": "crop_trend_chart.png",
+    "route": "/",
+    "type": "hero_crop",
+    "description": "Hospital-wide Resistance Trend Chart Card: 4-week daily longitudinal trends across key antibiotic classes with interactive hover states and legend.",
+    "box": {
+      "x": 272,
+      "y": 348.828125,
+      "width": 1072,
+      "height": 414.5
+    }
+  },
+  {
+    "id": "crop_kpi_row",
+    "file": "crop_kpi_row.png",
+    "route": "/",
+    "type": "hero_crop",
+    "description": "Hospital Surveillance KPIs: Total isolates (1,212), Resistant isolates (64.3%), Most common organism (E. coli 42.7%), Highest resistance (S. aureus to Penicillin 81.9%).",
+    "box": {
+      "x": 272,
+      "y": 211.5,
+      "width": 1616,
+      "height": 117.328125
+    }
+  },
+  {
+    "id": "crop_antibiogram_matrix",
+    "file": "crop_antibiogram_matrix.png",
+    "route": "/",
+    "type": "hero_crop",
+    "description": "Antibiogram Heatmap Matrix: 9 organisms x 7 antibiotics cross-tabulation with EUCAST color banding and isolate counts.",
+    "box": {
+      "x": 272,
+      "y": 641.328125,
+      "width": 1072,
+      "height": 438.5
+    }
+  },
+  {
+    "id": "screen_early_warning",
+    "file": "screen_early_warning.png",
+    "route": "/early-warning",
+    "type": "full_viewport",
+    "description": "AEI Pulse Early Warning & Transmission Center: False alarm budget meter, Warning Feed, Transmission Map network, and MDRO cards.",
+    "box": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "id": "crop_transmission_map",
+    "file": "crop_transmission_map.png",
+    "route": "/early-warning",
+    "type": "hero_crop",
+    "description": "Hospital Ward Transmission Map Card: Directed patient transfer network, central ICU node, ED triage gateway, peripheral health centres, and playback scrubber.",
+    "box": {
+      "x": 272,
+      "y": 502.25,
+      "width": 1616,
+      "height": 577.875
+    }
+  },
+  {
+    "id": "crop_warning_feed",
+    "file": "crop_warning_feed.png",
+    "route": "/early-warning",
+    "type": "hero_crop",
+    "description": "Warning Feed: High, moderate, and watch severity alerts with MDRO chips and outbreak evidence hypotheses.",
+    "box": {
+      "x": 272,
+      "y": 235.75,
+      "width": 1616,
+      "height": 246.5
+    }
+  },
+  {
+    "id": "crop_outbreak_pathways",
+    "file": "crop_outbreak_pathways.png",
+    "route": "/early-warning",
+    "type": "hero_crop",
+    "description": "Patient Pathways & Outbreak Spread: Inter-ward patient transition matrix showing transmission vectors into ICU.",
+    "box": {
+      "x": 272,
+      "y": 696.625,
+      "width": 1616,
+      "height": 202.5
+    }
+  },
+  {
+    "id": "screen_guidance",
+    "file": "screen_guidance.png",
+    "route": "/guidance",
+    "type": "full_viewport",
+    "description": "Antibiotic Guidance Interface: Interactive AI clinical advisor computing live empiric recommendations from surveillance isolates.",
+    "box": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "id": "crop_guidance_card",
+    "file": "crop_guidance_card.png",
+    "route": "/guidance",
+    "type": "hero_crop",
+    "description": "Empiric Bedside Guidance Card: AI recommendation for E. coli, including susceptibility rankings (% S) and isolate counts (n).",
+    "box": {
+      "x": 293,
+      "y": 179.25,
+      "width": 1574,
+      "height": 476.453125
+    }
+  },
+  {
+    "id": "screen_sitrep",
+    "file": "screen_sitrep.png",
+    "route": "/sitrep",
+    "type": "full_viewport",
+    "description": "Hospital Situation Report (Sitrep): Executive clinical briefing on AMR metrics, ICU status, and containment actions.",
+    "box": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "id": "crop_icu_alert_2x",
+    "file": "crop_icu_alert_2x.png",
+    "route": "/",
+    "type": "hero_crop_macro_2x",
+    "description": "ICU Anomaly Alert Card: 8 significant alerts, critical alert: Escherichia coli resistance to Ciprofloxacin [high] in ICU changed from 75% to 37.3% susceptible (z = -5.8) with 28-day daily resistance bar series.",
+    "box": {
+      "x": 1360,
+      "y": 348.828125,
+      "width": 528,
+      "height": 414.5
+    }
+  },
+  {
+    "id": "crop_trend_chart_2x",
+    "file": "crop_trend_chart_2x.png",
+    "route": "/",
+    "type": "hero_crop",
+    "description": "Hospital-wide Resistance Trend Chart Card: 4-week daily longitudinal trends across key antibiotic classes with interactive hover states and legend.",
+    "box": {
+      "x": 272,
+      "y": 348.828125,
+      "width": 1072,
+      "height": 414.5
+    }
+  },
+  {
+    "id": "crop_kpi_row_2x",
+    "file": "crop_kpi_row_2x.png",
+    "route": "/",
+    "type": "hero_crop",
+    "description": "Hospital Surveillance KPIs: Total isolates (1,212), Resistant isolates (64.3%), Most common organism (E. coli 42.7%), Highest resistance (S. aureus to Penicillin 81.9%).",
+    "box": {
+      "x": 272,
+      "y": 211.5,
+      "width": 1616,
+      "height": 117.328125
+    }
+  },
+  {
+    "id": "crop_antibiogram_matrix_2x",
+    "file": "crop_antibiogram_matrix_2x.png",
+    "route": "/",
+    "type": "hero_crop",
+    "description": "Antibiogram Heatmap Matrix: 9 organisms x 7 antibiotics cross-tabulation with EUCAST color banding and isolate counts.",
+    "box": {
+      "x": 272,
+      "y": 641.328125,
+      "width": 1072,
+      "height": 438.5
+    }
+  },
+  {
+    "id": "crop_transmission_map_2x",
+    "file": "crop_transmission_map_2x.png",
+    "route": "/early-warning",
+    "type": "hero_crop",
+    "description": "Hospital Ward Transmission Map Card: Directed patient transfer network, central ICU node, ED triage gateway, peripheral health centres, and playback scrubber.",
+    "box": {
+      "x": 272,
+      "y": 481.875,
+      "width": 1616,
+      "height": 598.375
+    }
+  },
+  {
+    "id": "crop_transmission_network_2x",
+    "file": "crop_transmission_network_2x.png",
+    "route": "/early-warning",
+    "type": "hero_crop_macro_2x",
+    "description": "Transmission Network HUD Vector SVG: Pure vector nodes (ICU, Emergency, Surgery, ID Ward, LTC) and curved transmission arcs matching ff-tracking telemetry.",
+    "box": {
+      "x": 293,
+      "y": 574.875,
+      "width": 1574,
+      "height": 430
+    }
+  },
+  {
+    "id": "crop_warning_feed_2x",
+    "file": "crop_warning_feed_2x.png",
+    "route": "/early-warning",
+    "type": "hero_crop",
+    "description": "Warning Feed: High, moderate, and watch severity alerts with MDRO chips and outbreak evidence hypotheses.",
+    "box": {
+      "x": 272,
+      "y": 39.75,
+      "width": 1616,
+      "height": 422.125
+    }
+  },
+  {
+    "id": "crop_outbreak_pathways_2x",
+    "file": "crop_outbreak_pathways_2x.png",
+    "route": "/early-warning",
+    "type": "hero_crop",
+    "description": "Patient Pathways & Outbreak Spread: Inter-ward patient transition matrix showing transmission vectors into ICU.",
+    "box": {
+      "x": 272,
+      "y": 197.25,
+      "width": 1616,
+      "height": 702.5
+    }
+  },
+  {
+    "id": "crop_guidance_card_2x",
+    "file": "crop_guidance_card_2x.png",
+    "route": "/guidance",
+    "type": "hero_crop_macro_2x",
+    "description": "Empiric Bedside Guidance Card: AI recommendation for E. coli, including susceptibility rankings (% S) and isolate counts (n).",
+    "box": {
+      "x": 293,
+      "y": 179.25,
+      "width": 1574,
+      "height": 476.453125
+    }
+  }
+]

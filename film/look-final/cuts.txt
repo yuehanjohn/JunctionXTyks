@@ -1,11 +1,22 @@
 # cuts from events film/final.mp4.events.json (time s, frame, timecode, source)
-5.000	frame 150	0:05.00	event cut 'hide #s1 show #s2'
-11.000	frame 330	0:11.00	event cut 'hide #s2 show #s3'
-16.000	frame 480	0:16.00	event cut 'hide #s3 show #s4'
-20.000	frame 600	0:20.00	event cut 'hide #s4 show #s5'
-28.000	frame 840	0:28.00	event cut 'hide #s5 show #s6'
-38.000	frame 1140	0:38.00	event cut 'hide #s6 show #s7'
-48.000	frame 1440	0:48.00	event cut 'hide #s7 show #s8'
-50.000	frame 1500	0:50.00	event show '#cursor'
-55.500	frame 1665	0:55.50	event cut 'hide #s8 show #s9'
-62.000	frame 1860	1:02.00	event cut 'hide #s9 show #s10'
+1.200	frame 36	0:01.20	event cut 'hide #s1a show #s1b'
+1.600	frame 48	0:01.60	event cut 'hide #s1b show #s1c'
+3.000	frame 90	0:03.00	event cut 'hide #s1c show #s1d'
+3.600	frame 108	0:03.60	event cut 'hide #strobe-word-acc show #strobe-word-unt'
+4.167	frame 125	0:04.17	event cut 'hide #s1d show #s1e'
+8.000	frame 240	0:08.00	event cut 'hide #s1e show #s2'
+15.000	frame 450	0:15.00	event cut 'hide #s2 show #s3a'
+16.500	frame 495	0:16.50	event cut 'hide #s3a show #s3b'
+21.000	frame 630	0:21.00	event cut 'hide #s3b show #s4'
+25.333	frame 760	0:25.33	event cut 'hide #s4 show #s5'
+31.667	frame 950	0:31.67	event cut 'hide #s5 show #s6'
+37.333	frame 1120	0:37.33	event cut 'hide #s6 show #s7'
+45.000	frame 1350	0:45.00	event cut 'hide #s7 show #s8'
+49.000	frame 1470	0:49.00	event cut 'hide #s8 show #s9'
+# detected but not in events:
+25.800	frame 774	0:25.80	scene 0.28 + corr 0.38 spike x5.6
+27.300	frame 819	0:27.30	pixel spike x3.8 diff 13.4 corr 0.52 scene 0.12
+28.800	frame 864	0:28.80	scene 0.12 + corr 0.51 spike x1.8
+29.300	frame 879	0:29.30	scene 0.14 + corr 0.45 spike x3.4
+30.300	frame 909	0:30.30	scene 0.14 + corr 0.41 spike x4.9
+39.333	frame 1180	0:39.33	scene 1.00

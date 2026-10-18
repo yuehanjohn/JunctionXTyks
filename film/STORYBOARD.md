@@ -1,76 +1,39 @@
-# AEI Pulse — motion film storyboard
+# AEI Pulse — Cinematic Surveillance Film Storyboard
 
 ## PAGE
-- **P**roblem: AMR reports are annual; resistance moves weekly. Doctors treat with data from last year.
-- **A**udience: Tyks Laboratories / challenge judges; watched on a demo screen with sound.
-- **G**oal: believe AEI Pulse turns yearly surveillance into a live instrument; want to open the demo.
-- **E**motion: quiet dread → alert competence → control.
+- **Problem**: Modern medicine is facing a silent, human-scale crisis: antimicrobial resistance (10M projected deaths/yr). Routine surgery, chemo, and childbirth are threatened, yet hospitals still monitor outbreaks with annual backward-looking PDF reports compiled once every 12 months.
+- **Audience**: Clinical evaluators, hospital epidemiologists, physicians at Tyks Laboratories, and challenge judges.
+- **Goal**: Make the viewer believe AEI Pulse transforms AMR monitoring from a retrospective archive into an active, real-time radar that defends modern medicine and saves lives at the bedside.
+- **Emotion**: Visceral crisis dread (rapid-fire media overload) → awe at human medical progress → cinematic relief & clinical control (real-time radar defense).
 
-## One true thing
-A surveillance window that never closes: four weeks rolling, every isolate, and the alarm before the outbreak.
+## The One True Thing
+A living surveillance radar that never closes: 28 days rolling, every acute isolate, and the alarm before the outbreak spreads.
 
-## Brand inventory
-| Row | Answer |
-|---|---|
-| Logo | House/roof mark in #0f6b7c (ward/home) |
-| Core control | The alert card; the 4-week rolling window |
-| Material | Daily lab data: isolates, S/R calls, trend curves |
-| Key verb | Watch. Detect. |
-| Success moment | Emerging signal fires (z −5.8) — caught early |
-| Voice | Clinical, exact, calm; numbers in mono |
-| Colour logic | #0f6b7c = acting/ON; #b3261e = signal/alarm; #177245 = good |
-| Type | IBM Plex Sans 400–700 + IBM Plex Mono for figures |
-| Never do | Hype, glow, rocket imagery, invented clinical claims |
+## System & Aesthetic
+- **Theme & Vibe**: Inspired by fframes `made-of-motion` and `the-why`:
+  - "Cold blue for the machines. Warm light for human intent."
+  - Analog / pixel collage: textured newsprint paper grain, procedural halftone screen, red marker strokes, decisive punctuation stamps (**crisis.** / **radar.** / **humanity.**).
+  - High-tech camera tracking HUD pass rendered via `ff-tracking` with Vulkan GPU SkSL lens shaders (perspective tilt, CRT phosphor bloom, scanline tears, real coordinates).
+  - Real AEI Pulse application interface (1,212 acute isolates, 9 Wards × 7 Antibiotics matrix, Transmission Map, ICU $z = -5.8\sigma$ alert slam, Bedside Guidance).
+- **Format**: 1920×1080 @ 30 fps. Duration: 1800 frames = 60.00s.
+- **Clock**: Smooth clock with seek-safe GSAP runtime (`Motion.film`).
+- **Sound**: `film/build/mix.wav` mastered to EBU R128 (-14.2 LUFS, true peak -1.6 dBFS, 0 clipped samples) combining `soundtrack.mp3`, 10 ElevenLabs studio VO clips, and 9 synchronized cinematic SFX hits.
 
-## System
-- Shape: claim → cut → proof → cta (Oppenheimer-adjacent: quiet menace, hard cuts on hits).
-- Length: 62.5 s (1875 f @30). Clock: smooth. Grammar: crisp steps; smear only on whips.
-- Ground: near-black lab dark #0b0e11 for acts 1–2, light #fcfcfd act 3 (the instrument opens), dark sign-off.
-- Accent #0f6b7c one meaning: "the system is acting". Signal red #da2525 one meaning: "resistance moving".
-- Hero: f1180 — trend line crossing baseline as alert card slams in over the soundtrack peak (~97 s).
+## Beat Architecture & Timings
 
-## VO lines → clip timings (film/vo/NN.mp3, s)
-| # | line | dur | start f | end f |
-|---|---|---|---|---|
-| 01 | Every year, the laboratory looks back. | 4.0 | 0 | 120 |
-| 02 | Twelve months of resistance, condensed into one report. | 5.2 | 150 | 305 |
-| 03 | But an infection does not wait a year. | 4.6 | 390 | 528 |
-| 04 | This is AEI Pulse. | 3.3 | 600 | 698 |
-| 05 | A rolling, real-time window on antimicrobial resistance. Updated every day. | 5.7 | 780 | 950 |
-| 06 | Every ward. Every organism. Every antibiotic. Susceptible, or resistant. | 9.1 | 1030 | 1303 |
-| 07 | When a signal drifts from its baseline, Pulse raises the alert. Early, while the outcome can still change. | 4.1 | 1390 | 1513 |
-| 08 | For the doctor at the bedside: what still works. What has stopped. | 4.0 | 1560 | 1680 |
-| 09 | Not a report of the past. An instrument for the next decision. | 3.3 | 1720 | 1819 |
-| 10 | AEI Pulse. Tyks Laboratories. Surveillance, in real time. | 4.3 | 1860* | end |
-
-*Line 10 VO is 4.32 s; film extended to 75 s (2250 f) so the close holds 0.9 s resolved.
-Final length: **2250 f = 75.0 s.**
-
-## Beats
-| # | role | imp | buys | copy | frames | sound |
+| Beat | Frames | Time | Role | Buys | VO Script | Visual & Sound Elements |
 |---|---|---|---|---|---|---|
-| 1 | hook | 2 | the viewer feels the annual-report backlog as stacked dated sheets | "Every year, the laboratory looks back." | 0–210 | quiet tick per sheet |
-| 2 | hook | 2 | the condensation of a year into one static page | "Twelve months… one report." | 210–345 | low drone |
-| 3 | turn | 3 | the problem is temporal: infection vs annual report | "An infection does not wait a year." | 390–555 | stinger hit @ ~19 s |
-| 4 | turn | 3 | the name arrives by cause (window opens on the ward map) | "This is AEI Pulse." | 600–720 | music enters |
-| 5 | proof | 2 | real rolling window mechanics: 28-day bar sweeping, daily dots landing | "A rolling, real-time window… every day." | 780–960 | ticks |
-| 6 | proof | 2 | scale as countable lattice: wards × organisms × antibiotics grid | "Every ward. Every organism…" | 1030–1330 | groove |
-| 7 | proof | 3 | deviation detection: curve crosses baseline, alert fires | "When a signal drifts… still change." | 1390–1540 | **hero hit @ 46.3 s** |
-| 8 | proof | 2 | bedside use: guidance fragment S/R lists | "For the doctor at the bedside…" | 1560–1700 | soft |
-| 9 | cta | 2 | product as instrument, not report | "Not a report… next decision." | 1720–1840 | cut down |
-| 10 | cta | 3 | the name + ownership, hold 0.9 s alive | "AEI Pulse. Tyks Laboratories…" | 1860–2250 | resolve, tail |
-
-Importance-3 beats: 3, 4, 7, 10 = 4/10 ≤ 25 %. ✓
-
-## Seams (carried object)
-1→2 sheet stack; 2→3 the stack burns away (ink drop); 3→4 the ward grid collapses into the opening window; 4→5 the window's 28-day bar; 5→6 the daily dot becomes a lattice node; 6→7 one node's curve; 7→8 the alert card shrinks into guidance panel; 8→9 the S/R list; 9→10 the window frame becomes the wordmark underscore.
-
-## Sound
-- Source: soundtrack.mp3 (110.2 s, 136 BPM). Mix = track trimmed 0–75 s, ducked under VO, 3 hero hits: 19.0 s (stinger, beat 3), 46.3 s (beat 7 alert), 62.0 s (name). Track's own RMS builds 0→97 s peak then drops — matches film energy curve.
-- SFX: sheet tick, soft UI pop, alert hit, resolved tone.
-- Mix: −14 LUFS, VO peaks −16…−12 dBFS.
-
-## Gates pre-check
-- G1: proof fragments ≥ 0.55 W or edge-cropped; all UI text ≥ 0.04 H (32 px @1080) built from brand tokens.
-- G3: end hold 0.9 s alive (logo creep + shimmer); CTA beat 390 f = 17 % ≤ 25 %. ✓
-- G4: one hero per frame; two panels only in beat 8 with 2× area rule (guidance hero, KPI texture).
+| **1A** | 0–36 | 0.0–1.2s | Hook | Global media panic | "A silent pandemic..." | *The Guardian* broadsheet, halftone dots, red marker stroke, "crisis." stamp. Shutter ticks. |
+| **1B** | 36–48 | 1.2–1.6s | Hook | Microbial mutation speed | "...is accelerating..." | Rapid thermal strobe "MUTATION." with CRT scanlines and camera snap shake. Flash hit. |
+| **1C** | 48–90 | 1.6–3.0s | Hook | Global health emergency | "...through modern medicine." | TV News Chyron (BBC/CNN Breaking), LIVE beacon, crawling ticker. Radio static. |
+| **1D** | 90–125 | 3.0–4.17s | Hook | Urgency of closing window | "Ten million lives a year." | Kinetic typography "ACCELERATING." toggling to "UNTREATABLE." Sub-bass drop @ 3.7s. |
+| **1E** | 125–240 | 4.17–8.0s | Hook | Scale of the crisis | "...The miracle drugs of our century are failing." | *The Lancet* Infectious Diseases, hero counter 1.2M -> 10,000,000, "failing." stamp slam. |
+| **2** | 240–450 | 8.0–15.0s | Turn | Human progress & stakes | "For a hundred years, antibiotics shielded humanity's greatest leaps: surgery, chemotherapy, childbirth." | Warm golden cinematic light. Sacred protective shield geometry. 3 Pillars of Modern Medicine. Warm harmonic swell. |
+| **3A** | 450–495 | 15.0–16.5s | Turn | The shield breaks | "Without them, the shield breaks..." | Cold alarm wash, hairline cracks branching violently across shield, "broken." stamp. Fracture crack sound. |
+| **3B** | 495–630 | 16.5–21.0s | Turn | Stagnant annual PDFs | "...And hospitals still fight back with annual PDF reports." | Dusty 3D paper stack drops (2021-2024 reports). Red rubber stamp "365-Day Lag" slam. Paper thud. |
+| **4** | 630–760 | 21.0–25.33s | Turn (Hero) | Radar arrival by cause | "An infection does not wait a year. This is AEI Pulse." | High-voltage flash shatters void. Tyks ward mark draws in teal #1594ab. Wordmark crash. Laser stinger. |
+| **5** | 760–950 | 25.33–31.66s | Proof | Real-time surveillance | "A living surveillance radar. 1,212 acute isolates, tracked in real time." | Embedded `ff-tracking` Vulkan SkSL camera-tracked HUD pass. Live isolate counter 840 -> 1,212. Sonar ping. |
+| **6** | 950–1120 | 31.66–37.33s | Proof | Comprehensive hospital scale | "A 28-day rolling window sweeping every ward, every organism, every antibiotic." | Real AEI Pulse UI: 9 Wards x 7 Antibiotics Matrix + Ward Transmission Map network. Smooth radar sweep. |
+| **7** | 1120–1350 | 37.33–45.0s | Proof (Hero) | Outbreak anomaly catch | "When a resistant clone surges, Pulse catches it. Z-score minus 5.8: intercepted before the outbreak spreads." | ICU E. coli to Ciprofloxacin trend curve crossing baseline. Alert Card SLAMS from 3.5x @ f1180. Trailer BRAAM hit & camera shake. |
+| **8** | 1350–1470 | 45.0–49.0s | Proof | Bedside decision support | "At the bedside: knowing what still works. Protecting what remains." | Real Bedside Guidance Card: Meropenem 96.5% S vs Ciprofloxacin compromised. Cursor clicks "Select for Order". Haptic UI pop. |
+| **9** | 1470–1800 | 49.0–60.0s | CTA | Saving humanity's shield | "We are defending the shield that built the modern world. AEI Pulse. Tyks Laboratories." | Protective shield reassembles. Tyks Laboratories signature brand lockup. Resolved hold 1.17s (f1765-f1800). Warm pad tail. |

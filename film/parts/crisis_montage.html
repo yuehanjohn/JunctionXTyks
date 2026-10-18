@@ -1,0 +1,1645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AEI Pulse — Crisis Montage & Evolution Sequence (Acts 1, 2, 3)</title>
+<meta name="viewport" content="width=1920, height=1080">
+<style>
+/* ============================================================
+   TYPOGRAPHY & BRAND TOKENS (IBM Plex + Serif + Made-of-Motion)
+   ============================================================ */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/IBMPlexSans-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../fonts/IBMPlexSans-600.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-weight: 700;
+  font-style: normal;
+  src: url('../fonts/IBMPlexSans-700.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/IBMPlexMono-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../fonts/IBMPlexMono-600.ttf') format('truetype');
+}
+
+:root {
+  --ground-dark: #07090d;
+  --ground-dark-2: #030406;
+  --ground-light: #fcfcfd;
+  --paper-bg: #f8f5ee;
+  --paper-grain: #e8e2d5;
+  --ink-dark: #f0f3f6;
+  --ink-dark-soft: #8892a0;
+  --ink-light: #12151a;
+  --ink-light-soft: #5b6472;
+  --accent-teal: #0f6b7c;
+  --accent-teal-bright: #1594ab;
+  --signal-red: #da2525;
+  --signal-red-bright: #ff3333;
+  --signal-red-glow: rgba(255, 51, 51, 0.45);
+  --warm-gold: #e5a93b;
+  --warm-gold-bright: #ffd166;
+  --warm-amber: #d97706;
+  --warm-candle: #ffb703;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-serif: 'Times New Roman', Georgia, 'Playfair Display', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  margin: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #000;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#main {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--ground-dark);
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cam {
+  position: absolute;
+  inset: 0;
+  transform-origin: 960px 540px;
+}
+
+/* ============================================================
+   GLOBAL OVERLAYS (Scanlines, Vignette, Noise, Flash, Guides)
+   ============================================================ */
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(15,107,124,0.03) 0%, rgba(8,11,15,0.45) 60%, rgba(3,4,6,0.96) 100%);
+  z-index: 20;
+}
+
+.vignette-warm {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, rgba(229,169,59,0.08) 0%, rgba(13,10,6,0.5) 65%, rgba(5,4,3,0.98) 100%);
+  z-index: 20;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.45) 50%);
+  background-size: 100% 4px;
+  opacity: 0.35;
+  z-index: 21;
+}
+
+#flash {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Procedural Halftone Print Texture */
+.halftone-screen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(0,0,0,0.12) 15%, transparent 16%);
+  background-size: 6px 6px;
+  opacity: 0.4;
+  z-index: 5;
+}
+
+/* Typographic Rulers & Coordinate Crosshairs (Made-of-Motion signature) */
+.typo-ruler-h {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  height: 1px;
+  border-top: 1px dashed rgba(255,255,255,0.15);
+  pointer-events: none;
+  z-index: 15;
+}
+.typo-ruler-h.dark {
+  border-top-color: rgba(0,0,0,0.15);
+}
+.typo-ruler-h.gold {
+  border-top-color: rgba(229,169,59,0.25);
+}
+.typo-label {
+  position: absolute;
+  right: 0;
+  top: -18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+.typo-label.dark { color: rgba(0,0,0,0.4); }
+.typo-label.gold { color: var(--warm-gold); }
+
+.crosshair {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 15;
+}
+.crosshair::before, .crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.25);
+}
+.crosshair::before { left: 6px; top: 0; width: 2px; height: 14px; }
+.crosshair::after { left: 0; top: 6px; width: 14px; height: 2px; }
+.crosshair.gold::before, .crosshair.gold::after { background: rgba(229,169,59,0.45); }
+.crosshair.red::before, .crosshair.red::after { background: var(--signal-red-bright); }
+
+/* ============================================================
+   ACT 1: FAST-PACED CRISIS MONTAGE (0s - 8s)
+   ============================================================ */
+
+/* 1A: The Guardian Broadsheet Newspaper */
+#s1a {
+  background: #0d0f12;
+  color: #1a1a1a;
+}
+.paper-container {
+  position: absolute;
+  left: 140px;
+  top: 70px;
+  width: 1640px;
+  height: 940px;
+  background: var(--paper-bg);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid #d5cebf;
+  padding: 48px 64px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.paper-grain-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(210,195,170,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(190,175,150,0.25) 0%, transparent 60%);
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+.news-header {
+  border-bottom: 5px solid #111;
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+}
+.news-masthead {
+  font-family: var(--font-serif);
+  font-size: 96px;
+  font-weight: 900;
+  letter-spacing: -2.5px;
+  line-height: 0.95;
+  color: #0c0d0e;
+}
+.news-dateline {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 600;
+  color: #4a4d52;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: right;
+  line-height: 1.4;
+}
+.news-banner-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 2;
+}
+.news-banner-tag {
+  background: var(--signal-red);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+.news-banner-context {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 1px;
+}
+.news-headline-wrap {
+  position: relative;
+  margin-bottom: 24px;
+  z-index: 2;
+}
+.news-headline {
+  font-family: var(--font-serif);
+  font-size: 98px;
+  line-height: 1.02;
+  font-weight: 900;
+  color: #0a0a0c;
+  letter-spacing: -2px;
+  max-width: 1500px;
+}
+/* Red marker stroke SVG container */
+.svg-marker-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.news-columns {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 48px;
+  border-top: 1px solid #111;
+  padding-top: 24px;
+  position: relative;
+  z-index: 2;
+}
+.news-lead-text {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  line-height: 48px;
+  color: #222;
+  font-weight: 600;
+}
+.news-sidebar-box {
+  border-left: 2px solid #111;
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.news-meta-title {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--signal-red);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.news-meta-stat {
+  font-family: var(--font-mono);
+  font-size: 52px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.news-meta-desc {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 26px;
+  color: #555;
+}
+.stamp-crisis {
+  position: absolute;
+  right: 80px;
+  top: 140px;
+  transform: rotate(-8deg);
+  border: 6px solid var(--signal-red);
+  color: var(--signal-red);
+  font-family: var(--font-mono);
+  font-size: 42px;
+  font-weight: 900;
+  padding: 8px 24px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  background: rgba(218, 37, 37, 0.06);
+  box-shadow: 0 0 20px rgba(218, 37, 37, 0.15);
+  z-index: 10;
+}
+
+/* 1B: Kinetic Strobe Rapid Cut 1 ("MUTATION.") */
+#s1b {
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.strobe-bg-thermal {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(218,37,37,0.2) 0%, rgba(0,0,0,0.95) 75%);
+}
+.strobe-frame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+}
+.strobe-hud-tag {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: var(--signal-red-bright);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.strobe-word-hero {
+  font-family: var(--font-sans);
+  font-size: 210px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -6px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 
+    -3px 0 rgba(255, 30, 30, 0.8),
+    3px 0 rgba(30, 200, 255, 0.8),
+    0 10px 40px rgba(0,0,0,0.9);
+}
+.strobe-coord {
+  position: absolute;
+  left: 80px;
+  bottom: 80px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+}
+
+/* 1C: TV News Chyron (BBC World News / CNN Breaking) */
+#s1c {
+  background: #05080c;
+}
+.tv-viewport {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: radial-gradient(circle at 50% 50%, #0a111a 0%, #030508 100%);
+}
+.tv-header-bar {
+  padding: 40px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+.tv-live-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--signal-red);
+  color: #fff;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 3px;
+  box-shadow: 0 0 30px rgba(218,37,37,0.7);
+}
+.tv-live-beacon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+.tv-channel-ident {
+  font-family: var(--font-sans);
+  font-size: 34px;
+  font-weight: 800;
+  color: #f0f3f6;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tv-channel-ident span { color: var(--signal-red-bright); }
+.tv-center-stage {
+  padding: 0 90px;
+  margin-top: 40px;
+  z-index: 2;
+}
+.tv-urgent-label {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  color: var(--signal-red-bright);
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tv-urgent-label::before {
+  content: '▲';
+  font-size: 22px;
+}
+.tv-main-headline {
+  font-size: 92px;
+  line-height: 1.05;
+  font-weight: 800;
+  color: #ffffff;
+  max-width: 1600px;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.9);
+}
+.tv-lower-third-wrap {
+  width: 100%;
+  z-index: 2;
+}
+.tv-sub-bar {
+  background: rgba(10, 15, 24, 0.94);
+  border-top: 3px solid var(--signal-red-bright);
+  padding: 18px 90px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.tv-sub-tag {
+  background: #ffffff;
+  color: #000000;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 20px;
+  padding: 6px 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.tv-sub-headline {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+.tv-ticker-crawler {
+  background: var(--signal-red);
+  padding: 14px 90px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.tv-ticker-title {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 22px;
+  color: #ffffff;
+  padding-right: 28px;
+  border-right: 2px solid rgba(255,255,255,0.4);
+  margin-right: 28px;
+  letter-spacing: 2px;
+}
+.tv-ticker-scroll {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* 1D: Kinetic Strobe Rapid Cut 2 ("ACCELERATING." & "UNTREATABLE.") */
+#s1d {
+  background: #000000;
+}
+.strobe-duo-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.strobe-word-1 {
+  font-family: var(--font-sans);
+  font-size: 190px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -5px;
+  color: #ff3333;
+  text-transform: uppercase;
+  position: absolute;
+}
+.strobe-word-2 {
+  font-family: var(--font-sans);
+  font-size: 200px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  position: absolute;
+  display: none;
+}
+.strobe-sub-bracket {
+  position: absolute;
+  bottom: 220px;
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* 1E: The Lancet 10 Million Crisis */
+#s1e {
+  background: #090c10;
+  color: #f0f3f6;
+}
+.lancet-journal-paper {
+  position: absolute;
+  left: 180px;
+  top: 90px;
+  width: 1560px;
+  height: 900px;
+  background: #0f141c;
+  border: 1px solid #232c38;
+  border-left: 14px solid var(--signal-red);
+  padding: 60px 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.85);
+  position: relative;
+  overflow: hidden;
+}
+.lancet-header {
+  border-bottom: 2px solid #232c38;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.lancet-masthead {
+  font-family: var(--font-serif);
+  font-size: 46px;
+  font-style: italic;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+.lancet-metadata {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: #718096;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: right;
+}
+.lancet-mid-stage {
+  margin: 30px 0;
+  position: relative;
+}
+.lancet-counter-tag {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--signal-red-bright);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.lancet-counter-hero {
+  font-family: var(--font-mono);
+  font-size: 210px;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -8px;
+  color: var(--signal-red);
+  text-shadow: 0 0 50px rgba(218, 37, 37, 0.4);
+  position: relative;
+  display: inline-block;
+}
+.lancet-title-text {
+  font-size: 60px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -1px;
+  margin-top: 20px;
+  line-height: 1.15;
+}
+.lancet-footer-quote {
+  border-top: 1px solid #232c38;
+  padding-top: 24px;
+  font-size: 28px;
+  line-height: 42px;
+  color: #94a3b8;
+  max-width: 1280px;
+  font-weight: 400;
+}
+.stamp-failing {
+  position: absolute;
+  right: 90px;
+  top: 160px;
+  transform: rotate(-10deg);
+  border: 6px solid var(--signal-red-bright);
+  color: var(--signal-red-bright);
+  font-family: var(--font-mono);
+  font-size: 46px;
+  font-weight: 900;
+  padding: 10px 28px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  background: rgba(218, 37, 37, 0.12);
+  box-shadow: 0 0 30px rgba(218, 37, 37, 0.3);
+}
+
+/* ============================================================
+   ACT 2: HUMANITY'S EVOLUTION & THE SHIELD (8s - 15s)
+   "Warm light for human intent"
+   ============================================================ */
+#s2 {
+  background: radial-gradient(circle at 50% 35%, #1c150b 0%, #0c0905 55%, #040302 100%);
+  color: #f7f3ea;
+}
+.h-stage-wrap {
+  position: absolute;
+  left: 140px;
+  top: 70px;
+  width: 1640px;
+  height: 940px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+/* Luminous Protective Shield Geometry (Center/Aura) */
+.shield-aura-bg {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 900px;
+  pointer-events: none;
+  z-index: 1;
+}
+.shield-glow-orb {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229,169,59,0.18) 0%, rgba(217,119,6,0.08) 50%, transparent 75%);
+  filter: blur(40px);
+}
+.shield-geom-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.h-top-banner {
+  border-bottom: 2px solid rgba(229, 169, 59, 0.3);
+  padding-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.h-pre-title {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 5px;
+  color: var(--warm-gold-bright);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.h-main-title {
+  font-size: 74px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
+.h-timeline-metric {
+  font-family: var(--font-mono);
+  text-align: right;
+  line-height: 1.4;
+}
+.h-metric-val {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--warm-gold-bright);
+}
+.h-metric-lbl {
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #d1c7b7;
+  text-transform: uppercase;
+}
+
+/* Timeline Track */
+.h-timeline-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin: 18px 0;
+  padding: 12px 0;
+}
+.h-timeline-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(229,169,59,0.15) 0%, rgba(229,169,59,0.85) 70%, var(--warm-gold-bright) 100%);
+  z-index: 1;
+}
+.h-t-node {
+  position: relative;
+  z-index: 2;
+  background: #0d0a06;
+  border: 1px solid rgba(229,169,59,0.4);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #c9bfaf;
+}
+.h-t-node.hero {
+  border-color: var(--warm-gold-bright);
+  background: rgba(229,169,59,0.2);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(229,169,59,0.3);
+}
+
+/* The 3 Pillars of Modern Medicine */
+.h-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  margin: 20px 0;
+  position: relative;
+  z-index: 3;
+}
+.h-pillar-card {
+  background: rgba(25, 19, 12, 0.78);
+  border: 1px solid rgba(229, 169, 59, 0.38);
+  border-radius: 14px;
+  padding: 38px 34px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+.h-pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--warm-amber), var(--warm-gold-bright));
+}
+.h-pillar-tag-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.h-pillar-tag {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--warm-gold-bright);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.h-pillar-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--warm-gold);
+}
+.h-pillar-name {
+  font-size: 46px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+.h-pillar-body {
+  font-size: 22px;
+  line-height: 34px;
+  color: #d8cebf;
+  margin-bottom: 20px;
+}
+.h-pillar-badge {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  color: var(--warm-gold-bright);
+  background: rgba(229, 169, 59, 0.12);
+  border: 1px solid rgba(229, 169, 59, 0.35);
+  padding: 6px 14px;
+  border-radius: 4px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+/* Luminous Shield Bottom Banner */
+.h-shield-lockup {
+  background: rgba(229, 169, 59, 0.1);
+  border: 1px solid rgba(229, 169, 59, 0.45);
+  border-radius: 12px;
+  padding: 22px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 3;
+}
+.h-shield-claim {
+  font-size: 27px;
+  font-weight: 600;
+  color: #fff6e0;
+  letter-spacing: -0.5px;
+}
+.h-shield-claim span {
+  color: var(--warm-gold-bright);
+  font-weight: 700;
+}
+.h-shield-punch {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--warm-gold-bright);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   ACT 3: THE BROKEN DEFENSE & STAGNANT REPORT STACK (15s - 21s)
+   ============================================================ */
+
+/* 3A: Shield Fracture with Hairline Cracks */
+#s3a {
+  background: radial-gradient(circle at 50% 50%, #150a0a 0%, #080304 60%, #000000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fracture-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+.fracture-shield-container {
+  position: relative;
+  width: 600px;
+  height: 680px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fracture-shield-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 50px rgba(218, 37, 37, 0.6));
+}
+.fracture-word-hero {
+  position: absolute;
+  top: 720px;
+  font-family: var(--font-sans);
+  font-size: 96px;
+  font-weight: 800;
+  color: #ff3333;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 40px rgba(255, 51, 51, 0.8);
+}
+.fracture-sub-lead {
+  position: absolute;
+  top: 830px;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  letter-spacing: 4px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* 3B: Stagnant 3D Paper Report Stack */
+#s3b {
+  background: #080b0f;
+  color: var(--ink-dark);
+}
+.archive-contrast-callout {
+  position: absolute;
+  left: 180px;
+  top: 70px;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  max-width: 1560px;
+  letter-spacing: -1.5px;
+  z-index: 10;
+}
+.archive-stage-viewport {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+}
+.archive-stack-3d {
+  position: relative;
+  width: 960px;
+  height: 700px;
+  transform-style: preserve-3d;
+  margin-top: 60px;
+}
+.paper-sheet-3d {
+  position: absolute;
+  width: 900px;
+  height: 640px;
+  background: #fbf9f4;
+  color: #1a1a1a;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 5px 20px rgba(0,0,0,0.5);
+  border: 1px solid #d4cfc5;
+  padding: 44px 54px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sheet-header-line {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  color: #666;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sheet-barcode {
+  font-family: var(--font-mono);
+  letter-spacing: 3px;
+  font-size: 15px;
+  color: #888;
+}
+.sheet-h1-title {
+  font-family: var(--font-serif);
+  font-size: 58px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #111;
+  line-height: 1.1;
+}
+.sheet-clinical-bullets {
+  font-size: 26px;
+  line-height: 42px;
+  color: #333;
+  margin-top: 24px;
+  list-style: none;
+}
+.sheet-clinical-bullets li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sheet-clinical-bullets li::before {
+  content: '■';
+  font-size: 16px;
+  color: var(--signal-red);
+}
+.sheet-stamp-alarm {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  transform: rotate(-12deg);
+  border: 8px solid var(--signal-red);
+  color: var(--signal-red);
+  font-family: var(--font-mono);
+  font-size: 46px;
+  font-weight: 900;
+  padding: 16px 34px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  background: rgba(218, 37, 37, 0.08);
+  box-shadow: 0 0 30px rgba(218, 37, 37, 0.25);
+  z-index: 5;
+}
+.sheet-hand-note {
+  position: absolute;
+  left: 60px;
+  bottom: 50px;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--signal-red);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+<div id="main" data-composition-id="main" data-duration="21.0" data-width="1920" data-height="1080">
+
+  <!-- GLOBAL OVERLAYS -->
+  <div id="flash"></div>
+
+  <!-- ============================================================
+       SCENE 1A: THE GUARDIAN BROADSHEET NEWSPAPER (0s - 1.2s, f0-f36)
+       ============================================================ -->
+  <section id="s1a" class="scene">
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="typo-ruler-h dark" style="top: 70px;"><span class="typo-label dark">BOUND: 1920 × 1080 // ARCHIVE 01</span></div>
+    <div class="typo-ruler-h dark" style="top: 1010px;"><span class="typo-label dark">X-HEIGHT BASELINE</span></div>
+    <div class="crosshair" style="left: 60px; top: 60px;"></div>
+    <div class="crosshair" style="right: 60px; top: 60px;"></div>
+
+    <div id="s1a-cam" class="cam">
+      <div class="paper-container">
+        <div class="paper-grain-texture"></div>
+        <div class="halftone-screen"></div>
+
+        <div class="news-header">
+          <div class="news-masthead">The Guardian</div>
+          <div class="news-dateline">
+            London • Special Global Health Report<br>
+            International Surveillance Audit
+          </div>
+        </div>
+
+        <div class="news-banner-strip">
+          <div id="emergency-wrap" style="position:relative; display:inline-block;">
+            <div class="news-banner-tag">Global Emergency</div>
+            <svg style="position:absolute; left:-6px; top:-4px; width:260px; height:46px; pointer-events:none;" viewBox="0 0 260 46">
+              <path id="marker-emg-stroke" 
+                    d="M 8 23 C 70 20, 160 26, 252 22" 
+                    stroke="#da2525" 
+                    stroke-width="32" 
+                    stroke-linecap="round" 
+                    stroke-opacity="0.45"
+                    style="stroke-dasharray: 300; stroke-dashoffset: 300;" />
+            </svg>
+          </div>
+          <div class="news-banner-context">INVESTIGATION: CLINICAL MICROBIOLOGY IN CRISIS</div>
+        </div>
+
+        <div class="news-headline-wrap">
+          <div class="news-headline" style="position:relative;">
+            ANTIBIOTIC RESISTANCE:<br>A SILENT PANDEMIC
+            <svg style="position:absolute; left:0; bottom:8px; width:1300px; height:36px; pointer-events:none;" viewBox="0 0 1300 36">
+              <path id="marker-hl-stroke" 
+                    d="M 10 18 C 350 14, 750 22, 1280 17" 
+                    stroke="#da2525" 
+                    stroke-width="26" 
+                    stroke-linecap="round" 
+                    stroke-opacity="0.35"
+                    style="stroke-dasharray: 1300; stroke-dashoffset: 1300;" />
+            </svg>
+          </div>
+
+          <div id="stamp-crisis-wrap" style="position:absolute; right:80px; top:110px; transform:rotate(-8deg); z-index:10;">
+            <div id="stamp-crisis-badge" class="stamp-crisis" style="position:relative; right:auto; top:auto; transform:none;">crisis.</div>
+            <svg style="position:absolute; left:-22px; top:-18px; width:230px; height:105px; pointer-events:none;" viewBox="0 0 230 105">
+              <path id="marker-circle" 
+                    d="M 22 52 C 15 18, 215 12, 210 52 C 205 92, 12 96, 26 46" 
+                    stroke="#da2525" 
+                    stroke-width="6" 
+                    fill="none"
+                    stroke-linecap="round" 
+                    stroke-opacity="0.88"
+                    style="stroke-dasharray: 600; stroke-dashoffset: 600;" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="news-columns">
+          <div class="news-lead-text">
+            Global health authorities issue urgent warning: common hospital infections are becoming untreatable as traditional surveillance lags up to twelve months behind emerging outbreaks.
+          </div>
+          <div class="news-sidebar-box">
+            <div>
+              <div class="news-meta-title">Surveillance Lag</div>
+              <div class="news-meta-stat">365 Days</div>
+              <div class="news-meta-desc">Average delay between bacterial transmission and hospital policy intervention.</div>
+            </div>
+            <div>
+              <div class="news-meta-title">Status</div>
+              <div style="font-family:var(--font-mono); font-size:24px; font-weight:700; color:var(--signal-red);">UNCONTROLLED</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 1B: KINETIC STROBE RAPID CUT 1 ("MUTATION.") (1.2s - 1.6s, f36-f48)
+       ============================================================ -->
+  <section id="s1b" class="scene">
+    <div class="strobe-bg-thermal"></div>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="typo-ruler-h" style="top: 540px;"><span class="typo-label">CENTER LAT: 0.000 // ZOOM 3.8X</span></div>
+    <div class="crosshair red" style="left: 960px; top: 540px; transform: translate(-50%, -50%);"></div>
+
+    <div id="s1b-cam" class="cam">
+      <div class="strobe-frame">
+        <div class="strobe-hud-tag">
+          <span>[LOC: ACUTE WARDS]</span>
+          <span>● ESKAPE CLONE DETECTED</span>
+        </div>
+        <div id="strobe-word-mut" class="strobe-word-hero">MUTATION.</div>
+        <div class="strobe-coord">SYS_ALERT // Δt = +0.02s // CRITICAL DRIFT</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 1C: TV NEWS CHYRON (BBC / CNN LIVE BREAKING) (1.6s - 3.0s, f48-f90)
+       ============================================================ -->
+  <section id="s1c" class="scene">
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="typo-ruler-h" style="top: 935px;"><span class="typo-label">CHYRON BASELINE GRID</span></div>
+
+    <div id="s1c-cam" class="cam">
+      <div class="tv-viewport">
+        <div class="tv-header-bar">
+          <div class="tv-live-badge">
+            <div id="tv-dot-beacon" class="tv-live-beacon"></div>
+            LIVE
+          </div>
+          <div class="tv-channel-ident">
+            TYKS SURVEILLANCE <span>NEWS BREAKING</span>
+          </div>
+        </div>
+
+        <div class="tv-center-stage">
+          <div class="tv-urgent-label">GLOBAL HEALTH SURVEILLANCE AUDIT</div>
+          <div class="tv-main-headline">
+            WHO: WE ARE ENTERING THE POST-ANTIBIOTIC ERA
+          </div>
+        </div>
+
+        <div class="tv-lower-third-wrap">
+          <div class="tv-sub-bar">
+            <div class="tv-sub-tag">BREAKING</div>
+            <div class="tv-sub-headline">CRITICAL SURVEILLANCE GAP: ANNUAL REPORTS LEAVE CLINICIANS BLIND TO OUTBREAK SURGES</div>
+          </div>
+          <div class="tv-ticker-crawler">
+            <div class="tv-ticker-title">LIVE TICKER</div>
+            <div id="tv-ticker-stream" class="tv-ticker-scroll">
+              ► ESKAPE PATHOGENS CIRCULATING IN ACUTE WARDS // 12-MONTH REPORTING DELAY CONCEALS WARD SPIKES // RESISTANCE SURGING AT BEDSIDE ►
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 1D: KINETIC STROBE RAPID CUT 2 ("ACCELERATING." & "UNTREATABLE.") (3.0s - 4.17s, f90-f125)
+       ============================================================ -->
+  <section id="s1d" class="scene">
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="typo-ruler-h" style="top: 300px;"><span class="typo-label">STROBE AXIS // FRAME REC</span></div>
+
+    <div id="s1d-cam" class="cam">
+      <div class="strobe-duo-stage">
+        <div id="strobe-word-acc" class="strobe-word-1">ACCELERATING.</div>
+        <div id="strobe-word-unt" class="strobe-word-2">UNTREATABLE.</div>
+        <div class="strobe-sub-bracket">[ THE WINDOW IS CLOSING ]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 1E: THE LANCET 10 MILLION CRISIS (4.17s - 8.0s, f125-f240)
+       ============================================================ -->
+  <section id="s1e" class="scene">
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="typo-ruler-h" style="top: 90px;"><span class="typo-label">PEER REVIEW DATASET // GLOBAL BURDEN</span></div>
+
+    <div id="s1e-cam" class="cam">
+      <div class="lancet-journal-paper">
+        <div class="lancet-header">
+          <div class="lancet-masthead">The Lancet • Infectious Diseases</div>
+          <div class="lancet-metadata">
+            VOLUME 402, ISSUE 10408 • GLOBAL AMR COLLABORATION<br>
+            EPIDEMIOLOGICAL FORECAST
+          </div>
+        </div>
+
+        <div class="lancet-mid-stage">
+          <div class="lancet-counter-tag">Projected Annual Mortality by 2050</div>
+          <div id="lancet-counter" class="lancet-counter-hero">10,000,000</div>
+          <div class="lancet-title-text">
+            Projected Annual Deaths: The Miracle Drugs Are Failing.
+          </div>
+        </div>
+
+        <div class="lancet-footer-quote">
+          "Without real-time ward-level surveillance, antimicrobial resistance will exceed cancer as a leading global cause of human mortality."
+        </div>
+
+        <div id="stamp-failing-badge" class="stamp-failing">failing.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 2: HUMANITY'S JOURNEY & THE SHIELD (8s - 15s, f240-f450)
+       "Warm light for human intent"
+       ============================================================ -->
+  <section id="s2" class="scene">
+    <div class="vignette-warm"></div>
+    <div class="typo-ruler-h gold" style="top: 70px;"><span class="typo-label gold">HUMANITY MILESTONE // 100-YEAR DEFENSE</span></div>
+    <div class="typo-ruler-h gold" style="top: 1010px;"><span class="typo-label gold">THE 3 PILLARS OF MODERN MEDICINE</span></div>
+    <div class="crosshair gold" style="left: 140px; top: 70px;"></div>
+    <div class="crosshair gold" style="right: 140px; top: 70px;"></div>
+
+    <!-- Radiant Shield Geometry in Background -->
+    <div class="shield-aura-bg">
+      <div class="shield-glow-orb"></div>
+      <svg class="shield-geom-svg" viewBox="0 0 600 600" fill="none">
+        <circle cx="300" cy="300" r="280" stroke="rgba(229,169,59,0.2)" stroke-width="2" stroke-dasharray="6 8" />
+        <circle cx="300" cy="300" r="220" stroke="rgba(229,169,59,0.35)" stroke-width="2" />
+        <circle cx="300" cy="300" r="160" stroke="rgba(229,169,59,0.45)" stroke-width="1.5" stroke-dasharray="4 6" />
+        <!-- Luminous Geodesic Shield Contour -->
+        <path d="M 300 80 L 460 160 L 460 380 C 460 480 300 540 300 540 C 300 540 140 480 140 380 L 140 160 Z" 
+              stroke="rgba(255,209,102,0.85)" 
+              stroke-width="4" 
+              fill="rgba(229,169,59,0.06)" />
+        <path d="M 300 80 L 300 540 M 140 260 L 460 260 M 140 380 L 460 380" 
+              stroke="rgba(229,169,59,0.25)" 
+              stroke-width="1.5" />
+      </svg>
+    </div>
+
+    <div id="s2-cam" class="cam">
+      <div class="h-stage-wrap">
+        <div class="h-top-banner">
+          <div>
+            <div class="h-pre-title">Humanity's Greatest Triumph</div>
+            <div class="h-main-title">One Hundred Years of Protected Progress</div>
+          </div>
+          <div class="h-timeline-metric">
+            <div class="h-metric-val">+32.4 YRS</div>
+            <div class="h-metric-lbl">Global Life Expectancy Gain</div>
+          </div>
+        </div>
+
+        <!-- Evolutionary Timeline -->
+        <div class="h-timeline-strip">
+          <div class="h-timeline-line"></div>
+          <div class="h-t-node">40,000 BC • Vulnerability</div>
+          <div class="h-t-node">1347 • The Black Death</div>
+          <div class="h-t-node">1928 • Fleming / Penicillin</div>
+          <div class="h-t-node hero">1944–2024 • The Antibiotic Era</div>
+        </div>
+
+        <!-- The 3 Pillars of Modern Medicine -->
+        <div class="h-pillars-grid">
+          <!-- Pillar 1: Surgery -->
+          <div id="pillar-1" class="h-pillar-card">
+            <div class="h-pillar-tag-row">
+              <span class="h-pillar-tag">Pillar 01</span>
+              <svg class="h-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 2l4 4-10 10-4-4 10-10z"/>
+                <path d="M2 22l6-2-4-4-2 6z"/>
+              </svg>
+            </div>
+            <div class="h-pillar-name">Surgery</div>
+            <div class="h-pillar-body">
+              Routine operations, joint replacements, and cardiac surgery made safe from lethal post-operative infection.
+            </div>
+            <span class="h-pillar-badge">Infection Risk: Collapsed</span>
+          </div>
+
+          <!-- Pillar 2: Chemotherapy -->
+          <div id="pillar-2" class="h-pillar-card">
+            <div class="h-pillar-tag-row">
+              <span class="h-pillar-tag">Pillar 02</span>
+              <svg class="h-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 3v18M3 12h18"/>
+              </svg>
+            </div>
+            <div class="h-pillar-name">Chemotherapy</div>
+            <div class="h-pillar-body">
+              Aggressive curative cancer therapies viable by sheltering immunocompromised and neutropenic patients.
+            </div>
+            <span class="h-pillar-badge">Immune Shield: Active</span>
+          </div>
+
+          <!-- Pillar 3: Childbirth -->
+          <div id="pillar-3" class="h-pillar-card">
+            <div class="h-pillar-tag-row">
+              <span class="h-pillar-tag">Pillar 03</span>
+              <svg class="h-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <div class="h-pillar-name">Childbirth</div>
+            <div class="h-pillar-body">
+              Maternal septic fever and neonatal bloodstream infection rates plummeted across modern hospital care.
+            </div>
+            <span class="h-pillar-badge">Neonatal Mortality: -95%</span>
+          </div>
+        </div>
+
+        <!-- Luminous Shield Claim Banner -->
+        <div id="h-shield-banner" class="h-shield-lockup">
+          <div class="h-shield-claim">
+            Every leap of modern medicine rests upon one invisible defense: <span>antibiotics.</span>
+          </div>
+          <div class="h-shield-punch">humanity. shielded.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 3A: SHIELD FRACTURE WITH HAIRLINE CRACKS (15s - 16.5s, f450-f495)
+       "Without them, the shield breaks."
+       ============================================================ -->
+  <section id="s3a" class="scene">
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="typo-ruler-h" style="top: 80px;"><span class="typo-label" style="color:var(--signal-red-bright);">DEFENSE INTEGRITY: BREACH DETECTED</span></div>
+
+    <div id="s3a-cam" class="cam">
+      <div class="fracture-stage">
+        <div class="fracture-shield-container">
+          <svg class="fracture-shield-svg" viewBox="0 0 600 680" fill="none">
+            <!-- Outer Fracturing Shield -->
+            <path id="shield-base-poly"
+                  d="M 300 40 L 520 150 L 520 440 C 520 560 300 640 300 640 C 300 640 80 560 80 440 L 80 150 Z" 
+                  stroke="#da2525" 
+                  stroke-width="8" 
+                  fill="rgba(218, 37, 37, 0.12)" />
+            <!-- Severe Hairline Fracture Crack Paths -->
+            <path id="crack-path-1" 
+                  d="M 300 40 L 320 180 L 270 260 L 340 370 L 290 490 L 300 640" 
+                  stroke="#ffffff" 
+                  stroke-width="5" 
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 800; stroke-dashoffset: 800; filter: drop-shadow(0 0 8px #ff3333);" />
+            <path id="crack-path-2" 
+                  d="M 270 260 L 140 290 L 80 340" 
+                  stroke="#ff5555" 
+                  stroke-width="4" 
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 400; stroke-dashoffset: 400;" />
+            <path id="crack-path-3" 
+                  d="M 340 370 L 460 390 L 520 430" 
+                  stroke="#ff5555" 
+                  stroke-width="4" 
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 400; stroke-dashoffset: 400;" />
+            <path id="crack-path-4" 
+                  d="M 320 180 L 440 190 L 520 150" 
+                  stroke="#ff7777" 
+                  stroke-width="3" 
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 300; stroke-dashoffset: 300;" />
+          </svg>
+        </div>
+        <div id="fracture-hero-word" class="fracture-word-hero">broken.</div>
+        <div id="fracture-sub-lead" class="fracture-sub-lead">THE SHIELD IS FAILING ACROSS MODERN MEDICINE.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 3B: STAGNANT 3D PAPER REPORT STACK (16.5s - 21.0s, f495-f630)
+       "And hospitals still fight back with annual PDF reports."
+       ============================================================ -->
+  <section id="s3b" class="scene">
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="typo-ruler-h" style="top: 70px;"><span class="typo-label">TYKS HOSPITAL ARCHIVE // SURVEILLANCE REPORT LAG</span></div>
+
+    <div id="s3b-cam" class="cam">
+      <div class="archive-contrast-callout">
+        Yet hospitals still fight back with annual PDF reports.
+      </div>
+
+      <div class="archive-stage-viewport">
+        <div class="archive-stack-3d">
+          <!-- Sheet 1: 2021 -->
+          <div id="stack-sheet-1" class="paper-sheet-3d" style="transform: rotate(-5deg) translate(-25px, 25px); opacity: 0.65;">
+            <div class="sheet-header-line">
+              <span>TYKS HOSPITAL ARCHIVES • INFECTION CONTROL</span>
+              <span class="sheet-barcode">||| | ||||| || ||| 2021</span>
+            </div>
+            <div class="sheet-h1-title">Annual Resistance Review 2021</div>
+          </div>
+
+          <!-- Sheet 2: 2022 -->
+          <div id="stack-sheet-2" class="paper-sheet-3d" style="transform: rotate(4deg) translate(20px, -15px); opacity: 0.8;">
+            <div class="sheet-header-line">
+              <span>TYKS HOSPITAL ARCHIVES • INFECTION CONTROL</span>
+              <span class="sheet-barcode">||| | ||||| || ||| 2022</span>
+            </div>
+            <div class="sheet-h1-title">Annual Resistance Review 2022</div>
+          </div>
+
+          <!-- Sheet 3: 2023 -->
+          <div id="stack-sheet-3" class="paper-sheet-3d" style="transform: rotate(-2deg) translate(-8px, 10px); opacity: 0.9;">
+            <div class="sheet-header-line">
+              <span>TYKS HOSPITAL ARCHIVES • INFECTION CONTROL</span>
+              <span class="sheet-barcode">||| | ||||| || ||| 2023</span>
+            </div>
+            <div class="sheet-h1-title">Annual Resistance Review 2023</div>
+          </div>
+
+          <!-- Sheet 4: 2024 (Hero Top Sheet) -->
+          <div id="stack-sheet-4" class="paper-sheet-3d" style="transform: rotate(0deg) translate(0px, 0px);">
+            <div class="sheet-header-line">
+              <span>TYKS HOSPITAL ARCHIVES • CLINICAL MICROBIOLOGY</span>
+              <span class="sheet-barcode">DOC-TYKS-AMR-2024-ANNUAL</span>
+            </div>
+            <div class="sheet-h1-title">Annual Resistance Review 2024</div>
+            <ul class="sheet-clinical-bullets">
+              <li>Compiled once every 12 months in retrospective static PDF</li>
+              <li>Ward-level ICU outbreaks completely concealed in hospital averages</li>
+              <li>Clinicians treating today's acute infections with last year's data</li>
+            </ul>
+
+            <div id="sheet-alarm-stamp" class="sheet-stamp-alarm">365-Day Lag</div>
+            <div class="sheet-hand-note">Outdated Before Published.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- GSAP + Motion runtime -->
+<script src="../runtime/vendor/gsap.min.js"></script>
+<script src="../runtime/motion.js"></script>
+<script>
+/* ============================================================
+   GSAP MOTION SCRIPT FOR ACTS 1, 2, 3 (0s - 21s = 0 - 630 frames)
+   ============================================================ */
+const M = Motion.film({ fps: 30, duration: 21.0, width: 1920, height: 1080, clock: 'smooth' });
+
+// ------------------------------------------------------------
+// ACT 1: FAST-PACED CRISIS MONTAGE (0 - 240 frames = 0.0s - 8.0s)
+// ------------------------------------------------------------
+
+// 1A: The Guardian Broadsheet (f0 - f36 = 0.0s - 1.2s)
+M.show('#s1a', 0, 36);
+M.enter('.paper-container', { at: 0, frames: 8, ease: 'softLand', from: { scale: 1.06, opacity: 0 } });
+M.kf('#marker-emg-stroke', 'strokeDashoffset', [[3, 300], [18, 0, 'softLand']]);
+M.kf('#marker-hl-stroke', 'strokeDashoffset', [[6, 1300], [24, 0, 'softLand']]);
+M.kf('#marker-circle', 'strokeDashoffset', [[16, 600], [28, 0, 'softLand']]);
+M.enter('#stamp-crisis-badge', { at: 18, frames: 6, ease: 'crashIn', from: { scale: 2.5, opacity: 0 } });
+M.drift('#s1a-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 0, end: 36 });
+
+// 1B: Kinetic Strobe Rapid Cut 1 ("MUTATION.") (f36 - f48 = 1.2s - 1.6s)
+M.cut(36, { hide: ['#s1a'], show: ['#s1b'] });
+M.kf('#flash', 'opacity', [[35, 0], [36, 0.85], [39, 0]]);
+M.enter('#strobe-word-mut', { at: 36, frames: 4, ease: 'crashIn', from: { scale: 2.4, opacity: 0 } });
+M.snap('#s1b-cam', { at: 36, from: { scale: 1.15 }, to: { scale: 1.0 }, firstFrameShare: 0.8, tail: 8 });
+
+// 1C: TV News Chyron (f48 - f90 = 1.6s - 3.0s)
+M.cut(48, { hide: ['#s1b'], show: ['#s1c'] });
+M.enter('.tv-urgent-label', { at: 48, frames: 6, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.enter('.tv-main-headline', { at: 50, frames: 8, ease: 'crashIn', from: { scale: 1.15, y: 30, opacity: 0 } });
+M.enter('.tv-lower-third-wrap', { at: 54, frames: 10, ease: 'softLand', from: { y: 60, opacity: 0 } });
+// Crawling ticker translation
+M.kf('#tv-ticker-stream', 'x', [[54, 0], [90, -180, 'cruise']]);
+M.drift('#s1c-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 48, end: 90 });
+
+// 1D: Kinetic Strobe Rapid Cut 2 ("ACCELERATING." & "UNTREATABLE.") (f90 - f125 = 3.0s - 4.17s)
+M.cut(90, { hide: ['#s1c'], show: ['#s1d'] });
+M.kf('#flash', 'opacity', [[89, 0], [90, 0.9], [93, 0]]);
+M.enter('#strobe-word-acc', { at: 90, frames: 4, ease: 'crashIn', from: { scale: 2.2, opacity: 0 } });
+
+// Toggle to "UNTREATABLE." at frame 108
+M.cut(108, { hide: ['#strobe-word-acc'], show: ['#strobe-word-unt'] });
+M.kf('#flash', 'opacity', [[107, 0], [108, 0.9], [111, 0]]);
+M.snap('#s1d-cam', { at: 108, from: { scale: 1.12 }, to: { scale: 1.0 }, firstFrameShare: 0.85, tail: 8 });
+
+// 1E: The Lancet 10 Million Crisis (f125 - f240 = 4.17s - 8.0s)
+M.cut(125, { hide: ['#s1d'], show: ['#s1e'] });
+M.enter('.lancet-journal-paper', { at: 125, frames: 10, ease: 'snapSettle', from: { scale: 0.92, opacity: 0 } });
+M.count('#lancet-counter', { at: 130, from: 1200000, to: 10000000, frames: 42, round: true, format: 'comma' });
+M.enter('#stamp-failing-badge', { at: 180, frames: 6, ease: 'crashIn', from: { scale: 3.2, opacity: 0 } });
+M.drift('#s1e-cam', { prop: 'scale', from: 1.0, to: 1.045, start: 125, end: 240 });
+
+
+// ------------------------------------------------------------
+// ACT 2: HUMANITY'S EVOLUTION & THE SHIELD (240 - 450 frames = 8.0s - 15.0s)
+// ------------------------------------------------------------
+M.cut(240, { hide: ['#s1e'], show: ['#s2'] });
+M.enter('.h-top-banner', { at: 240, frames: 14, ease: 'softLand', from: { y: -30, opacity: 0 } });
+M.enter('.h-timeline-strip', { at: 255, frames: 12, ease: 'softLand', from: { scaleX: 0.85, opacity: 0 } });
+M.enter('#pillar-1', { at: 275, frames: 14, ease: 'softLand', from: { y: 60, opacity: 0 } });
+M.enter('#pillar-2', { at: 310, frames: 14, ease: 'softLand', from: { y: 60, opacity: 0 } });
+M.enter('#pillar-3', { at: 345, frames: 14, ease: 'softLand', from: { y: 60, opacity: 0 } });
+M.enter('#h-shield-banner', { at: 380, frames: 16, ease: 'snapSettle', from: { scale: 0.94, opacity: 0 } });
+M.drift('#s2-cam', { prop: 'scale', from: 1.0, to: 1.035, start: 240, end: 450 });
+
+
+// ------------------------------------------------------------
+// ACT 3: THE BROKEN DEFENSE & STAGNANT REPORT (450 - 630 frames = 15.0s - 21.0s)
+// ------------------------------------------------------------
+
+// 3A: Shield Fractures (f450 - f495 = 15.0s - 16.5s)
+M.cut(450, { hide: ['#s2'], show: ['#s3a'] });
+M.kf('#flash', 'opacity', [[449, 0], [450, 0.75], [454, 0]]);
+M.snap('#s3a-cam', { at: 450, from: { scale: 1.15 }, to: { scale: 1.0 }, firstFrameShare: 0.85, tail: 10 });
+// Crack paths shooting violently across shield
+M.kf('#crack-path-1', 'strokeDashoffset', [[450, 800], [464, 0, 'crashIn']]);
+M.kf('#crack-path-2', 'strokeDashoffset', [[458, 400], [470, 0, 'softLand']]);
+M.kf('#crack-path-3', 'strokeDashoffset', [[462, 400], [474, 0, 'softLand']]);
+M.kf('#crack-path-4', 'strokeDashoffset', [[466, 300], [478, 0, 'softLand']]);
+M.enter('#fracture-hero-word', { at: 468, frames: 6, ease: 'crashIn', from: { scale: 2.5, opacity: 0 } });
+M.enter('#fracture-sub-lead', { at: 476, frames: 8, ease: 'softLand', from: { y: 20, opacity: 0 } });
+
+// 3B: Stagnant 3D Paper Stack (f495 - f630 = 16.5s - 21.0s)
+M.cut(495, { hide: ['#s3a'], show: ['#s3b'] });
+M.enter('.archive-contrast-callout', { at: 495, frames: 12, ease: 'softLand', from: { y: -25, opacity: 0 } });
+M.enter('#stack-sheet-1', { at: 505, frames: 12, ease: 'softLand', from: { y: -220, opacity: 0 } });
+M.enter('#stack-sheet-2', { at: 520, frames: 12, ease: 'softLand', from: { y: -220, opacity: 0 } });
+M.enter('#stack-sheet-3', { at: 535, frames: 12, ease: 'softLand', from: { y: -220, opacity: 0 } });
+M.enter('#stack-sheet-4', { at: 550, frames: 16, ease: 'snapSettle', from: { y: -280, scale: 1.15, opacity: 0 } });
+M.enter('#sheet-alarm-stamp', { at: 575, frames: 8, ease: 'crashIn', from: { scale: 3.5, opacity: 0 } });
+M.drift('#s3b-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 495, end: 630 });
+
+window.__ready = Motion.loaded().then(() => {
+  if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 });
+});
+</script>
+</body>
+</html>
