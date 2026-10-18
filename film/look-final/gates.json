@@ -1,0 +1,101 @@
+{
+ "film": "film/final.mp4",
+ "duration": 68.6,
+ "fps": 30.0,
+ "gates": [
+  {
+   "id": "G0",
+   "name": "render exists",
+   "status": "PASS",
+   "detail": "duration 68.60 s matches --expect 68.60 s; audio stream present"
+  },
+  {
+   "id": "G2",
+   "name": "no empty frame",
+   "status": "PASS",
+   "detail": "no run of > 3 flat frames; 5 short dip(s) ignored: 16.00s, 20.00s, 28.00s, 38.00s, 48.00s"
+  },
+  {
+   "id": "G3",
+   "name": "end card hold, CTA share",
+   "status": "PASS",
+   "detail": "end hold 1.13 s (0.6-1.4); final shot 6.60 s = 10 % of the film (<= 25 %)"
+  }
+ ],
+ "motion_mean_luma_diff": 0.49,
+ "human_band": {
+  "median": 6.8,
+  "q1": 4.4,
+  "q3": 9.8
+ },
+ "audio": {
+  "dur": 68.6,
+  "audible": [
+   0.2,
+   68.60000000000001
+  ],
+  "lead": 0.2,
+  "tail": 0.0,
+  "dropouts": [],
+  "onsets": [
+   0.19,
+   1.46,
+   5.0,
+   11.6,
+   14.3,
+   16.1,
+   24.990000000000002,
+   34.44,
+   37.88,
+   41.7
+  ],
+  "silent": false,
+  "cut_offsets": [
+   [
+    5.0,
+    0.0
+   ],
+   [
+    11.0,
+    0.5999999999999996
+   ],
+   [
+    16.0,
+    0.10000000000000142
+   ],
+   [
+    20.0,
+    -3.8999999999999986
+   ],
+   [
+    28.0,
+    -3.009999999999998
+   ],
+   [
+    38.0,
+    -0.11999999999999744
+   ],
+   [
+    48.0,
+    -6.299999999999997
+   ],
+   [
+    50.0,
+    -8.299999999999997
+   ],
+   [
+    55.5,
+    -13.799999999999997
+   ],
+   [
+    62.0,
+    -20.299999999999997
+   ]
+  ]
+ },
+ "loudness": {
+  "integrated_lufs": "-12.0",
+  "lra_lu": "2.9",
+  "true_peak_dbfs": "-1.3"
+ }
+}

@@ -18,11 +18,11 @@
   {
    "id": "G3",
    "name": "end card hold, CTA share",
-   "status": "FAIL",
-   "detail": "end hold 5.53 s > 1.40 s; final shot 6.60 s = 10 % of the film (<= 25 %)"
+   "status": "PASS",
+   "detail": "end hold 1.13 s (0.6-1.4); final shot 6.60 s = 10 % of the film (<= 25 %)"
   }
  ],
- "motion_mean_luma_diff": 0.47,
+ "motion_mean_luma_diff": 0.49,
  "human_band": {
   "median": 6.8,
   "q1": 4.4,

@@ -573,8 +573,13 @@ html, body {
   padding: 36px 44px;
   box-shadow: 0 28px 70px rgba(218,37,37,0.18), 0 4px 16px rgba(0,0,0,0.06);
 }
-        <div id="b10-resolve-pulse" style="position:absolute; left:960px; top:540px; width:1200px; height:1200px; margin-left:-600px; margin-top:-600px; border-radius:50%; background:radial-gradient(circle, rgba(15,107,124,0.38) 0%, rgba(21,148,171,0) 70%); pointer-events:none; opacity:0;"></div>
-        <div id="b10-mark" class="b10-logo-wrap">
+
+.alert-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
 
 .alert-pill {
   background: var(--signal-red);
@@ -710,12 +715,13 @@ html, body {
   background: var(--good-green);
   color: #ffffff;
   padding: 10px 22px;
-// Radial resolution pulse as tagline finishes (frames 2000 - 2022)
-M.kf('#b10-resolve-pulse', 'scale', [[2000, 0.2], [2022, 2.4, 'glide']]);
-M.kf('#b10-resolve-pulse', 'opacity', [[2000, 0], [2008, 0.75], [2022, 0]]);
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(22,163,73,0.3);
+}
 
-// From frame 2022 to 2058 (67.40s to 68.60s = 1.20s hold), pure designed stillness!
-// 1.20s is in the 0.60 - 1.40s window -> Gate G3 PASS!
+/* BEAT 9: Contrast */
 #s9 {
   background: var(--ground-light);
 }
@@ -1264,6 +1270,7 @@ M.kf('#b10-resolve-pulse', 'opacity', [[2000, 0], [2008, 0.75], [2022, 0]]);
     <div class="vignette"></div>
     <div id="s10-cam" class="cam">
       <div class="b10-lockup">
+        <div id="b10-resolve-pulse" style="position:absolute; left:50%; top:50%; width:1400px; height:1400px; margin-left:-700px; margin-top:-700px; border-radius:50%; background:radial-gradient(circle, rgba(15,107,124,0.45) 0%, rgba(21,148,171,0) 70%); pointer-events:none; opacity:0;"></div>
         <div id="b10-mark" class="b10-logo-wrap">
           <svg viewBox="0 0 24 24" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 10.5 12 3l9 7.5"/>
@@ -1473,6 +1480,10 @@ M.words('#b10-tagline', { at: 1990, gaps: [5, 4, 4, 6], dist: 30, frames: 16, ea
 
 // Light sweep across rule line up to frame 2023 (67.43s)
 M.kf('#b10-rule-sweep', 'x', [[1960, 0], [2023, 440, 'softInOut']]);
+
+// Cinematic radial resolution pulse expanding from the logo (frames 2005 - 2023)
+M.kf('#b10-resolve-pulse', 'scale', [[2005, 0.1], [2023, 2.5, 'glide']]);
+M.kf('#b10-resolve-pulse', 'opacity', [[2005, 0], [2012, 0.8], [2023, 0]]);
 
 // Subpixel camera drift until 2023
 M.drift('#s10-cam', { prop: 'scale', from: 1.0, to: 0.98, start: 1860, end: 2023 });

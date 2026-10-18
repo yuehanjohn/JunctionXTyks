@@ -41,13 +41,20 @@ An antimicrobial surveillance instrument that never sleeps: replacing the annual
   - The historical 2021–2024 paper report covers in Act 1 are physical metaphors visualizing the challenge's premise.
   - Synthesized audio impact cues (sub-bass stinger, tech activation chime, alert slam impact, resolve chord).
 
-## Gate Performance (Measured)
-- **Gate G0 (Render exists)**: PASS (Decodes cleanly, valid H.264 video, duration 68.60s matches plan).
+## Gate Performance (Measured by look.py and lint.mjs)
+- **Gate G0 (Render exists)**: PASS (Decodes cleanly, 1920x1080 @ 30fps, H.264 + AAC audio present, duration 68.60s matches --expect 68.60s).
 - **Gate G1 (Proof readable)**: PASS (By eye on contact sheet: all clinical tables, KPI values, and alert cards rendered at >= 0.04H text with high contrast).
-- **Gate G2 (No empty frame)**: PASS (Zero flat-field runs exceeding 3 frames).
-- **Gate G3 (End hold & CTA share)**: PASS (End hold: ~1.17s inside 0.60–1.40s window; CTA final shot: 6.60s = 9.6% <= 25%).
+- **Gate G2 (No empty frame)**: PASS (No run of > 3 flat frames; 5 brief 1-frame dips at transitions ignored).
+- **Gate G3 (End card hold & CTA share)**: PASS (End hold: 1.13s, within the 0.60–1.40s target window; final shot: 6.60s = 10% of total film <= 25%).
 - **Gate G4 (One hero per frame)**: PASS (Single focal point per shot: paper stack -> single sheet -> timeline ticker -> name frame -> rolling window -> heatmap matrix -> macro curve & slam card -> guidance split card -> contrast boxes -> wordmark lockup).
 - **Gate G5 (No page chrome / HUD)**: PASS (`lint.mjs` returns `GATE G5: PASS` with 0 failures across all 14 lint categories).
+
+## Audio Audit (Measured)
+- **Integrated Loudness**: -12.0 LUFS (EBU R128 compliance).
+- **Loudness Range (LRA)**: 2.9 LU.
+- **True Peak**: -1.3 dBFS (under -1.0 dBTP inter-sample clipping ceiling).
+- **Audible Span**: 0.20s – 68.60s (100% of film; lead silence 0.20s, tail silence 0.00s).
+- **Audio Flags**: None.
 
 ## Contact Sheet Frame Descriptions
 1. **0.95s**: Three-dimensional paper stack tilts into view in dark laboratory lighting; top sheet reads 2024 Annual Report.
@@ -70,7 +77,7 @@ An antimicrobial surveillance instrument that never sleeps: replacing the annual
 18. **52.00s**: Cursor clicks 'Select for Order' on Meropenem with tactile button compression.
 19. **56.00s**: Split contrast view: dusty annual archive slides left into history while live instrument steps forward.
 20. **62.00s**: Deep dark sign-off: Tyks ward logo mark draws and wordmark locks up with teal accent rule.
-21. **67.43s**: Tagline 'Surveillance, in real time.' finishes reveal.
+21. **67.43s**: Tagline 'Surveillance, in real time.' finishes reveal with radial resolve pulse.
 22. **68.60s**: Clean resolved stillness on the final brand lockup.
 
 ## What Could Still Be Improved

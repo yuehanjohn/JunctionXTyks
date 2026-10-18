@@ -221,6 +221,13 @@ async function importCsv() {
 }
 
 async function main() {
+  // Idempotent: clear existing rows (child → parent FK order) so the seed can
+  // run repeatedly (e.g. on every build) without duplicating data.
+  await db.susceptibility.deleteMany();
+  await db.isolate.deleteMany();
+  await db.culture.deleteMany();
+  await db.patient.deleteMany();
+
   const hasCsv = existsSync(join(DATA_DIR, "patients.csv"));
   if (!hasCsv) {
     console.log("no CSVs in ./data — generating synthetic dataset");
