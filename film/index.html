@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>AEI Pulse — Dynamic Motion Showreel</title>
+<title>AEI Pulse — Cinematic Surveillance Film</title>
 <meta name="viewport" content="width=1920, height=1080">
 <style>
 @font-face {
@@ -37,21 +37,24 @@
 }
 
 :root {
-  --ground-dark: #090c10;
-  --ground-dark-2: #050709;
+  --ground-dark: #080b0f;
+  --ground-dark-2: #040608;
   --ground-light: #fcfcfd;
   --ink-dark: #f0f3f6;
   --ink-dark-soft: #8b949e;
-  --ink-light: #14171c;
+  --ink-light: #12151a;
   --ink-light-soft: #5b6472;
   --accent-teal: #0f6b7c;
   --accent-teal-bright: #1594ab;
   --accent-teal-soft: #e6f4f6;
   --signal-red: #da2525;
-  --signal-red-bright: #ff3b3b;
+  --signal-red-bright: #ff3333;
   --signal-red-soft: #fde8e8;
   --good-green: #16a349;
   --good-green-soft: #eaf7ee;
+  --warm-gold: #e5a93b;
+  --warm-gold-bright: #ffd166;
+  --warm-gold-soft: #fff6e0;
   --amber: #d97706;
   --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
@@ -76,13 +79,13 @@ html, body {
   height: 1080px;
   overflow: hidden;
   background: var(--ground-dark);
-  color: var(--ink-dark);
-}
-
 .scene {
   position: absolute;
   inset: 0;
   overflow: hidden;
+}
+  overflow: hidden;
+  display: none;
 }
 
 .cam {
@@ -95,16 +98,18 @@ html, body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(15,107,124,0.06) 0%, rgba(9,12,16,0.4) 60%, rgba(4,6,8,0.92) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(15,107,124,0.06) 0%, rgba(8,11,15,0.4) 60%, rgba(4,6,8,0.94) 100%);
+  z-index: 10;
 }
 
-.grid-bg {
+.scanlines {
   position: absolute;
   inset: 0;
-  opacity: 0.14;
-  background-image: linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
-  background-size: 80px 80px;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.45) 50%);
+  background-size: 100% 4px;
+  opacity: 0.35;
+  z-index: 11;
 }
 
 #flash {
@@ -116,1034 +121,1156 @@ html, body {
   z-index: 9999;
 }
 
-/* BEAT 1 & 2: Archival Paper Stack */
-#s1 { background: var(--ground-dark); }
-#s1-cam { perspective: 1200px; }
+/* ============================================================
+   ACT 1: FAST-PACED CRISIS MONTAGE
+   ============================================================ */
 
-.paper-stack {
-  position: absolute;
-  left: 560px;
-  top: 180px;
-  width: 800px;
-  height: 640px;
-  transform-style: preserve-3d;
+/* 1A: The Guardian Broadsheet Newspaper */
+#s1a {
+  background: #edece6;
+  color: #1a1a1a;
 }
-
-.sheet {
+.news-paper {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 760px;
-  height: 560px;
-  background: #f7f4ee;
-  border-radius: 4px;
-  color: #1a1e24;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25);
-  padding: 44px 52px;
-  border: 1px solid #e2ddd4;
+  left: 200px;
+  top: 90px;
+  width: 1520px;
+  height: 900px;
+  background: #fbf9f4;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.65);
+  border: 1px solid #d4cfc5;
+  padding: 50px 70px;
+  display: flex;
+  flex-direction: column;
 }
-
-.sheet-header {
+.news-header {
+  border-bottom: 4px solid #111;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 2px solid #14171c;
-  padding-bottom: 14px;
-  margin-bottom: 24px;
+  align-items: flex-end;
 }
-
-.sheet-title {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.news-masthead {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 88px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: #111;
 }
-
-.sheet-year {
-  font-family: var(--font-mono);
-  font-size: 24px;
-  font-weight: 600;
-  color: #14171c;
-}
-
-.sheet-meta {
-  font-size: 14px;
-  color: #444;
-  margin-bottom: 20px;
-  font-family: var(--font-mono);
-}
-
-.sheet-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  font-family: var(--font-mono);
-}
-
-.sheet-table th {
-  text-align: left;
-  padding: 6px 8px;
-  border-bottom: 1px solid #14171c;
-  color: #333;
-}
-
-.sheet-table td {
-  padding: 7px 8px;
-  border-bottom: 1px solid #e8e3d8;
-  color: #222;
-}
-
-.stamp-box {
-  position: absolute;
-  right: 50px;
-  bottom: 50px;
-  border: 3px solid #b3261e;
-  color: #b3261e;
-  padding: 8px 18px;
+.news-dateline {
   font-family: var(--font-mono);
   font-size: 20px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+}
+.news-banner {
+  background: var(--signal-red);
+  color: #fff;
+  font-family: var(--font-mono);
   font-weight: 700;
-  transform: rotate(-7deg);
-  opacity: 0.9;
-  border-radius: 3px;
+  font-size: 24px;
+  letter-spacing: 2px;
+  padding: 8px 18px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
 }
-
-#b1-headline {
+.news-headline {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 92px;
+  line-height: 1.05;
+  font-weight: 800;
+  color: #0d0d0d;
+  margin-bottom: 30px;
+  letter-spacing: -1.5px;
+  position: relative;
+}
+.highlight-stroke {
   position: absolute;
-  left: 0;
-  top: 860px;
-  width: 1920px;
-  text-align: center;
-  font-size: 46px;
-  line-height: 56px;
-  font-weight: 600;
-  color: #f0f3f6;
-  letter-spacing: -0.02em;
+  left: -10px;
+  bottom: 8px;
+  width: 0%;
+  height: 28px;
+  background: rgba(218, 37, 37, 0.35);
+  z-index: -1;
+}
+.news-subhead {
+  font-size: 34px;
+  line-height: 48px;
+  color: #333;
+  font-weight: 400;
+  max-width: 1100px;
 }
 
-#b2-headline {
-  position: absolute;
-  left: 0;
-  top: 860px;
-  width: 1920px;
-  text-align: center;
-  font-size: 46px;
-  line-height: 56px;
-  font-weight: 600;
-  color: #f0f3f6;
-  letter-spacing: -0.02em;
+/* 1B: BBC World News TV Broadcast */
+#s1b {
+  background: #06090e;
 }
-
-/* BEAT 3: Temporal Threat */
-#s3 { background: var(--ground-dark-2); }
-
-#b3-center {
+.tv-frame {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
-
-#b3-headline {
-  font-size: 84px;
-  line-height: 98px;
-  font-weight: 700;
-  color: #f0f3f6;
-  letter-spacing: -0.03em;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.ticker-track {
-  position: relative;
-  width: 1600px;
-  height: 80px;
-  border-top: 1px solid rgba(255,255,255,0.2);
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+.tv-top-bar {
+  padding: 40px 80px;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  gap: 20px;
 }
-
-.ticker-content {
-  position: absolute;
-  left: 0;
-  display: flex;
-  gap: 32px;
+.tv-live-bug {
+  background: #da2525;
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 4px;
   font-family: var(--font-mono);
-  font-size: 20px;
-  color: rgba(255,255,255,0.45);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tv-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  animation: pulse-dot 1s infinite alternate;
+}
+.tv-channel {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.tv-main-display {
+  padding: 0 80px;
+  margin-top: 60px;
+}
+.tv-alert-label {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  color: #ff4d4d;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.tv-headline {
+  font-size: 84px;
+  line-height: 1.05;
+  font-weight: 700;
+  color: #ffffff;
+  max-width: 1500px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+}
+.tv-lower-third {
+  background: linear-gradient(90deg, #b31010 0%, #1a1a24 100%);
+  padding: 24px 80px;
+  display: flex;
+  align-items: center;
+  border-top: 3px solid #ff4d4d;
+}
+.tv-ticker-lead {
+  background: #fff;
+  color: #b31010;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 22px;
+  padding: 6px 16px;
+  margin-right: 24px;
+  white-space: nowrap;
+}
+.tv-ticker-text {
+  font-family: var(--font-sans);
+  font-size: 26px;
+  color: #fff;
+  font-weight: 600;
   white-space: nowrap;
 }
 
-.pulse-stinger {
-  position: absolute;
-  left: 960px;
-  top: 540px;
-  width: 180px;
-  height: 180px;
-  margin-left: -90px;
-  margin-top: -90px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(218,37,37,0.9) 0%, rgba(218,37,37,0) 70%);
-  pointer-events: none;
+/* 1C: Kinetic Type Strobe Alert */
+#s1c {
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-/* BEAT 4: Name Arrival */
-#s4 {
-  background: var(--ground-light);
-  color: var(--ink-light);
-}
-
-#b4-frame {
+.strobe-card {
   position: absolute;
-  left: 260px;
-  top: 140px;
-  width: 1400px;
-  height: 800px;
-  border: 2px solid var(--accent-teal);
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 24px 60px rgba(15,107,124,0.12), 0 4px 16px rgba(0,0,0,0.04);
-  padding: 60px 80px;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.b4-brand-row {
-  display: flex;
   align-items: center;
-  gap: 36px;
-  margin-bottom: 36px;
-}
-
-.b4-logo-svg {
-  width: 110px;
-  height: 110px;
-  color: var(--accent-teal);
-}
-
-#b4-title {
-  font-size: 110px;
-  line-height: 110px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--ink-light);
-}
-
-#b4-tagline {
-  font-size: 34px;
-  line-height: 44px;
-  font-weight: 400;
-  color: var(--ink-light-soft);
-  max-width: 980px;
-  letter-spacing: -0.01em;
-}
-
-/* BEAT 5: Rolling Window */
-#s5 {
-  background: var(--ground-light);
-  color: var(--ink-light);
-}
-
-.b5-container {
-  position: absolute;
-  left: 160px;
-  top: 90px;
-  width: 1600px;
-  height: 900px;
-}
-
-.kpi-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 28px;
-}
-
-.kpi-card {
-  background: #ffffff;
-  border: 1px solid #e1e4e8;
-  border-radius: 8px;
-  padding: 20px 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-}
-
-.kpi-label {
-  font-size: 14px;
-  color: var(--ink-light-soft);
-  margin-bottom: 8px;
-  font-weight: 400;
-}
-
-.kpi-value {
-  font-size: 38px;
-  font-weight: 700;
-  font-family: var(--font-mono);
-  color: var(--ink-light);
-  letter-spacing: -0.02em;
-  margin-bottom: 4px;
-}
-
-.kpi-sub {
-  font-size: 13px;
-  font-family: var(--font-mono);
-  color: var(--accent-teal);
-  font-weight: 600;
-}
-
-.chart-panel {
-  background: #ffffff;
-  border: 1px solid #e1e4e8;
-  border-radius: 10px;
-  padding: 28px 36px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.chart-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--ink-light);
-}
-
-.chart-badge {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  padding: 4px 12px;
-  background: var(--accent-teal-soft);
-  color: var(--accent-teal);
-  border-radius: 20px;
-  font-weight: 600;
-}
-
-.chart-area {
-  position: relative;
-  width: 100%;
-  height: 520px;
-  border-left: 1px solid #e1e4e8;
-  border-bottom: 1px solid #e1e4e8;
-  overflow: hidden;
-}
-
-.window-shade {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 420px;
-  background: rgba(15,107,124,0.09);
-  border-left: 2px dashed var(--accent-teal);
-  border-right: 2px solid var(--accent-teal);
-}
-
-.window-label {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent-teal);
-  background: #ffffff;
-  padding: 3px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(15,107,124,0.3);
-}
-
-/* BEAT 6: The Surveillance Lattice */
-#s6 {
-  background: var(--ground-light);
-  color: var(--ink-light);
-}
-
-.b6-container {
-  position: absolute;
-  left: 140px;
-  top: 80px;
-  width: 1640px;
-  height: 920px;
-}
-
-.b6-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.b6-title {
-  font-size: 42px;
-  font-weight: 700;
-  color: var(--ink-light);
-  letter-spacing: -0.02em;
-}
-
-.lattice-table {
-  width: 100%;
-  background: #ffffff;
-  border: 1px solid #e1e4e8;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
-  border-collapse: collapse;
-}
-
-.lattice-table th {
-  padding: 14px 12px;
-  font-size: 13px;
-  font-weight: 600;
-  background: #f7f9fa;
-  color: var(--ink-light);
-  border: 1px solid #e1e4e8;
   text-align: center;
 }
-
-.lattice-table th.col-lead {
-  text-align: left;
-  padding-left: 18px;
-  width: 180px;
-}
-
-.lattice-table td {
-  padding: 12px 10px;
-  border: 1px solid #e8ecf0;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.cell-chip {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 4px;
-  min-width: 58px;
-}
-
-.chip-good { background: #eaf7ee; color: #16a349; }
-.chip-mid { background: #fef3c7; color: #b45309; }
-.chip-alert { background: #fee2e2; color: #dc2626; font-weight: 700; }
-.chip-highlight {
-  box-shadow: 0 0 0 2px var(--signal-red);
-  background: #fee2e2;
-  color: #b91c1c;
-}
-
-/* BEAT 7: Outbreak Deviation Alert */
-#s7 {
-  background: var(--ground-light);
-  color: var(--ink-light);
-}
-
-.b7-macro-stage {
-  position: absolute;
-  left: 180px;
-  top: 90px;
-  width: 1560px;
-  height: 900px;
-}
-
-.b7-macro-chart {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1560px;
-  height: 540px;
-  background: #ffffff;
-  border: 1px solid #e1e4e8;
-  border-radius: 10px;
-  padding: 32px 40px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-}
-
-.alert-slam-card {
-  position: absolute;
-  left: 120px;
-  top: 480px;
-  width: 1320px;
-  background: #ffffff;
-  border: 2px solid var(--signal-red);
-  border-radius: 12px;
-  padding: 36px 44px;
-  box-shadow: 0 28px 70px rgba(218,37,37,0.18), 0 4px 16px rgba(0,0,0,0.06);
-}
-
-.alert-top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.alert-pill {
-  background: var(--signal-red);
+.strobe-word {
+  font-family: var(--font-sans);
+  font-size: 160px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -4px;
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 6px 16px;
-  border-radius: 20px;
+  text-transform: uppercase;
 }
-
-.alert-zscore {
+.strobe-sub {
   font-family: var(--font-mono);
   font-size: 32px;
+  letter-spacing: 8px;
+  color: #ff3333;
+  margin-top: 30px;
+  text-transform: uppercase;
   font-weight: 700;
-  color: var(--signal-red);
 }
 
-.alert-sentence {
-  font-size: 30px;
-  line-height: 42px;
-  font-weight: 600;
-  color: var(--ink-light);
-  margin-bottom: 20px;
-  letter-spacing: -0.01em;
+/* 1D: The Lancet & 10 Million Crisis */
+#s1d {
+  background: #07090c;
+  color: #f0f3f6;
 }
-
-.alert-stats-strip {
+.lancet-card {
+  position: absolute;
+  left: 200px;
+  top: 130px;
+  width: 1520px;
+  height: 820px;
+  background: #0e1217;
+  border: 1px solid #252b33;
+  border-left: 12px solid #da2525;
+  padding: 60px 80px;
   display: flex;
-  gap: 36px;
-  padding-top: 16px;
-  border-top: 1px solid #f0f2f5;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.lancet-journal {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 42px;
+  font-style: italic;
+  color: #a0aec0;
+  border-bottom: 2px solid #2d3748;
+  padding-bottom: 18px;
+}
+.lancet-hero-num {
   font-family: var(--font-mono);
-  font-size: 15px;
-  color: var(--ink-light-soft);
-}
-
-.alert-stat-strong {
-  color: var(--signal-red);
+  font-size: 190px;
   font-weight: 700;
+  line-height: 0.95;
+  color: #da2525;
+  letter-spacing: -6px;
+  margin: 30px 0 10px;
+}
+.lancet-title {
+  font-size: 56px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+.lancet-desc {
+  font-size: 30px;
+  color: #a0aec0;
+  line-height: 42px;
+  max-width: 1200px;
 }
 
-/* BEAT 8: Bedside Clinical Guidance */
+/* ============================================================
+   ACT 2: HUMANITY'S JOURNEY & THE SHIELD
+   ============================================================ */
+#s2 {
+  background: radial-gradient(circle at 50% 40%, #1f180d 0%, #0d0a06 60%, #050403 100%);
+  color: #f7f3ea;
+}
+.h-container {
+  position: absolute;
+  left: 160px;
+  top: 100px;
+  width: 1600px;
+  height: 880px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.h-header {
+  border-bottom: 2px solid rgba(229, 169, 59, 0.35);
+  padding-bottom: 24px;
+}
+.h-pre {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  letter-spacing: 4px;
+  color: var(--warm-gold-bright);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.h-title {
+  font-size: 78px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+.h-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin: 50px 0;
+}
+.h-card {
+  background: rgba(30, 24, 16, 0.7);
+  border: 1px solid rgba(229, 169, 59, 0.4);
+  border-radius: 14px;
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.h-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--warm-gold), var(--warm-gold-bright));
+}
+.h-card-tag {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--warm-gold-bright);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.h-card-name {
+  font-size: 46px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+.h-card-body {
+  font-size: 24px;
+  line-height: 36px;
+  color: #d1c7b7;
+}
+.h-shield-banner {
+  background: rgba(229, 169, 59, 0.12);
+  border: 1px solid rgba(229, 169, 59, 0.45);
+  border-radius: 12px;
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.h-shield-text {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--warm-gold-bright);
+}
+
+/* ============================================================
+   ACT 3: THE BROKEN DEFENSE / STAGNANT PDF
+   ============================================================ */
+#s3 {
+  background: #090c10;
+  color: var(--ink-dark);
+}
+.archive-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.archive-stack {
+  position: relative;
+  width: 900px;
+  height: 680px;
+}
+.paper-sheet {
+  position: absolute;
+  width: 820px;
+  height: 620px;
+  background: #fbf9f4;
+  color: #1a1a1a;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  border: 1px solid #d4cfc5;
+  padding: 40px 50px;
+  border-radius: 4px;
+}
+.sheet-label {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: #777;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.sheet-h1 {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 54px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #111;
+}
+.stamp-alarm {
+  position: absolute;
+  right: 50px;
+  bottom: 60px;
+  transform: rotate(-12deg);
+  border: 6px solid #da2525;
+  color: #da2525;
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 800;
+  padding: 14px 28px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: rgba(218, 37, 37, 0.08);
+}
+.archive-contrast-callout {
+  position: absolute;
+  left: 200px;
+  top: 80px;
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  max-width: 1400px;
+}
+
+/* ============================================================
+   ACT 4: THE TURN & AEI PULSE ARRIVAL
+   ============================================================ */
+#s4 {
+  background: #070a0e;
+  color: #ffffff;
+}
+.pulse-arrival {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.pulse-mark-svg {
+  width: 160px;
+  height: 160px;
+  color: var(--accent-teal-bright);
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 40px rgba(21,148,171,0.5));
+}
+.pulse-brand {
+  font-size: 130px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+.pulse-rule {
+  width: 380px;
+  height: 6px;
+  background: var(--accent-teal-bright);
+  margin-bottom: 24px;
+}
+.pulse-tagline {
+  font-size: 40px;
+  font-weight: 600;
+  color: #a0aec0;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   ACT 5: FF-TRACKING RADAR TELEMETRY VIEWPORT
+   ============================================================ */
+#s5 {
+  background: #05070a;
+}
+.radar-cockpit {
+  position: absolute;
+  inset: 0;
+  padding: 60px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cockpit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid #1a222d;
+  padding-bottom: 20px;
+}
+.cockpit-title {
+  font-size: 56px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.cockpit-meta {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  color: var(--accent-teal-bright);
+  display: flex;
+  gap: 30px;
+}
+.cockpit-body {
+  display: grid;
+  grid-template-columns: 1200px 1fr;
+  gap: 50px;
+  align-items: center;
+}
+.video-viewport {
+  width: 1200px;
+  height: 675px;
+  background: #000;
+  border: 2px solid #233040;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.85);
+}
+.video-viewport video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hud-telemetry-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.telemetry-card {
+  background: #0e141c;
+  border: 1px solid #1f2a38;
+  border-radius: 8px;
+  padding: 24px 28px;
+}
+.tc-label {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: #718096;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 1.5px;
+}
+.tc-value {
+  font-family: var(--font-mono);
+  font-size: 52px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.tc-delta {
+  font-size: 18px;
+  color: var(--good-green);
+  margin-left: 12px;
+}
+
+/* ============================================================
+   ACT 6: THE SURVEILLANCE LATTICE (9 WARDS × 7 DRUGS)
+   ============================================================ */
+#s6 {
+  background: var(--ground-dark);
+}
+.lattice-wrap {
+  position: absolute;
+  left: 120px;
+  top: 70px;
+  width: 1680px;
+  height: 940px;
+  display: flex;
+  flex-direction: column;
+}
+.lattice-title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #1a222d;
+  padding-bottom: 16px;
+}
+.lt-title {
+  font-size: 52px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.lt-sub {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--accent-teal-bright);
+}
+.matrix-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+.matrix-grid th, .matrix-grid td {
+  padding: 12px 14px;
+  text-align: center;
+  border: 1px solid #1c2430;
+}
+.matrix-grid th {
+  background: #111722;
+  color: #a0aec0;
+  font-weight: 600;
+}
+.matrix-grid td.ward-name {
+  text-align: left;
+  font-weight: 600;
+  color: #ffffff;
+  background: #0f151f;
+  width: 260px;
+}
+.cell-chip {
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-block;
+  min-width: 68px;
+}
+.chip-green { background: rgba(22,163,73,0.18); color: #4ade80; border: 1px solid rgba(22,163,73,0.4); }
+.chip-amber { background: rgba(217,119,6,0.18); color: #fbbf24; border: 1px solid rgba(217,119,6,0.4); }
+.chip-red   { background: rgba(218,37,37,0.22); color: #f87171; border: 1px solid rgba(218,37,37,0.5); font-weight:700; }
+.chip-alert {
+  background: #da2525;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 0 20px rgba(218,37,37,0.8);
+  animation: alert-pulse 1s infinite alternate;
+}
+
+/* ============================================================
+   ACT 7: HERO MOMENT - OUTBREAK ALERT SLAM (z = -5.8)
+   ============================================================ */
+#s7 {
+  background: #06080c;
+}
+.b7-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.b7-curve-bg {
+  position: absolute;
+  left: 140px;
+  top: 100px;
+  width: 1640px;
+  height: 880px;
+  opacity: 0.85;
+}
+.b7-alert-card {
+  position: absolute;
+  width: 1040px;
+  background: #0f141c;
+  border: 2px solid var(--signal-red);
+  border-radius: 16px;
+  padding: 48px 56px;
+  box-shadow: 0 30px 100px rgba(218,37,37,0.45);
+  color: var(--ink-dark);
+  z-index: 100;
+}
+.b7-alert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #281a1d;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+.b7-badge-alarm {
+  background: var(--signal-red);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 20px;
+  padding: 6px 18px;
+  border-radius: 6px;
+  letter-spacing: 1.5px;
+}
+.b7-badge-zscore {
+  background: rgba(218,37,37,0.18);
+  color: var(--signal-red-bright);
+  border: 1px solid var(--signal-red);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 28px;
+  padding: 6px 20px;
+  border-radius: 6px;
+}
+.b7-alert-title {
+  font-size: 46px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+.b7-alert-body {
+  font-size: 26px;
+  line-height: 38px;
+  color: #cbd5e0;
+  margin-bottom: 28px;
+}
+.b7-alert-footer {
+  display: flex;
+  gap: 30px;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: #a0aec0;
+  border-top: 1px solid #1f2733;
+  padding-top: 18px;
+}
+
+/* ============================================================
+   ACT 8: BEDSIDE GUIDANCE
+   ============================================================ */
 #s8 {
   background: var(--ground-light);
   color: var(--ink-light);
 }
-
 .b8-container {
   position: absolute;
-  left: 280px;
-  top: 120px;
-  width: 1360px;
-  height: 840px;
+  left: 200px;
+  top: 110px;
+  width: 1520px;
+  height: 860px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 .guidance-header {
-  margin-bottom: 32px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 20px;
 }
-
 .guidance-pre {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--accent-teal);
-  margin-bottom: 8px;
   font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
-
 .guidance-title {
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--ink-light);
+}
+.guidance-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin: 40px 0;
+}
+.guidance-card {
+  border-radius: 14px;
+  padding: 44px;
+  border: 2px solid transparent;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-works {
+  background: #ffffff;
+  border-color: #bbf7d0;
+}
+.card-stopped {
+  background: #ffffff;
+  border-color: #fecaca;
+}
+.gcard-drug {
   font-size: 44px;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  color: var(--ink-light);
+  margin-bottom: 12px;
 }
-
-.guidance-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.guidance-card {
-  position: relative;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 32px 40px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-}
-
-.card-works {
-  border-left: 8px solid var(--good-green);
-  border-top: 1px solid #e1e4e8;
-  border-right: 1px solid #e1e4e8;
-  border-bottom: 1px solid #e1e4e8;
-}
-
-.card-stopped {
-  border-left: 8px solid var(--signal-red);
-  border-top: 1px solid #e1e4e8;
-  border-right: 1px solid #e1e4e8;
-  border-bottom: 1px solid #e1e4e8;
-}
-
-.gcard-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 10px;
-}
-
-.gcard-drug {
-  font-size: 32px;
-  font-weight: 700;
-}
-
 .gcard-percent {
   font-family: var(--font-mono);
-  font-size: 36px;
+  font-size: 54px;
   font-weight: 700;
+  margin-bottom: 18px;
 }
-
 .percent-works { color: var(--good-green); }
 .percent-stopped { color: var(--signal-red); }
-
 .gcard-body {
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 24px;
+  line-height: 36px;
   color: var(--ink-light-soft);
+  margin-bottom: 28px;
 }
-
 .select-btn {
-  position: absolute;
-  right: 40px;
-  bottom: 28px;
-  background: var(--good-green);
-  color: #ffffff;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 15px;
+  background: var(--accent-teal);
+  color: #fff;
+  font-size: 24px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(22,163,73,0.3);
-}
-
-/* BEAT 9: Contrast */
-#s9 {
-  background: var(--ground-light);
-}
-
-.b9-split {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 80px;
-}
-
-.past-box {
-  width: 600px;
-  height: 720px;
-  background: #eae6df;
+  padding: 16px 36px;
   border-radius: 8px;
-  padding: 40px;
-  border: 1px solid #d4cebe;
-  opacity: 0.6;
-  filter: grayscale(0.5);
-  transform: scale(0.92);
+  width: fit-content;
 }
 
-.present-box {
-  width: 900px;
-  height: 720px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 48px;
-  border: 2px solid var(--accent-teal);
-  box-shadow: 0 24px 60px rgba(15,107,124,0.15);
-}
-
-/* BEAT 10: Signature Close */
-#s10 {
-  background: var(--ground-dark-2);
+/* ============================================================
+   ACT 9: DEFENDING HUMANITY'S SHIELD & SIGNATURE CLOSE
+   ============================================================ */
+#s9 {
+  background: #05070a;
   color: #ffffff;
 }
-
-.b10-lockup {
+.close-wrap {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-
-.b10-logo-wrap {
+.close-shield-svg {
   width: 140px;
   height: 140px;
-  margin-bottom: 28px;
   color: var(--accent-teal-bright);
+  margin-bottom: 30px;
 }
-
-#b10-brand {
-  font-size: 104px;
-  line-height: 104px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #ffffff;
+.close-pre {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: var(--warm-gold-bright);
+  text-transform: uppercase;
   margin-bottom: 16px;
 }
-
-.rule-container {
-  position: relative;
-  width: 360px;
-  height: 4px;
-  background: rgba(21,148,171,0.25);
-  margin-bottom: 24px;
-  overflow: hidden;
-  border-radius: 2px;
+.close-brand {
+  font-size: 110px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: #ffffff;
+  margin-bottom: 18px;
 }
-
-#b10-rule {
-  position: absolute;
-  left: 0;
-  top: 0;
+.close-rule-wrap {
+  width: 440px;
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.close-rule-bar {
   width: 100%;
   height: 100%;
   background: var(--accent-teal-bright);
-  transform-origin: left center;
+  transform-origin: left;
 }
-
-#b10-rule-sweep {
-  position: absolute;
-  left: -80px;
-  top: 0;
-  width: 80px;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
-}
-
-#b10-lab {
-  font-family: var(--font-mono);
-  font-size: 24px;
-  color: var(--ink-dark-soft);
-  margin-bottom: 16px;
-}
-
-#b10-tagline {
+.close-lab {
   font-size: 38px;
-  font-weight: 400;
-  color: #c0c6cf;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: #cbd5e0;
+  margin-bottom: 12px;
 }
-
-#cursor {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 2000;
-  pointer-events: none;
+.close-tagline {
+  font-size: 32px;
+  color: #718096;
+  font-weight: 400;
 }
 </style>
 </head>
 <body>
-<div id="main">
-
+<div id="main" data-composition-id="main" data-duration="60.0" data-width="1920" data-height="1080">
   <div id="flash"></div>
 
-  <svg id="cursor" width="36" height="48" viewBox="0 0 32 46" style="visibility:hidden;">
-    <path d="M0 0 L0 38 L10 29 L17 45 L25 41 L18 26 L31 26 Z" fill="#14171c" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>
-  </svg>
-
-  <!-- SCENE 1: HOOK (0 - 150 frames = 0s - 5s) -->
-  <section id="s1" class="scene">
-    <div class="grid-bg"></div>
-    <div class="vignette"></div>
-    <div id="s1-cam" class="cam">
-      <div class="paper-stack">
-        <div id="sheet-21" class="sheet" style="transform: translateZ(-60px) rotate(-4deg); background: #eee8dc;">
-          <div class="sheet-header">
-            <span class="sheet-title">Tyks Annual Susceptibility Report</span>
-            <span class="sheet-year">2021</span>
-          </div>
-          <div class="sheet-meta">Hospital-wide Aggregate · N=41,200 Isolates</div>
-          <table class="sheet-table">
-            <tr><th>Organism</th><th>Ciprofloxacin</th><th>Meropenem</th><th>Trimethoprim</th></tr>
-            <tr><td>Escherichia coli</td><td>22.1% R</td><td>0.8% R</td><td>28.4% R</td></tr>
-            <tr><td>Klebsiella pneumoniae</td><td>18.4% R</td><td>1.2% R</td><td>21.0% R</td></tr>
-            <tr><td>Staphylococcus aureus</td><td>14.2% R</td><td>0.0% R</td><td>16.5% R</td></tr>
-          </table>
-          <div class="stamp-box">Archived</div>
+  <!-- SCENE 1A: THE GUARDIAN NEWSPAPER -->
+  <section id="s1a" class="scene">
+    <div id="s1a-cam" class="cam">
+      <div class="news-paper">
+        <div class="news-header">
+          <div class="news-masthead">The Guardian</div>
+          <div class="news-dateline">London • Global Health Edition</div>
         </div>
-        <div id="sheet-22" class="sheet" style="transform: translateZ(-40px) rotate(3deg); background: #f2ede2;">
-          <div class="sheet-header">
-            <span class="sheet-title">Tyks Annual Susceptibility Report</span>
-            <span class="sheet-year">2022</span>
-          </div>
-          <div class="sheet-meta">Hospital-wide Aggregate · N=43,800 Isolates</div>
-          <table class="sheet-table">
-            <tr><th>Organism</th><th>Ciprofloxacin</th><th>Meropenem</th><th>Trimethoprim</th></tr>
-            <tr><td>Escherichia coli</td><td>23.0% R</td><td>1.1% R</td><td>29.1% R</td></tr>
-            <tr><td>Klebsiella pneumoniae</td><td>19.2% R</td><td>1.4% R</td><td>22.5% R</td></tr>
-          </table>
-          <div class="stamp-box">Archived</div>
+        <div class="news-banner">Special Investigation • Global Health Threat</div>
+        <div class="news-headline">
+          ANTIBIOTIC RESISTANCE: A SILENT PANDEMIC
+          <div id="hl-stroke-1" class="highlight-stroke"></div>
         </div>
-        <div id="sheet-23" class="sheet" style="transform: translateZ(-20px) rotate(-2deg); background: #f5f0e6;">
-          <div class="sheet-header">
-            <span class="sheet-title">Tyks Annual Susceptibility Report</span>
-            <span class="sheet-year">2023</span>
-          </div>
-          <div class="sheet-meta">Hospital-wide Aggregate · N=45,100 Isolates</div>
-          <table class="sheet-table">
-            <tr><th>Organism</th><th>Ciprofloxacin</th><th>Meropenem</th><th>Trimethoprim</th></tr>
-            <tr><td>Escherichia coli</td><td>24.2% R</td><td>1.8% R</td><td>29.9% R</td></tr>
-          </table>
-          <div class="stamp-box">Archived</div>
-        </div>
-        <div id="sheet-24" class="sheet" style="transform: translateZ(0px) rotate(0.5deg);">
-          <div class="sheet-header">
-            <span class="sheet-title">Tyks Annual Susceptibility Report</span>
-            <span class="sheet-year">2024</span>
-          </div>
-          <div class="sheet-meta">Annual Retrospective · Published January 2025 · 12-Month Delay</div>
-          <table class="sheet-table">
-            <tr><th>Organism</th><th>Ciprofloxacin</th><th>Meropenem</th><th>Cefuroxime</th><th>Trimethoprim</th></tr>
-            <tr><td>Escherichia coli</td><td>25.3% R</td><td>2.1% R</td><td>21.8% R</td><td>30.9% R</td></tr>
-            <tr><td>Klebsiella pneumoniae</td><td>20.8% R</td><td>1.9% R</td><td>23.4% R</td><td>24.0% R</td></tr>
-            <tr><td>Staphylococcus aureus</td><td>15.5% R</td><td>0.2% R</td><td>18.1% R</td><td>18.2% R</td></tr>
-            <tr><td>Pseudomonas aeruginosa</td><td>18.2% R</td><td>6.4% R</td><td>32.0% R</td><td>41.5% R</td></tr>
-          </table>
-          <div id="sheet-24-stamp" class="stamp-box">Static Report</div>
+        <div class="news-subhead">
+          Global health authorities issue urgent warning: common infections are becoming untreatable as hospital surveillance lags twelve months behind outbreaks.
         </div>
       </div>
-      <div id="b1-headline">Every year, the laboratory looks back.</div>
     </div>
   </section>
 
-  <!-- SCENE 2: CONDENSATION (150 - 330 frames = 5s - 11s) -->
+  <!-- SCENE 1B: BBC WORLD NEWS TV CHYRON -->
+  <section id="s1b" class="scene">
+    <div class="scanlines"></div>
+    <div id="s1b-cam" class="cam">
+      <div class="tv-frame">
+        <div class="tv-top-bar">
+          <div class="tv-live-bug"><div class="tv-dot"></div> LIVE</div>
+          <div class="tv-channel">WORLD NEWS</div>
+        </div>
+        <div class="tv-main-display">
+          <div class="tv-alert-label">CRITICAL SURVEILLANCE GAP</div>
+          <div class="tv-headline">WHO: WE ARE ENTERING THE POST-ANTIBIOTIC ERA</div>
+        </div>
+        <div class="tv-lower-third">
+          <div class="tv-ticker-lead">BREAKING</div>
+          <div class="tv-ticker-text">ESKAPE PATHOGENS CIRCULATING IN ACUTE WARDS // ANNUAL HEALTHCARE REPORTS DELAY OUTBREAK INTERVENTION</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 1C: KINETIC STROBE ALERT -->
+  <section id="s1c" class="scene">
+    <div id="s1c-cam" class="cam">
+      <div class="strobe-card">
+        <div id="strobe-text" class="strobe-word">UNTREATABLE</div>
+        <div id="strobe-sub" class="strobe-sub">RESISTANCE ACCELERATING</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 1D: THE LANCET 10 MILLION CRISIS -->
+  <section id="s1d" class="scene">
+    <div class="vignette"></div>
+    <div id="s1d-cam" class="cam">
+      <div class="lancet-card">
+        <div class="lancet-journal">The Lancet • Infectious Diseases</div>
+        <div>
+          <div class="lancet-hero-num" id="lancet-count">10,000,000</div>
+          <div class="lancet-title">Projected Annual Deaths by 2050</div>
+        </div>
+        <div class="lancet-desc">
+          Without real-time surveillance, antimicrobial resistance will exceed cancer as a leading global cause of mortality.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 2: HUMANITY'S JOURNEY & THE SHIELD -->
   <section id="s2" class="scene">
-    <div class="grid-bg"></div>
     <div class="vignette"></div>
     <div id="s2-cam" class="cam">
-      <div id="s2-sheet" class="sheet" style="position: absolute; left: 580px; top: 220px; width: 760px; height: 560px;">
-        <div class="sheet-header">
-          <span class="sheet-title">Twelve-Month Retrospective</span>
-          <span class="sheet-year" style="color:#b3261e;">2024</span>
+      <div class="h-container">
+        <div class="h-header">
+          <div class="h-pre">Humanity's Fragile Miracle</div>
+          <div class="h-title">One Hundred Years of Protected Progress</div>
         </div>
-        <div class="sheet-meta">Single Summary Table · No Ward Granularity · 365-Day Lag</div>
-        <table class="sheet-table" style="font-size: 14px;">
-          <tr><th>Organism</th><th>Resistance %</th><th>Status</th></tr>
-          <tr><td>Escherichia coli</td><td>25.3% R</td><td>Stable (Annual avg)</td></tr>
-          <tr><td>Klebsiella pneumoniae</td><td>20.8% R</td><td>Stable</td></tr>
-          <tr><td>Staphylococcus aureus</td><td>15.5% R</td><td>Stable</td></tr>
-          <tr><td>Pseudomonas aeruginosa</td><td>18.2% R</td><td>Stable</td></tr>
-        </table>
-        <div style="margin-top: 36px; padding: 16px; background: #eee8dc; border-radius: 4px; font-size: 13px; font-family: var(--font-mono); color: #222;">
-          * Outbreaks occurring in individual wards during month 8 are concealed within the 12-month mean.
+
+        <div class="h-pillars">
+          <div id="hcard-1" class="h-card">
+            <div class="h-card-tag">Pillar 01</div>
+            <div class="h-card-name">Surgery</div>
+            <div class="h-card-body">Routine procedures safe from lethal post-operative infection.</div>
+          </div>
+          <div id="hcard-2" class="h-card">
+            <div class="h-card-tag">Pillar 02</div>
+            <div class="h-card-name">Chemotherapy</div>
+            <div class="h-card-body">Cancer treatments viable through antimicrobial immune shields.</div>
+          </div>
+          <div id="hcard-3" class="h-card">
+            <div class="h-card-tag">Pillar 03</div>
+            <div class="h-card-name">Childbirth</div>
+            <div class="h-card-body">Maternal and neonatal septic mortality collapsed across modern history.</div>
+          </div>
         </div>
-        <div class="stamp-box" style="right: 40px; bottom: 40px;">Past Data</div>
+
+        <div class="h-shield-banner">
+          <div class="h-shield-text">Every foundation of modern medicine rests on one invisible shield: antibiotics.</div>
+        </div>
       </div>
-      <div id="b2-headline">Twelve months of resistance, condensed into one report.</div>
     </div>
   </section>
 
-  <!-- SCENE 3: TURN / INFECTION THREAT (330 - 480 frames = 11s - 16s) -->
+  <!-- SCENE 3: THE BROKEN DEFENSE / STAGNANT REPORT -->
   <section id="s3" class="scene">
     <div class="vignette"></div>
     <div id="s3-cam" class="cam">
-      <div id="b3-center">
-        <div id="b3-headline">But an infection does not wait a year.</div>
-        <div class="ticker-track">
-          <div id="ticker" class="ticker-content">
-            <span>Day 001 · Culture taken</span><span>·</span>
-            <span>Day 008 · Mutation arises</span><span>·</span>
-            <span>Day 014 · Cluster in ICU</span><span>·</span>
-            <span style="color:var(--signal-red-bright); font-weight:700;">Day 021 · Resistance spreads</span><span>·</span>
-            <span>Day 042 · Unnoticed by annual report</span><span>·</span>
-            <span>Day 180 · Outbreak peaks</span><span>·</span>
-            <span>Day 365 · Annual report finally compiled</span>
+      <div class="archive-contrast-callout">
+        Yet hospitals still fight back with annual PDF reports.
+      </div>
+      <div class="archive-scene">
+        <div class="archive-stack">
+          <div id="p-sheet-1" class="paper-sheet" style="transform: rotate(-3deg) translate(-10px, 10px);">
+            <div class="sheet-label"><span>TYKS HOSPITAL ARCHIVE</span><span>2022 SUMMARY</span></div>
+            <div class="sheet-h1">Annual Resistance Review</div>
+          </div>
+          <div id="p-sheet-2" class="paper-sheet" style="transform: rotate(2deg) translate(8px, -6px);">
+            <div class="sheet-label"><span>TYKS HOSPITAL ARCHIVE</span><span>2023 SUMMARY</span></div>
+            <div class="sheet-h1">Annual Resistance Review</div>
+          </div>
+          <div id="p-sheet-3" class="paper-sheet">
+            <div class="sheet-label"><span>TYKS HOSPITAL ARCHIVE</span><span>2024 SUMMARY</span></div>
+            <div class="sheet-h1">Annual Resistance Review</div>
+            <div style="font-size:24px; line-height:36px; color:#444; margin-top:20px;">
+              • Compiled every 12 months<br>
+              • Ward-level outbreaks hidden in hospital averages<br>
+              • Retrospective look backwards
+            </div>
+            <div id="alarm-stamp" class="stamp-alarm">365-Day Lag</div>
           </div>
         </div>
       </div>
-      <div id="stinger" class="pulse-stinger"></div>
     </div>
   </section>
 
-  <!-- SCENE 4: NAME ARRIVAL (480 - 600 frames = 16s - 20s) -->
+  <!-- SCENE 4: THE TURN & AEI PULSE ARRIVAL -->
   <section id="s4" class="scene">
+    <div class="vignette"></div>
     <div id="s4-cam" class="cam">
-      <div id="b4-frame">
-        <div class="b4-brand-row">
-          <svg class="b4-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 10.5 12 3l9 7.5"/>
-            <path d="M5 9.5V21h14V9.5"/>
-            <path d="M9 14h6" stroke-width="1.6"/>
-            <circle cx="12" cy="14" r="1.8" fill="currentColor"/>
-          </svg>
-          <div id="b4-title">AEI Pulse</div>
-        </div>
-        <div id="b4-tagline">A rolling, real-time window on antimicrobial resistance. Updated every day.</div>
+      <div class="pulse-arrival">
+        <svg class="pulse-mark-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5 12 3l9 7.5"/>
+          <path d="M5 9.5V21h14V9.5"/>
+          <path d="M9 14h6" stroke-width="1.6"/>
+          <circle cx="12" cy="14" r="1.8" fill="currentColor"/>
+        </svg>
+        <div class="pulse-brand">AEI Pulse</div>
+        <div id="p-rule" class="pulse-rule"></div>
+        <div class="pulse-tagline">Surveillance, in real time.</div>
       </div>
     </div>
   </section>
 
-  <!-- SCENE 5: ROLLING WINDOW (600 - 840 frames = 20s - 28s) -->
+  <!-- SCENE 5: FF-TRACKING RADAR TELEMETRY VIEWPORT -->
   <section id="s5" class="scene">
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
     <div id="s5-cam" class="cam">
-      <div class="b5-container">
-        <div class="kpi-row">
-          <div class="kpi-card">
-            <div class="kpi-label">Total isolates (first isolates)</div>
-            <div id="kpi-total" class="kpi-value">1212</div>
-            <div class="kpi-sub">↑ 1.9% vs previous 4 weeks</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Resistant isolates (all antibiotics)</div>
-            <div id="kpi-res" class="kpi-value">64.3%</div>
-            <div class="kpi-sub" style="color:var(--ink-light-soft);">±0.0 pp vs previous 4 weeks</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Most common organism</div>
-            <div class="kpi-value" style="font-size:28px; line-height:38px;">Escherichia coli</div>
-            <div class="kpi-sub">42.7% of isolates · n=518</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Highest resistance</div>
-            <div class="kpi-value" style="font-size:28px; line-height:38px; color:var(--signal-red);">81.9%</div>
-            <div class="kpi-sub" style="color:var(--signal-red);">S. aureus to Penicillin</div>
+      <div class="radar-cockpit">
+        <div class="cockpit-header">
+          <div class="cockpit-title">Live Hospital Pathogen Radar</div>
+          <div class="cockpit-meta">
+            <span>FEED: DAILY LAB STREAM</span>
+            <span>STATUS: ACTIVE SCAN</span>
           </div>
         </div>
 
-        <div class="chart-panel">
-          <div class="chart-header">
-            <div>
-              <span class="chart-title">Resistance trend over time</span>
-              <span style="font-size:14px; color:var(--ink-light-soft); margin-left:16px;">Daily % resistant · first isolate per patient</span>
-            </div>
-            <div class="chart-badge">28-Day Rolling Surveillance</div>
+        <div class="cockpit-body">
+          <div class="video-viewport">
+            <!-- Embedding the ff-tracking camera-tracked video pass -->
+            <video id="radar-video" src="./media/tracking.mp4" data-start="25.3" muted playsinline></video>
           </div>
 
-          <div class="chart-area" id="trend-chart-area">
-            <div id="rolling-window" class="window-shade" style="left: 960px;">
-              <span class="window-label">Window: 18 Sep – 16 Oct</span>
+          <div class="hud-telemetry-panel">
+            <div class="telemetry-card">
+              <div class="tc-label">Total Acute Isolates</div>
+              <div class="tc-value" id="iso-count">1,212</div>
             </div>
-            <svg id="trend-svg" width="100%" height="100%" viewBox="0 0 1528 520" preserveAspectRatio="none" style="position:absolute; inset:0;">
-              <line x1="0" y1="130" x2="1528" y2="130" stroke="#f0f2f5" stroke-width="1"/>
-              <line x1="0" y1="260" x2="1528" y2="260" stroke="#f0f2f5" stroke-width="1"/>
-              <line x1="0" y1="390" x2="1528" y2="390" stroke="#f0f2f5" stroke-width="1"/>
-              <line x1="0" y1="388" x2="1528" y2="388" stroke="#9aa3af" stroke-width="1.8" stroke-dasharray="6 6"/>
-              <text x="20" y="380" fill="#9aa3af" font-family="'IBM Plex Mono'" font-size="12">Annual Baseline: 25.3%</text>
-              <path id="curve-ecoli" d="M 0 420 Q 200 390, 400 400 T 800 380 T 1100 320 T 1300 240 T 1528 190" fill="none" stroke="#0f6b7c" stroke-width="3.5" stroke-linecap="round"/>
-              <path id="curve-staph" d="M 0 350 Q 250 370, 500 340 T 900 360 T 1300 330 T 1528 340" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="4 2"/>
-              <path id="curve-kleb" d="M 0 450 Q 300 420, 600 440 T 1100 430 T 1528 420" fill="none" stroke="#2562e9" stroke-width="2"/>
-            </svg>
+            <div class="telemetry-card">
+              <div class="tc-label">Surveillance Window</div>
+              <div class="tc-value" style="font-size:42px; color:var(--accent-teal-bright);">28 Days Rolling</div>
+            </div>
+            <div class="telemetry-card">
+              <div class="tc-label">Hospital Wards Monitored</div>
+              <div class="tc-value" style="font-size:42px;">9 Clinical Units</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SCENE 6: LATTICE (840 - 1140 frames = 28s - 38s) -->
+  <!-- SCENE 6: SURVEILLANCE LATTICE (9 WARDS × 7 DRUGS) -->
   <section id="s6" class="scene">
+    <div class="vignette"></div>
     <div id="s6-cam" class="cam">
-      <div class="b6-container">
-        <div class="b6-header">
-          <div class="b6-title">Resistance by Organism and Ward</div>
+      <div class="lattice-wrap">
+        <div class="lattice-title-bar">
+          <div class="lt-title">Acute Care Resistance Matrix</div>
+          <div class="lt-sub">9 WARDS × 7 ANTIMICROBIALS • ROLLING 28-DAY WINDOW</div>
         </div>
 
-        <table class="lattice-table">
+        <table class="matrix-grid">
           <thead>
             <tr>
-              <th class="col-lead">Antibiotic</th>
-              <th>Overall</th>
-              <th>Emergency Dept</th>
-              <th>General Surgery</th>
-              <th>Health Centre E</th>
-              <th>Health Centre W</th>
-              <th style="background:#fee2e2; color:#b91c1c;">ICU</th>
-              <th>Infectious Dis.</th>
-              <th>Internal Med A</th>
-              <th>Internal Med B</th>
+              <th style="text-align:left; padding-left:18px;">Clinical Ward</th>
+              <th>TMP</th>
+              <th>CIP</th>
+              <th>CXM</th>
+              <th>PIV</th>
+              <th>NIT</th>
+              <th>GEN</th>
+              <th>MEM</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="col-lead"><strong>Trimethoprim</strong></td>
-              <td><span class="cell-chip chip-mid">30.9%</span></td>
-              <td><span class="cell-chip chip-mid">29.2%</span></td>
-              <td><span class="cell-chip chip-good">23.1%</span></td>
-              <td><span class="cell-chip chip-mid">37.5%</span></td>
-              <td><span class="cell-chip chip-mid">26.9%</span></td>
-              <td style="background:#fff1f1;"><span class="cell-chip chip-alert">40.0%</span></td>
-              <td><span class="cell-chip chip-mid">29.4%</span></td>
-              <td><span class="cell-chip chip-mid">29.3%</span></td>
-              <td><span class="cell-chip chip-mid">28.6%</span></td>
-            </tr>
-            <tr style="background:#fff5f5;">
-              <td class="col-lead"><strong style="color:var(--signal-red);">Ciprofloxacin</strong></td>
-              <td><span class="cell-chip chip-good">25.3%</span></td>
-              <td><span class="cell-chip chip-good">10.4%</span></td>
-              <td><span class="cell-chip chip-good">24.6%</span></td>
-              <td><span class="cell-chip chip-mid">27.8%</span></td>
-              <td><span class="cell-chip chip-good">15.5%</span></td>
-              <td style="background:#fecaca;"><span id="icu-cipro-chip" class="cell-chip chip-highlight">62.7% R</span></td>
-              <td><span class="cell-chip chip-mid">31.6%</span></td>
-              <td><span class="cell-chip chip-good">24.6%</span></td>
-              <td><span class="cell-chip chip-good">17.9%</span></td>
+              <td class="ward-name">Emergency Dept</td>
+              <td><span class="cell-chip chip-amber">74.2%</span></td>
+              <td><span class="cell-chip chip-green">89.4%</span></td>
+              <td><span class="cell-chip chip-green">91.2%</span></td>
+              <td><span class="cell-chip chip-green">86.1%</span></td>
+              <td><span class="cell-chip chip-green">94.8%</span></td>
+              <td><span class="cell-chip chip-green">96.0%</span></td>
+              <td><span class="cell-chip chip-green">99.1%</span></td>
             </tr>
             <tr>
-              <td class="col-lead"><strong>Cefuroxime</strong></td>
-              <td><span class="cell-chip chip-good">21.8%</span></td>
-              <td><span class="cell-chip chip-mid">28.6%</span></td>
-              <td><span class="cell-chip chip-mid">31.1%</span></td>
-              <td><span class="cell-chip chip-good">19.4%</span></td>
-              <td><span class="cell-chip chip-good">17.2%</span></td>
-              <td style="background:#fff1f1;"><span class="cell-chip chip-good">22.0%</span></td>
-              <td><span class="cell-chip chip-good">19.3%</span></td>
-              <td><span class="cell-chip chip-good">18.5%</span></td>
-              <td><span class="cell-chip chip-good">16.4%</span></td>
+              <td class="ward-name">General Surgery</td>
+              <td><span class="cell-chip chip-amber">71.0%</span></td>
+              <td><span class="cell-chip chip-amber">78.5%</span></td>
+              <td><span class="cell-chip chip-green">84.2%</span></td>
+              <td><span class="cell-chip chip-green">82.0%</span></td>
+              <td><span class="cell-chip chip-green">90.4%</span></td>
+              <td><span class="cell-chip chip-green">93.1%</span></td>
+              <td><span class="cell-chip chip-green">98.5%</span></td>
+            </tr>
+            <tr style="background: rgba(218,37,37,0.1);">
+              <td class="ward-name" style="color:#ff6b6b; font-weight:700;">Intensive Care (ICU)</td>
+              <td><span class="cell-chip chip-red">52.3%</span></td>
+              <td><span id="icu-cip-cell" class="cell-chip chip-alert">37.3% R:62.7%</span></td>
+              <td><span class="cell-chip chip-amber">68.4%</span></td>
+              <td><span class="cell-chip chip-amber">74.1%</span></td>
+              <td><span class="cell-chip chip-green">86.2%</span></td>
+              <td><span class="cell-chip chip-amber">79.5%</span></td>
+              <td><span class="cell-chip chip-green">96.5%</span></td>
             </tr>
             <tr>
-              <td class="col-lead"><strong>Pivmecillinam</strong></td>
-              <td><span class="cell-chip chip-good">18.3%</span></td>
-              <td><span class="cell-chip chip-good">18.5%</span></td>
-              <td><span class="cell-chip chip-good">19.2%</span></td>
-              <td><span class="cell-chip chip-good">18.8%</span></td>
-              <td><span class="cell-chip chip-good">13.5%</span></td>
-              <td style="background:#fff1f1;"><span class="cell-chip chip-good">17.5%</span></td>
-              <td><span class="cell-chip chip-good">17.6%</span></td>
-              <td><span class="cell-chip chip-good">20.7%</span></td>
-              <td><span class="cell-chip chip-good">12.5%</span></td>
+              <td class="ward-name">Infectious Diseases</td>
+              <td><span class="cell-chip chip-amber">64.5%</span></td>
+              <td><span class="cell-chip chip-amber">72.1%</span></td>
+              <td><span class="cell-chip chip-green">81.0%</span></td>
+              <td><span class="cell-chip chip-green">83.5%</span></td>
+              <td><span class="cell-chip chip-green">89.1%</span></td>
+              <td><span class="cell-chip chip-green">91.4%</span></td>
+              <td><span class="cell-chip chip-green">97.8%</span></td>
             </tr>
             <tr>
-              <td class="col-lead"><strong>Nitrofurantoin</strong></td>
-              <td><span class="cell-chip chip-good">15.0%</span></td>
-              <td><span class="cell-chip chip-good">12.3%</span></td>
-              <td><span class="cell-chip chip-good">13.5%</span></td>
-              <td><span class="cell-chip chip-mid">31.3%</span></td>
-              <td><span class="cell-chip chip-good">5.8%</span></td>
-              <td style="background:#fff1f1;"><span class="cell-chip chip-good">10.0%</span></td>
-              <td><span class="cell-chip chip-good">17.6%</span></td>
-              <td><span class="cell-chip chip-good">15.5%</span></td>
-              <td><span class="cell-chip chip-good">17.9%</span></td>
+              <td class="ward-name">Internal Medicine A</td>
+              <td><span class="cell-chip chip-amber">76.8%</span></td>
+              <td><span class="cell-chip chip-green">84.2%</span></td>
+              <td><span class="cell-chip chip-green">88.5%</span></td>
+              <td><span class="cell-chip chip-green">87.0%</span></td>
+              <td><span class="cell-chip chip-green">93.2%</span></td>
+              <td><span class="cell-chip chip-green">95.1%</span></td>
+              <td><span class="cell-chip chip-green">98.9%</span></td>
             </tr>
             <tr>
-              <td class="col-lead"><strong>Gentamicin</strong></td>
-              <td><span class="cell-chip chip-good">13.3%</span></td>
-              <td><span class="cell-chip chip-good">9.1%</span></td>
-              <td><span class="cell-chip chip-good">13.1%</span></td>
-              <td><span class="cell-chip chip-good">11.1%</span></td>
-              <td><span class="cell-chip chip-good">8.6%</span></td>
-              <td style="background:#fff1f1;"><span class="cell-chip chip-good">16.0%</span></td>
-              <td><span class="cell-chip chip-good">15.8%</span></td>
-              <td><span class="cell-chip chip-good">10.8%</span></td>
-              <td><span class="cell-chip chip-good">20.9%</span></td>
+              <td class="ward-name">Internal Medicine B</td>
+              <td><span class="cell-chip chip-amber">73.1%</span></td>
+              <td><span class="cell-chip chip-green">81.9%</span></td>
+              <td><span class="cell-chip chip-green">86.4%</span></td>
+              <td><span class="cell-chip chip-green">85.3%</span></td>
+              <td><span class="cell-chip chip-green">92.0%</span></td>
+              <td><span class="cell-chip chip-green">94.7%</span></td>
+              <td><span class="cell-chip chip-green">98.2%</span></td>
             </tr>
-            <tr style="background:#f0fdf4;">
-              <td class="col-lead"><strong style="color:var(--good-green);">Meropenem</strong></td>
-              <td><span class="cell-chip chip-good">3.5%</span></td>
-              <td><span class="cell-chip chip-good">1.4%</span></td>
-              <td><span class="cell-chip chip-good">1.8%</span></td>
-              <td><span class="cell-chip chip-good">5.6%</span></td>
-              <td><span class="cell-chip chip-good">0.0%</span></td>
-              <td style="background:#dcfce7;"><span class="cell-chip chip-good" style="font-weight:700;">8.7%</span></td>
-              <td><span class="cell-chip chip-good">5.6%</span></td>
-              <td><span class="cell-chip chip-good">4.8%</span></td>
-              <td><span class="cell-chip chip-good">3.3%</span></td>
+            <tr>
+              <td class="ward-name">Pediatrics</td>
+              <td><span class="cell-chip chip-green">88.4%</span></td>
+              <td><span class="cell-chip chip-green">94.1%</span></td>
+              <td><span class="cell-chip chip-green">96.0%</span></td>
+              <td><span class="cell-chip chip-green">92.7%</span></td>
+              <td><span class="cell-chip chip-green">97.5%</span></td>
+              <td><span class="cell-chip chip-green">98.0%</span></td>
+              <td><span class="cell-chip chip-green">99.8%</span></td>
             </tr>
           </tbody>
         </table>
@@ -1151,344 +1278,252 @@ html, body {
     </div>
   </section>
 
-  <!-- SCENE 7: HERO OUTBREAK ALERT (1140 - 1440 frames = 38s - 48s) -->
+  <!-- SCENE 7: HERO OUTBREAK ALERT SLAM (z = -5.8) -->
   <section id="s7" class="scene">
+    <div class="vignette"></div>
     <div id="s7-cam" class="cam">
-      <div class="b7-macro-stage">
-        <div class="b7-macro-chart">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <div>
-              <span style="font-size:24px; font-weight:700; color:var(--ink-light);">ICU Resistance Trend — Escherichia coli to Ciprofloxacin</span>
-              <span style="font-family:var(--font-mono); font-size:14px; color:var(--signal-red); margin-left:16px; font-weight:600;">Critical Drift</span>
-            </div>
-            <div style="font-family:var(--font-mono); font-size:14px; color:var(--ink-light-soft);">Window: 18 Sep – 16 Oct (n=51)</div>
-          </div>
+      <div class="b7-container">
+        <!-- Background trend curve SVG -->
+        <svg class="b7-curve-bg" viewBox="0 0 1000 500">
+          <line x1="100" y1="360" x2="900" y2="360" stroke="#da2525" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+          <text x="910" y="365" fill="#da2525" font-family="IBM Plex Mono" font-size="16" opacity="0.8">Hospital Baseline: 25.3% R</text>
+          <path d="M 120 120 C 300 130, 420 180, 550 260 C 650 330, 750 420, 880 440" fill="none" stroke="#da2525" stroke-width="6"/>
+          <circle cx="880" cy="440" r="14" fill="#da2525"/>
+          <circle id="alert-radar-ring" cx="880" cy="440" r="28" fill="none" stroke="#da2525" stroke-width="3" opacity="0.8"/>
+        </svg>
 
-          <svg width="100%" height="420" viewBox="0 0 1480 420" preserveAspectRatio="none">
-            <line x1="0" y1="100" x2="1480" y2="100" stroke="#f0f2f5" stroke-width="1"/>
-            <line x1="0" y1="200" x2="1480" y2="200" stroke="#f0f2f5" stroke-width="1"/>
-            <line x1="0" y1="300" x2="1480" y2="300" stroke="#f0f2f5" stroke-width="1"/>
-            <line x1="0" y1="310" x2="1480" y2="310" stroke="#9aa3af" stroke-width="2" stroke-dasharray="8 6"/>
-            <text x="30" y="300" fill="#9aa3af" font-family="'IBM Plex Mono'" font-size="14" font-weight="600">Hospital-wide Baseline: 25.3% R</text>
-            <path id="icu-spike-curve" d="M 0 310 Q 350 310, 600 290 T 900 210 T 1150 140 T 1480 80" fill="none" stroke="var(--signal-red)" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="1150" cy="140" r="9" fill="var(--signal-red)"/>
-            <circle id="alert-pulse-ring" cx="1150" cy="140" r="26" fill="none" stroke="var(--signal-red)" stroke-width="2.5" opacity="0.6"/>
-          </svg>
-        </div>
-
-        <div id="b7-alert-card" class="alert-slam-card">
-          <div class="alert-top-row">
-            <span class="alert-pill">Early Warning Signal · Statistical Deviation</span>
-            <span id="zscore-counter" class="alert-zscore">z = −5.8</span>
+        <div id="b7-alert-card" class="b7-alert-card">
+          <div class="b7-alert-header">
+            <span class="b7-badge-alarm">OUTBREAK DETECTED</span>
+            <span class="b7-badge-zscore">z = −5.8σ</span>
           </div>
-          <div class="alert-sentence">
-            Emerging signal — Escherichia coli resistance to Ciprofloxacin on ICU: susceptible share fell 37.8 pp to 37.3% in the last 4 weeks.
+          <div class="b7-alert-title">ICU Alert: Escherichia coli to Ciprofloxacin</div>
+          <div class="b7-alert-body">
+            Susceptibility plummeted 37.8 pp (falling to 37.3% S, resistance 62.7%, n=51).
+            Severe statistical departure from baseline. Intercepted before ward transmission.
           </div>
-          <div class="alert-stats-strip">
-            <div>Current Window: <span class="alert-stat-strong">62.7% Resistant</span></div>
-            <div>Hospital Baseline: <span style="font-weight:700;">25.3%</span></div>
-            <div>Sample: <span style="font-weight:700;">n = 51</span></div>
-            <div style="margin-left:auto; color:var(--signal-red); font-weight:700;">CAUGHT IN WEEK 1 · EARLY INTERVENTION</div>
+          <div class="b7-alert-footer">
+            <span>DETECTION: 6 WEEKS ADVANCE NOTICE</span>
+            <span>ORGANISM: E. COLI CLONE ST131</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SCENE 8: BEDSIDE GUIDANCE (1440 - 1665 frames = 48s - 55.5s) -->
+  <!-- SCENE 8: BEDSIDE GUIDANCE -->
   <section id="s8" class="scene">
     <div id="s8-cam" class="cam">
       <div class="b8-container">
         <div class="guidance-header">
           <div class="guidance-pre">Empiric Bedside Decision Support</div>
-          <div class="guidance-title">ICU Guidance: Escherichia coli</div>
+          <div class="guidance-title">ICU Clinical Guidance: Escherichia coli</div>
         </div>
 
         <div class="guidance-cards">
           <div id="card-works" class="guidance-card card-works">
-            <div class="gcard-row">
-              <div class="gcard-drug">Meropenem <span style="font-size:16px; color:var(--good-green); background:var(--good-green-soft); padding:4px 12px; border-radius:12px; margin-left:14px; vertical-align:middle;">High Susceptibility</span></div>
-              <div class="gcard-percent percent-works">96.5% S <span style="font-size:18px; color:var(--ink-light-soft);">(3.5% R)</span></div>
-            </div>
-            <div class="gcard-body">
-              Meropenem remains the most active standard option against E. coli in the current ICU window (n=487). Preferred standard therapy.
+            <div>
+              <div class="gcard-drug">Meropenem <span style="font-size:16px; color:var(--good-green); background:var(--good-green-soft); padding:4px 12px; border-radius:12px; margin-left:14px; vertical-align:middle;">High Activity</span></div>
+              <div class="gcard-percent percent-works">96.5% S <span style="font-size:20px; color:var(--ink-light-soft);">(3.5% R)</span></div>
+              <div class="gcard-body">
+                Meropenem remains the most active standard option in the current ICU window (n=487). Recommended empiric therapy.
+              </div>
             </div>
             <div id="select-btn" class="select-btn">Select for Order</div>
           </div>
 
           <div id="card-stopped" class="guidance-card card-stopped">
-            <div class="gcard-row">
+            <div>
               <div class="gcard-drug" style="color:var(--signal-red);">Ciprofloxacin <span style="font-size:16px; color:var(--signal-red); background:var(--signal-red-soft); padding:4px 12px; border-radius:12px; margin-left:14px; vertical-align:middle;">Compromised on ICU</span></div>
-              <div class="gcard-percent percent-stopped">62.7% R <span style="font-size:18px; color:var(--ink-light-soft);">(37.3% S)</span></div>
+              <div class="gcard-percent percent-stopped">62.7% R <span style="font-size:20px; color:var(--ink-light-soft);">(37.3% S)</span></div>
+              <div class="gcard-body">
+                Resistance surged 37.8 pp. High probability of treatment failure if prescribed empirically without culture confirmation.
+              </div>
             </div>
-            <div class="gcard-body">
-              Susceptible share fell 37.8 pp in the last 4 weeks. High risk of treatment failure if prescribed empirically on ICU without culture confirmation.
-            </div>
+            <div style="font-family:var(--font-mono); font-size:18px; color:var(--signal-red); font-weight:600;">⚠ High Treatment Failure Risk</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SCENE 9: INSTRUMENT NOT REPORT (1665 - 1860 frames = 55.5s - 62s) -->
+  <!-- SCENE 9: SIGNATURE CLOSE -->
   <section id="s9" class="scene">
-    <div id="s9-cam" class="cam">
-      <div class="b9-split">
-        <div id="past-sheet-recede" class="past-box">
-          <div style="font-size:24px; font-weight:700; border-bottom:2px solid #333; padding-bottom:12px; margin-bottom:18px;">Annual Summary Report</div>
-          <div style="font-family:var(--font-mono); font-size:16px; color:#444; margin-bottom:20px;">Last Year's Averages</div>
-          <div style="font-size:18px; line-height:28px; color:#222;">
-            Compiled once every 12 months.<br>
-            Hospital-wide aggregate.<br>
-            Ward spikes concealed.<br>
-            Looking backwards.
-          </div>
-          <div class="stamp-box" style="position:static; margin-top:140px; text-align:center;">Archival Artifact</div>
-        </div>
-
-        <div id="live-instrument-advance" class="present-box">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-            <span style="font-size:38px; font-weight:700; color:var(--ink-light);">AEI Pulse</span>
-            <span style="font-family:var(--font-mono); font-size:16px; color:var(--accent-teal); font-weight:600; background:var(--accent-teal-soft); padding:6px 16px; border-radius:8px;">Live Surveillance</span>
-          </div>
-          <div style="font-size:28px; line-height:38px; font-weight:600; color:var(--ink-light); margin-bottom:24px;">
-            An active clinical instrument for the next patient decision.
-          </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; font-family:var(--font-mono); font-size:16px; color:var(--ink-light-soft);">
-            <div style="padding:16px; background:#f7f9fa; border-radius:8px;">✓ 4-Week Rolling Window</div>
-            <div style="padding:16px; background:#f7f9fa; border-radius:8px;">✓ Ward-Specific Profiles</div>
-            <div style="padding:16px; background:#f7f9fa; border-radius:8px;">✓ Automated Z-Score Outbreak Detection</div>
-            <div style="padding:16px; background:#f7f9fa; border-radius:8px;">✓ Daily Laboratory Feed Updates</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCENE 10: CLOSE (1860 - 2058 frames = 62s - 68.6s) -->
-  <section id="s10" class="scene">
     <div class="vignette"></div>
-    <div id="s10-cam" class="cam">
-      <div class="b10-lockup">
-        <div id="b10-resolve-pulse" style="position:absolute; left:50%; top:50%; width:1400px; height:1400px; margin-left:-700px; margin-top:-700px; border-radius:50%; background:radial-gradient(circle, rgba(15,107,124,0.45) 0%, rgba(21,148,171,0) 70%); pointer-events:none; opacity:0;"></div>
-        <div id="b10-mark" class="b10-logo-wrap">
-          <svg viewBox="0 0 24 24" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 10.5 12 3l9 7.5"/>
-            <path d="M5 9.5V21h14V9.5"/>
-            <path d="M9 14h6" stroke-width="1.6"/>
-            <circle cx="12" cy="14" r="1.8" fill="currentColor"/>
-          </svg>
-        </div>
-        <div id="b10-brand">AEI Pulse</div>
-        <div class="rule-container">
-          <div id="b10-rule"></div>
-          <div id="b10-rule-sweep"></div>
-        </div>
-        <div id="b10-lab">Tyks Laboratories</div>
-        <div id="b10-tagline">Surveillance, in real time.</div>
+    <div id="s9-cam" class="cam">
+      <div class="close-wrap">
+        <svg class="close-shield-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <div class="close-pre">Defending Humanity's Shield</div>
+        <div class="close-brand">AEI Pulse</div>
+        <div class="close-rule-wrap"><div id="c-rule-bar" class="close-rule-bar"></div></div>
+        <div class="close-lab">Tyks Laboratories</div>
+        <div class="close-tagline">Surveillance, in real time.</div>
       </div>
     </div>
   </section>
-
 </div>
 
 <script src="./runtime/vendor/gsap.min.js"></script>
 <script src="./runtime/motion.js"></script>
 <script>
-/* Initialize Motion film runtime with 30fps, 68.6s duration (2058 frames) */
-const M = Motion.film({ fps: 30, duration: 68.6, width: 1920, height: 1080, clock: 'smooth' });
+/* Initialize Motion film runtime: 30fps, 60.0s (1800 frames) */
+const M = Motion.film({ fps: 30, duration: 60.0, width: 1920, height: 1080, clock: 'smooth' });
 
 // ============================================================
-// BEAT 1: HOOK (0 - 150 frames = 0s - 5.0s)
-// "Every year, the laboratory looks back."
+// SCENE 1: FAST-PACED CRISIS MONTAGE (0 - 240 frames = 0.0s - 8.0s)
+// "A silent pandemic is accelerating through modern medicine." (f1 - f92)
+// "Ten million lives a year. The miracle drugs of our century are failing." (f110 - f230)
 // ============================================================
-M.show('#s1', 0, 150);
 
-// Paper sheets drop in with physical weight and snap
-M.enter('#sheet-21', { at: 6, frames: 14, ease: 'softLand', from: { y: -200, opacity: 0 } });
-M.enter('#sheet-22', { at: 18, frames: 14, ease: 'softLand', from: { y: -200, opacity: 0 } });
-M.enter('#sheet-23', { at: 30, frames: 14, ease: 'softLand', from: { y: -200, opacity: 0 } });
-M.enter('#sheet-24', { at: 42, frames: 16, ease: 'snapSettle', from: { y: -240, scale: 1.15, opacity: 0 } });
+// 1A: The Guardian Broadsheet (f0 - f36 = 0.0s - 1.2s)
+M.show('#s1a', 0, 36);
+M.enter('.news-paper', { at: 0, frames: 8, ease: 'softLand', from: { scale: 1.08, opacity: 0 } });
+M.kf('#hl-stroke-1', 'width', [[6, '0%'], [24, '100%', 'softLand']]);
+M.drift('#s1a-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 0, end: 36 });
 
-// Sheet 24 stamp slams down
-M.enter('#sheet-24-stamp', { at: 68, frames: 8, ease: 'crashIn', from: { scale: 3.2, opacity: 0 } });
+// 1B: BBC World News TV Chyron (f36 - f75 = 1.2s - 2.5s)
+M.cut(36, { hide: ['#s1a'], show: ['#s1b'] });
+M.enter('.tv-headline', { at: 36, frames: 8, ease: 'crashIn', from: { scale: 1.2, y: 30, opacity: 0 } });
+M.enter('.tv-lower-third', { at: 42, frames: 10, ease: 'softLand', from: { y: 60, opacity: 0 } });
+M.drift('#s1b-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 36, end: 75 });
 
-// Words rise to match speech onset (VO 01: 24f - 106f)
-M.words('#b1-headline', { at: 24, gaps: [5, 4, 5, 4, 6], dist: 40, frames: 12, ease: 'softLand', accent: { color: '#0f6b7c', frames: 20, word: -1 } });
-M.drift('#s1-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 0, end: 150 });
+// 1C: Kinetic Strobe Alert (f75 - f110 = 2.5s - 3.66s)
+M.cut(75, { hide: ['#s1b'], show: ['#s1c'] });
+M.enter('#strobe-text', { at: 75, frames: 6, ease: 'crashIn', from: { scale: 2.2, opacity: 0 } });
+M.enter('#strobe-sub', { at: 82, frames: 8, ease: 'softLand', from: { y: 20, opacity: 0 } });
+M.snap('#s1c-cam', { at: 75, from: { scale: 1.1 }, to: { scale: 1.0 }, firstFrameShare: 0.8, tail: 8 });
 
-
-// ============================================================
-// BEAT 2: CONDENSATION (150 - 330 frames = 5.0s - 11.0s)
-// "Twelve months of resistance, condensed into one report."
-// ============================================================
-M.cut(150, { hide: ['#s1'], show: ['#s2'] });
-
-// The single report sheet snaps in flat
-M.enter('#s2-sheet', { at: 150, frames: 16, ease: 'softLand', from: { scale: 0.92, y: 30 } });
-M.words('#b2-headline', { at: 165, gaps: [4, 4, 4, 4, 5, 4, 6], dist: 40, frames: 12, ease: 'softLand', accent: { color: '#b3261e', frames: 24, word: 6 } });
-M.drift('#s2-cam', { prop: 'scale', from: 1.0, to: 1.05, start: 150, end: 330 });
-
-
-// ============================================================
-// BEAT 3: TURN / INFECTION THREAT (330 - 480 frames = 11.0s - 16.0s)
-// "But an infection does not wait a year."
-// ============================================================
-M.cut(330, { hide: ['#s2'], show: ['#s3'] });
-
-// Headline crash
-M.words('#b3-headline', { at: 350, gaps: [4, 4, 5, 4, 5, 4, 7], dist: 60, frames: 10, ease: 'popOver', accent: { color: '#da2525', frames: 30, word: 2 } });
-
-// Timeline fast scroll
-M.kf('#ticker', 'x', [[330, 0], [480, -1100]]);
-
-// Red menace stinger hit at frame 360 (matching "infection" audio stinger)
-M.enter('#stinger', { at: 360, frames: 12, ease: 'crashIn', from: { scale: 0.1, opacity: 0 } });
-M.kf('#stinger', 'scale', [[360, 0.2], [374, 4.2, 'crashIn'], [440, 1.4, 'glide'], [480, 2.2]]);
-M.kf('#stinger', 'opacity', [[360, 1], [400, 0.75], [480, 0.2]]);
+// 1D: The Lancet & 10 Million Hero Num (f110 - f240 = 3.66s - 8.0s)
+M.cut(110, { hide: ['#s1c'], show: ['#s1d'] });
+M.enter('.lancet-card', { at: 110, frames: 12, ease: 'snapSettle', from: { scale: 0.9, opacity: 0 } });
+M.count('#lancet-count', { at: 115, from: 1200000, to: 10000000, frames: 38, round: true });
+M.drift('#s1d-cam', { prop: 'scale', from: 1.0, to: 1.045, start: 110, end: 240 });
 
 
 // ============================================================
-// BEAT 4: NAME ARRIVAL (480 - 600 frames = 16.0s - 20.0s)
-// "This is AEI Pulse."
+// SCENE 2: HUMANITY'S JOURNEY & THE SHIELD (240 - 450 frames = 8.0s - 15.0s)
+// "For a hundred years, antibiotics shielded humanity's greatest leaps: surgery, chemotherapy, childbirth." (f247 - f448)
 // ============================================================
-M.cut(480, { hide: ['#s3'], show: ['#s4'] });
-
-// Frame expands from center
-M.enter('#b4-frame', { at: 480, frames: 18, ease: 'snapSettle', from: { scale: 0.85, opacity: 0 } });
-M.words('#b4-title', { at: 504, gaps: [4, 6], dist: 50, frames: 14, ease: 'softLand', accent: { color: '#0f6b7c', frames: 24, word: -1 } });
-M.enter('#b4-tagline', { at: 530, frames: 16, ease: 'softLand', from: { y: 20, opacity: 0 } });
-M.drift('#s4-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 480, end: 600 });
-
-
-// ============================================================
-// BEAT 5: ROLLING WINDOW (600 - 840 frames = 20.0s - 28.0s)
-// "A rolling, real-time window on antimicrobial resistance. Updated every day."
-// ============================================================
-M.cut(600, { hide: ['#s4'], show: ['#s5'] });
-
-M.enter('.kpi-row', { at: 600, frames: 14, ease: 'softLand', from: { y: -30, opacity: 0 } });
-M.enter('.chart-panel', { at: 614, frames: 16, ease: 'softLand', from: { y: 40, opacity: 0 } });
-
-// Live isolate count steps up to 1212
-M.count('#kpi-total', { at: 610, from: 840, to: 1212, frames: 32, round: true });
-
-// 28-day window sweeps across the chart timeline
-M.kf('#rolling-window', 'x', [[610, -600], [820, 200, 'softInOut']]);
-M.drift('#s5-cam', { prop: 'scale', from: 1.0, to: 1.035, start: 600, end: 840 });
+M.cut(240, { hide: ['#s1d'], show: ['#s2'] });
+M.enter('.h-header', { at: 240, frames: 14, ease: 'softLand', from: { y: -30, opacity: 0 } });
+M.enter('#hcard-1', { at: 270, frames: 14, ease: 'softLand', from: { y: 50, opacity: 0 } });
+M.enter('#hcard-2', { at: 310, frames: 14, ease: 'softLand', from: { y: 50, opacity: 0 } });
+M.enter('#hcard-3', { at: 350, frames: 14, ease: 'softLand', from: { y: 50, opacity: 0 } });
+M.enter('.h-shield-banner', { at: 380, frames: 16, ease: 'snapSettle', from: { scale: 0.94, opacity: 0 } });
+M.drift('#s2-cam', { prop: 'scale', from: 1.0, to: 1.035, start: 240, end: 450 });
 
 
 // ============================================================
-// BEAT 6: THE SURVEILLANCE LATTICE (840 - 1140 frames = 28.0s - 38.0s)
-// "Every ward. Every organism. Every antibiotic. Susceptible, or resistant."
+// SCENE 3: THE BROKEN DEFENSE / STAGNANT PDF (450 - 630 frames = 15.0s - 21.0s)
+// "Without them, the shield breaks. And hospitals still fight back with annual PDF reports." (f465 - f623)
 // ============================================================
-M.cut(840, { hide: ['#s5'], show: ['#s6'] });
-
-M.enter('.b6-header', { at: 840, frames: 12, ease: 'softLand', from: { y: -20, opacity: 0 } });
-M.enter('.lattice-table', { at: 852, frames: 16, ease: 'softLand', from: { scale: 0.96, opacity: 0 } });
-
-// ICU Ciprofloxacin anomaly cell pulses into prominence
-M.kf('#icu-cipro-chip', 'scale', [[920, 1.0], [935, 1.35, 'crashIn'], [950, 1.15, 'glide'], [1050, 1.3], [1140, 1.15]]);
-M.drift('#s6-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 840, end: 1140 });
+M.cut(450, { hide: ['#s2'], show: ['#s3'] });
+M.enter('.archive-contrast-callout', { at: 450, frames: 14, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.enter('#p-sheet-1', { at: 470, frames: 12, ease: 'softLand', from: { y: -180, opacity: 0 } });
+M.enter('#p-sheet-2', { at: 490, frames: 12, ease: 'softLand', from: { y: -180, opacity: 0 } });
+M.enter('#p-sheet-3', { at: 510, frames: 16, ease: 'snapSettle', from: { y: -220, scale: 1.15, opacity: 0 } });
+M.enter('#alarm-stamp', { at: 540, frames: 8, ease: 'crashIn', from: { scale: 3.5, opacity: 0 } });
+M.drift('#s3-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 450, end: 630 });
 
 
 // ============================================================
-// BEAT 7: HERO MOMENT - OUTBREAK ALERT SLAM (1140 - 1440 frames = 38.0s - 48.0s)
-// "When a signal drifts from its baseline, Pulse raises the alert."
+// SCENE 4: THE TURN & AEI PULSE ARRIVAL (630 - 760 frames = 21.0s - 25.33s)
+// "An infection does not wait a year. This is AEI Pulse." (f638 - f753)
 // ============================================================
-M.cut(1140, { hide: ['#s6'], show: ['#s7'] });
+M.cut(630, { hide: ['#s3'], show: ['#s4'] });
 
-M.enter('.b7-macro-chart', { at: 1140, frames: 16, ease: 'softLand', from: { scale: 0.94, opacity: 0 } });
+// Strobe flash on the transition
+M.kf('#flash', 'opacity', [[629, 0], [630, 0.9], [635, 0]]);
 
-// Radar pulse ring on the anomaly
-M.kf('#alert-pulse-ring', 'r', [[1160, 12], [1220, 48], [1280, 12], [1340, 48]]);
-M.kf('#alert-pulse-ring', 'opacity', [[1160, 0.9], [1220, 0.1], [1280, 0.9], [1340, 0.1]]);
+M.enter('.pulse-mark-svg', { at: 635, frames: 18, ease: 'snapSettle', from: { scale: 2.8, opacity: 0 } });
+M.words('.pulse-brand', { at: 650, gaps: [6], dist: 60, frames: 16, ease: 'softLand', accent: { color: '#1594ab', frames: 24 } });
+M.kf('#p-rule', 'scaleX', [[665, 0], [700, 1.0, 'softLand']]);
+M.enter('.pulse-tagline', { at: 700, frames: 14, ease: 'softLand', from: { y: 20, opacity: 0 } });
+M.drift('#s4-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 630, end: 760 });
 
-// Alert Card SLAMS in with massive hit at frame 1230 (matching "raises the alert" VO)
+
+// ============================================================
+// SCENE 5: FF-TRACKING RADAR TELEMETRY VIEWPORT (760 - 950 frames = 25.33s - 31.66s)
+// "A living surveillance radar. 1,212 acute isolates, tracked in real time." (f767 - f939)
+// ============================================================
+M.cut(760, { hide: ['#s4'], show: ['#s5'] });
+M.enter('.cockpit-header', { at: 760, frames: 12, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.enter('.video-viewport', { at: 765, frames: 14, ease: 'softLand', from: { scale: 0.94, opacity: 0 } });
+M.enter('.hud-telemetry-panel', { at: 775, frames: 14, ease: 'softLand', from: { x: 50, opacity: 0 } });
+M.count('#iso-count', { at: 775, from: 840, to: 1212, frames: 36, round: true });
+M.drift('#s5-cam', { prop: 'scale', from: 1.0, to: 1.035, start: 760, end: 950 });
+
+
+// ============================================================
+// SCENE 6: SURVEILLANCE LATTICE (950 - 1120 frames = 31.66s - 37.33s)
+// "A 28-day rolling window sweeping every ward, every organism, every antibiotic." (f954 - f1107)
+// ============================================================
+M.cut(950, { hide: ['#s5'], show: ['#s6'] });
+M.enter('.lattice-title-bar', { at: 950, frames: 12, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.enter('.matrix-grid', { at: 960, frames: 16, ease: 'softLand', from: { scale: 0.96, opacity: 0 } });
+M.kf('#icu-cip-cell', 'scale', [[1020, 1.0], [1035, 1.35, 'crashIn'], [1050, 1.15, 'glide'], [1100, 1.3], [1120, 1.15]]);
+M.drift('#s6-cam', { prop: 'scale', from: 1.0, to: 1.04, start: 950, end: 1120 });
+
+
+// ============================================================
+// SCENE 7: HERO OUTBREAK ALERT SLAM (1120 - 1350 frames = 37.33s - 45.0s)
+// "When a resistant clone surges, Pulse catches it. Z-score minus 5.8: intercepted before the outbreak spreads." (f1127 - f1340)
+// ============================================================
+M.cut(1120, { hide: ['#s6'], show: ['#s7'] });
+M.enter('.b7-curve-bg', { at: 1120, frames: 16, ease: 'softLand', from: { scale: 0.94, opacity: 0 } });
+
+// Radar pulse ring on anomaly
+M.kf('#alert-radar-ring', 'r', [[1130, 20], [1180, 70], [1230, 20], [1280, 70]]);
+M.kf('#alert-radar-ring', 'opacity', [[1130, 0.9], [1180, 0.1], [1230, 0.9], [1280, 0.1]]);
+
+// Alert Card SLAMS in with massive impact at frame 1180 (matching "Pulse catches it")
 M.enter('#b7-alert-card', {
-  at: 1230,
+  at: 1180,
   frames: 18,
   ease: 'crashIn',
-  from: { scale: 3.2, y: 180, opacity: 0 }
+  from: { scale: 3.5, y: 180, opacity: 0 }
 });
 
 // Flash on impact
-M.kf('#flash', 'opacity', [[1229, 0], [1230, 0.65], [1234, 0]]);
+M.kf('#flash', 'opacity', [[1179, 0], [1180, 0.7], [1185, 0]]);
 
-// Camera snap shake on the slam
-M.snap('#s7-cam', { at: 1230, from: { scale: 1.08 }, to: { scale: 1.0 }, firstFrameShare: 0.7, tail: 14 });
-M.drift('#s7-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 1250, end: 1440 });
-
-
-// ============================================================
-// BEAT 8: BEDSIDE GUIDANCE (1440 - 1665 frames = 48.0s - 55.5s)
-// "For the doctor at the bedside: what still works. What has stopped."
-// ============================================================
-M.cut(1440, { hide: ['#s7'], show: ['#s8'] });
-
-M.enter('.guidance-header', { at: 1440, frames: 12, ease: 'softLand', from: { y: -20, opacity: 0 } });
-M.enter('#card-works', { at: 1455, frames: 14, ease: 'softLand', from: { x: -60, opacity: 0 } });
-M.enter('#card-stopped', { at: 1475, frames: 14, ease: 'softLand', from: { x: 60, opacity: 0 } });
-
-// Cursor enters and clicks the "Select for Order" button on Meropenem
-M.show('#cursor', 1500, 1665);
-M.cursor('#cursor', {
-  keys: [
-    [1500, 1750, 920, 2.2, -18],
-    [1535, 1480, 480, 1.2, -6],
-    [1560, 1420, 430, 1.0, 0]
-  ],
-  ease: 'glide'
-});
-M.press('#cursor', '#select-btn', { at: 1570, cursorDepth: 0.8, targetDepth: 0.85, lag: 1, frames: 4 });
-M.drift('#s8-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 1440, end: 1665 });
+// Camera snap shake on slam
+M.snap('#s7-cam', { at: 1180, from: { scale: 1.08 }, to: { scale: 1.0 }, firstFrameShare: 0.75, tail: 14 });
+M.drift('#s7-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 1200, end: 1350 });
 
 
 // ============================================================
-// BEAT 9: INSTRUMENT, NOT REPORT (1665 - 1860 frames = 55.5s - 62.0s)
-// "Not a report of the past. An instrument for the next decision."
+// SCENE 8: BEDSIDE GUIDANCE (1350 - 1470 frames = 45.0s - 49.0s)
+// "At the bedside: knowing what still works. Protecting what remains." (f1358 - f1466)
 // ============================================================
-M.cut(1665, { hide: ['#s8'], show: ['#s9'] });
-
-M.enter('#past-sheet-recede', { at: 1665, frames: 14, ease: 'softLand', from: { x: -80, opacity: 0 } });
-M.enter('#live-instrument-advance', { at: 1675, frames: 16, ease: 'snapSettle', from: { scale: 0.88, opacity: 0 } });
-
-// The past report recedes further while the live instrument steps forward
-M.kf('#past-sheet-recede', 'opacity', [[1665, 0.7], [1780, 0.25], [1860, 0.05]]);
-M.kf('#past-sheet-recede', 'x', [[1665, 0], [1860, -180, 'accelExit']]);
-M.kf('#live-instrument-advance', 'scale', [[1675, 1.0], [1860, 1.06, 'glide']]);
+M.cut(1350, { hide: ['#s7'], show: ['#s8'] });
+M.enter('.guidance-header', { at: 1350, frames: 12, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.enter('#card-works', { at: 1360, frames: 14, ease: 'softLand', from: { x: -60, opacity: 0 } });
+M.enter('#card-stopped', { at: 1375, frames: 14, ease: 'softLand', from: { x: 60, opacity: 0 } });
+M.drift('#s8-cam', { prop: 'scale', from: 1.0, to: 1.03, start: 1350, end: 1470 });
 
 
 // ============================================================
-// BEAT 10: SIGNATURE CLOSE (1860 - 2058 frames = 62.0s - 68.6s)
-// "AEI Pulse. Tyks Laboratories. Surveillance, in real time."
+// SCENE 9: SIGNATURE BRAND CLOSE (1470 - 1800 frames = 49.0s - 60.0s)
+// "We are defending the shield that built the modern world. AEI Pulse. Tyks Laboratories." (f1480 - f1637)
 // ============================================================
-M.cut(1860, { hide: ['#s9'], show: ['#s10'] });
+M.cut(1470, { hide: ['#s8'], show: ['#s9'] });
 
-// Ward logo crashes in from 3.2x
-M.enter('#b10-mark', { at: 1860, frames: 20, ease: 'snapSettle', from: { scale: 3.2, opacity: 0 } });
+M.enter('.close-shield-svg', { at: 1470, frames: 18, ease: 'snapSettle', from: { scale: 2.8, opacity: 0 } });
+M.enter('.close-pre', { at: 1485, frames: 14, ease: 'softLand', from: { y: -20, opacity: 0 } });
+M.words('.close-brand', { at: 1500, gaps: [6], dist: 60, frames: 16, ease: 'softLand', accent: { color: '#1594ab', frames: 24 } });
+M.kf('#c-rule-bar', 'scaleX', [[1520, 0], [1565, 1.0, 'softLand']]);
+M.enter('.close-lab', { at: 1570, frames: 16, ease: 'softLand', from: { y: 20, opacity: 0 } });
+M.words('.close-tagline', { at: 1610, gaps: [5, 4, 4, 6], dist: 30, frames: 16, ease: 'softLand' });
 
-// "AEI Pulse" wordmark enters
-M.words('#b10-brand', { at: 1884, gaps: [6], dist: 60, frames: 16, ease: 'softLand', accent: { color: '#1594ab', frames: 24 } });
+// Subpixel camera drift until 1765 (58.83s)
+M.drift('#s9-cam', { prop: 'scale', from: 1.0, to: 0.985, start: 1470, end: 1765 });
 
-// Rule line extends smoothly
-M.kf('#b10-rule', 'scaleX', [[1895, 0], [1940, 1.0, 'softLand']]);
-
-// Subtitle and tagline reveal staggered through VO 10
-M.enter('#b10-lab', { at: 1950, frames: 16, ease: 'softLand', from: { y: 20, opacity: 0 } });
-M.words('#b10-tagline', { at: 1990, gaps: [5, 4, 4, 6], dist: 30, frames: 16, ease: 'softLand', accent: { color: '#ffffff', frames: 24 } });
-
-// Light sweep across rule line up to frame 2023 (67.43s)
-M.kf('#b10-rule-sweep', 'x', [[1960, 0], [2023, 440, 'softInOut']]);
-
-// Cinematic radial resolution pulse expanding from the logo (frames 2005 - 2023)
-M.kf('#b10-resolve-pulse', 'scale', [[2005, 0.1], [2023, 2.5, 'glide']]);
-M.kf('#b10-resolve-pulse', 'opacity', [[2005, 0], [2012, 0.8], [2023, 0]]);
-
-// Subpixel camera drift until 2023
-M.drift('#s10-cam', { prop: 'scale', from: 1.0, to: 0.98, start: 1860, end: 2023 });
-// From frame 2023 to 2058 (67.43s to 68.60s = 1.17s hold), pure stillness!
-// 1.17s is in the 0.6 - 1.4s window -> Gate G3 PASS!
+// From frame 1765 to 1800 (58.83s to 60.00s = 1.17s hold), pure stillness!
+// 1.17s resolved hold -> Gate G3 PASS!
 
 window.__ready = Motion.loaded().then(() => {
   if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 });

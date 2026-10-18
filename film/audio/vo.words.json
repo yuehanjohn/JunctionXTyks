@@ -1,0 +1,842 @@
+[
+ {
+  "word": "A",
+  "start": 0.044,
+  "end": 0.093,
+  "raw_start": 0.0,
+  "raw_end": 0.093
+ },
+ {
+  "word": "silent",
+  "start": 0.209,
+  "end": 0.615,
+  "raw_start": 0.209,
+  "raw_end": 0.615
+ },
+ {
+  "word": "pandemic",
+  "start": 0.662,
+  "end": 1.231,
+  "raw_start": 0.662,
+  "raw_end": 1.231
+ },
+ {
+  "word": "is",
+  "start": 1.277,
+  "end": 1.358,
+  "raw_start": 1.277,
+  "raw_end": 1.358
+ },
+ {
+  "word": "accelerating",
+  "start": 1.405,
+  "end": 2.067,
+  "raw_start": 1.405,
+  "raw_end": 2.067
+ },
+ {
+  "word": "through",
+  "start": 2.101,
+  "end": 2.299,
+  "raw_start": 2.101,
+  "raw_end": 2.299
+ },
+ {
+  "word": "modern",
+  "start": 2.334,
+  "end": 2.601,
+  "raw_start": 2.334,
+  "raw_end": 2.601
+ },
+ {
+  "word": "medicine.",
+  "start": 2.647,
+  "end": 3.059,
+  "raw_start": 2.647,
+  "raw_end": 3.181
+ },
+ {
+  "word": "Ten",
+  "start": 3.68,
+  "end": 3.901,
+  "raw_start": 3.622,
+  "raw_end": 3.901
+ },
+ {
+  "word": "million",
+  "start": 3.971,
+  "end": 4.272,
+  "raw_start": 3.971,
+  "raw_end": 4.272
+ },
+ {
+  "word": "lives",
+  "start": 4.331,
+  "end": 4.621,
+  "raw_start": 4.331,
+  "raw_end": 4.621
+ },
+ {
+  "word": "a",
+  "start": 4.656,
+  "end": 4.69,
+  "raw_start": 4.656,
+  "raw_end": 4.69
+ },
+ {
+  "word": "year.",
+  "start": 4.76,
+  "end": 5.053,
+  "raw_start": 4.76,
+  "raw_end": 5.155
+ },
+ {
+  "word": "The",
+  "start": 5.53,
+  "end": 5.596,
+  "raw_start": 5.48,
+  "raw_end": 5.596
+ },
+ {
+  "word": "miracle",
+  "start": 5.689,
+  "end": 6.084,
+  "raw_start": 5.689,
+  "raw_end": 6.084
+ },
+ {
+  "word": "drugs",
+  "start": 6.118,
+  "end": 6.409,
+  "raw_start": 6.118,
+  "raw_end": 6.409
+ },
+ {
+  "word": "of",
+  "start": 6.444,
+  "end": 6.502,
+  "raw_start": 6.444,
+  "raw_end": 6.502
+ },
+ {
+  "word": "our",
+  "start": 6.548,
+  "end": 6.653,
+  "raw_start": 6.548,
+  "raw_end": 6.653
+ },
+ {
+  "word": "century",
+  "start": 6.722,
+  "end": 7.047,
+  "raw_start": 6.722,
+  "raw_end": 7.047
+ },
+ {
+  "word": "are",
+  "start": 7.094,
+  "end": 7.198,
+  "raw_start": 7.094,
+  "raw_end": 7.198
+ },
+ {
+  "word": "failing.",
+  "start": 7.245,
+  "end": 7.655,
+  "raw_start": 7.245,
+  "raw_end": 7.732
+ },
+ {
+  "word": "For",
+  "start": 8.222,
+  "end": 8.348,
+  "raw_start": 8.173,
+  "raw_end": 8.348
+ },
+ {
+  "word": "a",
+  "start": 8.406,
+  "end": 8.44,
+  "raw_start": 8.406,
+  "raw_end": 8.44
+ },
+ {
+  "word": "hundred",
+  "start": 8.533,
+  "end": 8.824,
+  "raw_start": 8.533,
+  "raw_end": 8.824
+ },
+ {
+  "word": "years,",
+  "start": 8.87,
+  "end": 9.195,
+  "raw_start": 8.87,
+  "raw_end": 9.195
+ },
+ {
+  "word": "antibiotics",
+  "start": 9.23,
+  "end": 10.008,
+  "raw_start": 9.23,
+  "raw_end": 10.008
+ },
+ {
+  "word": "shielded",
+  "start": 10.054,
+  "end": 10.472,
+  "raw_start": 10.054,
+  "raw_end": 10.472
+ },
+ {
+  "word": "humanity's",
+  "start": 10.519,
+  "end": 11.053,
+  "raw_start": 10.519,
+  "raw_end": 11.053
+ },
+ {
+  "word": "greatest",
+  "start": 11.099,
+  "end": 11.424,
+  "raw_start": 11.099,
+  "raw_end": 11.424
+ },
+ {
+  "word": "leaps:",
+  "start": 11.482,
+  "end": 11.863,
+  "raw_start": 11.482,
+  "raw_end": 11.97
+ },
+ {
+  "word": "surgery,",
+  "start": 12.353,
+  "end": 12.97,
+  "raw_start": 12.353,
+  "raw_end": 13.05
+ },
+ {
+  "word": "chemotherapy,",
+  "start": 13.159,
+  "end": 14.028,
+  "raw_start": 13.119,
+  "raw_end": 14.153
+ },
+ {
+  "word": "childbirth.",
+  "start": 14.333,
+  "end": 14.944,
+  "raw_start": 14.327,
+  "raw_end": 15.07
+ },
+ {
+  "word": "Without",
+  "start": 15.514,
+  "end": 15.825,
+  "raw_start": 15.453,
+  "raw_end": 15.825
+ },
+ {
+  "word": "them,",
+  "start": 15.86,
+  "end": 16.105,
+  "raw_start": 15.86,
+  "raw_end": 16.173
+ },
+ {
+  "word": "the",
+  "start": 16.536,
+  "end": 16.603,
+  "raw_start": 16.498,
+  "raw_end": 16.603
+ },
+ {
+  "word": "shield",
+  "start": 16.661,
+  "end": 16.939,
+  "raw_start": 16.661,
+  "raw_end": 16.939
+ },
+ {
+  "word": "breaks.",
+  "start": 16.986,
+  "end": 17.474,
+  "raw_start": 16.986,
+  "raw_end": 17.555
+ },
+ {
+  "word": "And",
+  "start": 17.94,
+  "end": 18.031,
+  "raw_start": 17.88,
+  "raw_end": 18.031
+ },
+ {
+  "word": "hospitals",
+  "start": 18.112,
+  "end": 18.576,
+  "raw_start": 18.112,
+  "raw_end": 18.576
+ },
+ {
+  "word": "still",
+  "start": 18.623,
+  "end": 18.855,
+  "raw_start": 18.623,
+  "raw_end": 18.855
+ },
+ {
+  "word": "fight",
+  "start": 18.913,
+  "end": 19.122,
+  "raw_start": 18.913,
+  "raw_end": 19.122
+ },
+ {
+  "word": "back",
+  "start": 19.168,
+  "end": 19.377,
+  "raw_start": 19.168,
+  "raw_end": 19.377
+ },
+ {
+  "word": "with",
+  "start": 19.424,
+  "end": 19.552,
+  "raw_start": 19.424,
+  "raw_end": 19.552
+ },
+ {
+  "word": "annual",
+  "start": 19.598,
+  "end": 19.853,
+  "raw_start": 19.598,
+  "raw_end": 19.853
+ },
+ {
+  "word": "PDF",
+  "start": 19.911,
+  "end": 20.26,
+  "raw_start": 19.911,
+  "raw_end": 20.26
+ },
+ {
+  "word": "reports.",
+  "start": 20.318,
+  "end": 20.751,
+  "raw_start": 20.318,
+  "raw_end": 20.887
+ },
+ {
+  "word": "An",
+  "start": 21.252,
+  "end": 21.34,
+  "raw_start": 21.212,
+  "raw_end": 21.34
+ },
+ {
+  "word": "infection",
+  "start": 21.398,
+  "end": 21.885,
+  "raw_start": 21.398,
+  "raw_end": 21.885
+ },
+ {
+  "word": "does",
+  "start": 21.943,
+  "end": 22.094,
+  "raw_start": 21.943,
+  "raw_end": 22.094
+ },
+ {
+  "word": "not",
+  "start": 22.21,
+  "end": 22.408,
+  "raw_start": 22.21,
+  "raw_end": 22.408
+ },
+ {
+  "word": "wait",
+  "start": 22.466,
+  "end": 22.605,
+  "raw_start": 22.466,
+  "raw_end": 22.605
+ },
+ {
+  "word": "a",
+  "start": 22.64,
+  "end": 22.675,
+  "raw_start": 22.64,
+  "raw_end": 22.675
+ },
+ {
+  "word": "year.",
+  "start": 22.721,
+  "end": 22.995,
+  "raw_start": 22.721,
+  "raw_end": 23.127
+ },
+ {
+  "word": "This",
+  "start": 23.505,
+  "end": 23.638,
+  "raw_start": 23.453,
+  "raw_end": 23.638
+ },
+ {
+  "word": "is",
+  "start": 23.696,
+  "end": 23.812,
+  "raw_start": 23.696,
+  "raw_end": 23.812
+ },
+ {
+  "word": "AEI",
+  "start": 23.905,
+  "end": 24.532,
+  "raw_start": 23.905,
+  "raw_end": 24.532
+ },
+ {
+  "word": "Pulse.",
+  "start": 24.625,
+  "end": 25.098,
+  "raw_start": 24.625,
+  "raw_end": 25.194
+ },
+ {
+  "word": "A",
+  "start": 25.562,
+  "end": 25.6,
+  "raw_start": 25.519,
+  "raw_end": 25.6
+ },
+ {
+  "word": "living",
+  "start": 25.751,
+  "end": 26.1,
+  "raw_start": 25.751,
+  "raw_end": 26.1
+ },
+ {
+  "word": "surveillance",
+  "start": 26.251,
+  "end": 26.819,
+  "raw_start": 26.251,
+  "raw_end": 26.819
+ },
+ {
+  "word": "radar.",
+  "start": 26.866,
+  "end": 27.253,
+  "raw_start": 26.866,
+  "raw_end": 27.4
+ },
+ {
+  "word": "1,212",
+  "start": 27.841,
+  "end": 29.188,
+  "raw_start": 27.841,
+  "raw_end": 29.188
+ },
+ {
+  "word": "acute",
+  "start": 29.211,
+  "end": 29.513,
+  "raw_start": 29.211,
+  "raw_end": 29.513
+ },
+ {
+  "word": "isolates,",
+  "start": 29.559,
+  "end": 30.099,
+  "raw_start": 29.559,
+  "raw_end": 30.186
+ },
+ {
+  "word": "tracked",
+  "start": 30.269,
+  "end": 30.593,
+  "raw_start": 30.256,
+  "raw_end": 30.593
+ },
+ {
+  "word": "in",
+  "start": 30.627,
+  "end": 30.686,
+  "raw_start": 30.627,
+  "raw_end": 30.686
+ },
+ {
+  "word": "real",
+  "start": 30.744,
+  "end": 30.929,
+  "raw_start": 30.744,
+  "raw_end": 30.929
+ },
+ {
+  "word": "time.",
+  "start": 30.987,
+  "end": 31.289,
+  "raw_start": 30.987,
+  "raw_end": 31.394
+ },
+ {
+  "word": "A",
+  "start": 31.812,
+  "end": 31.858,
+  "raw_start": 31.777,
+  "raw_end": 31.858
+ },
+ {
+  "word": "28-day",
+  "start": 31.974,
+  "end": 32.567,
+  "raw_start": 31.974,
+  "raw_end": 32.567
+ },
+ {
+  "word": "rolling",
+  "start": 32.636,
+  "end": 32.915,
+  "raw_start": 32.636,
+  "raw_end": 32.915
+ },
+ {
+  "word": "window",
+  "start": 32.973,
+  "end": 33.263,
+  "raw_start": 32.973,
+  "raw_end": 33.263
+ },
+ {
+  "word": "sweeping",
+  "start": 33.333,
+  "end": 33.693,
+  "raw_start": 33.333,
+  "raw_end": 33.693
+ },
+ {
+  "word": "every",
+  "start": 33.762,
+  "end": 33.971,
+  "raw_start": 33.762,
+  "raw_end": 33.971
+ },
+ {
+  "word": "ward,",
+  "start": 34.029,
+  "end": 34.417,
+  "raw_start": 34.029,
+  "raw_end": 34.517
+ },
+ {
+  "word": "every",
+  "start": 34.733,
+  "end": 34.981,
+  "raw_start": 34.726,
+  "raw_end": 34.981
+ },
+ {
+  "word": "organism,",
+  "start": 35.04,
+  "end": 35.64,
+  "raw_start": 35.04,
+  "raw_end": 35.736
+ },
+ {
+  "word": "every",
+  "start": 35.892,
+  "end": 36.131,
+  "raw_start": 35.887,
+  "raw_end": 36.131
+ },
+ {
+  "word": "antibiotic.",
+  "start": 36.189,
+  "end": 36.902,
+  "raw_start": 36.189,
+  "raw_end": 37.048
+ },
+ {
+  "word": "When",
+  "start": 37.55,
+  "end": 37.663,
+  "raw_start": 37.489,
+  "raw_end": 37.663
+ },
+ {
+  "word": "a",
+  "start": 37.698,
+  "end": 37.721,
+  "raw_start": 37.698,
+  "raw_end": 37.721
+ },
+ {
+  "word": "resistant",
+  "start": 37.779,
+  "end": 38.209,
+  "raw_start": 37.779,
+  "raw_end": 38.209
+ },
+ {
+  "word": "clone",
+  "start": 38.244,
+  "end": 38.523,
+  "raw_start": 38.244,
+  "raw_end": 38.523
+ },
+ {
+  "word": "surges,",
+  "start": 38.557,
+  "end": 39.065,
+  "raw_start": 38.557,
+  "raw_end": 39.161
+ },
+ {
+  "word": "Pulse",
+  "start": 39.355,
+  "end": 39.637,
+  "raw_start": 39.312,
+  "raw_end": 39.637
+ },
+ {
+  "word": "catches",
+  "start": 39.684,
+  "end": 40.055,
+  "raw_start": 39.684,
+  "raw_end": 40.055
+ },
+ {
+  "word": "it.",
+  "start": 40.113,
+  "end": 40.177,
+  "raw_start": 40.113,
+  "raw_end": 40.31
+ },
+ {
+  "word": "Z-score",
+  "start": 40.694,
+  "end": 41.262,
+  "raw_start": 40.694,
+  "raw_end": 41.262
+ },
+ {
+  "word": "minus",
+  "start": 41.297,
+  "end": 41.53,
+  "raw_start": 41.297,
+  "raw_end": 41.53
+ },
+ {
+  "word": "5.8:",
+  "start": 41.611,
+  "end": 42.235,
+  "raw_start": 41.611,
+  "raw_end": 42.389
+ },
+ {
+  "word": "intercepted",
+  "start": 42.717,
+  "end": 43.329,
+  "raw_start": 42.714,
+  "raw_end": 43.329
+ },
+ {
+  "word": "before",
+  "start": 43.375,
+  "end": 43.631,
+  "raw_start": 43.375,
+  "raw_end": 43.631
+ },
+ {
+  "word": "the",
+  "start": 43.654,
+  "end": 43.724,
+  "raw_start": 43.654,
+  "raw_end": 43.724
+ },
+ {
+  "word": "outbreak",
+  "start": 43.77,
+  "end": 44.142,
+  "raw_start": 43.77,
+  "raw_end": 44.142
+ },
+ {
+  "word": "spreads.",
+  "start": 44.188,
+  "end": 44.679,
+  "raw_start": 44.188,
+  "raw_end": 44.815
+ },
+ {
+  "word": "At",
+  "start": 45.272,
+  "end": 45.384,
+  "raw_start": 45.256,
+  "raw_end": 45.384
+ },
+ {
+  "word": "the",
+  "start": 45.419,
+  "end": 45.488,
+  "raw_start": 45.419,
+  "raw_end": 45.488
+ },
+ {
+  "word": "bedside:",
+  "start": 45.547,
+  "end": 46.081,
+  "raw_start": 45.547,
+  "raw_end": 46.081
+ },
+ {
+  "word": "knowing",
+  "start": 46.104,
+  "end": 46.348,
+  "raw_start": 46.104,
+  "raw_end": 46.348
+ },
+ {
+  "word": "what",
+  "start": 46.382,
+  "end": 46.499,
+  "raw_start": 46.382,
+  "raw_end": 46.499
+ },
+ {
+  "word": "still",
+  "start": 46.533,
+  "end": 46.743,
+  "raw_start": 46.533,
+  "raw_end": 46.743
+ },
+ {
+  "word": "works.",
+  "start": 46.801,
+  "end": 47.227,
+  "raw_start": 46.801,
+  "raw_end": 47.288
+ },
+ {
+  "word": "Protecting",
+  "start": 47.651,
+  "end": 48.113,
+  "raw_start": 47.614,
+  "raw_end": 48.113
+ },
+ {
+  "word": "what",
+  "start": 48.171,
+  "end": 48.287,
+  "raw_start": 48.171,
+  "raw_end": 48.287
+ },
+ {
+  "word": "remains.",
+  "start": 48.357,
+  "end": 48.853,
+  "raw_start": 48.357,
+  "raw_end": 48.972
+ },
+ {
+  "word": "We",
+  "start": 49.344,
+  "end": 49.413,
+  "raw_start": 49.297,
+  "raw_end": 49.413
+ },
+ {
+  "word": "are",
+  "start": 49.448,
+  "end": 49.541,
+  "raw_start": 49.448,
+  "raw_end": 49.541
+ },
+ {
+  "word": "defending",
+  "start": 49.576,
+  "end": 49.982,
+  "raw_start": 49.576,
+  "raw_end": 49.982
+ },
+ {
+  "word": "the",
+  "start": 50.04,
+  "end": 50.11,
+  "raw_start": 50.04,
+  "raw_end": 50.11
+ },
+ {
+  "word": "shield",
+  "start": 50.168,
+  "end": 50.47,
+  "raw_start": 50.168,
+  "raw_end": 50.47
+ },
+ {
+  "word": "that",
+  "start": 50.504,
+  "end": 50.621,
+  "raw_start": 50.504,
+  "raw_end": 50.621
+ },
+ {
+  "word": "built",
+  "start": 50.655,
+  "end": 50.83,
+  "raw_start": 50.655,
+  "raw_end": 50.83
+ },
+ {
+  "word": "the",
+  "start": 50.864,
+  "end": 50.934,
+  "raw_start": 50.864,
+  "raw_end": 50.934
+ },
+ {
+  "word": "modern",
+  "start": 50.98,
+  "end": 51.236,
+  "raw_start": 50.98,
+  "raw_end": 51.236
+ },
+ {
+  "word": "world.",
+  "start": 51.271,
+  "end": 51.559,
+  "raw_start": 51.271,
+  "raw_end": 51.654
+ },
+ {
+  "word": "AEI",
+  "start": 52.098,
+  "end": 52.525,
+  "raw_start": 52.095,
+  "raw_end": 52.525
+ },
+ {
+  "word": "Pulse.",
+  "start": 52.641,
+  "end": 53.065,
+  "raw_start": 52.641,
+  "raw_end": 53.093
+ },
+ {
+  "word": "Tyks",
+  "start": 53.565,
+  "end": 53.883,
+  "raw_start": 53.535,
+  "raw_end": 53.883
+ },
+ {
+  "word": "Laboratories.",
+  "start": 53.929,
+  "end": 54.559,
+  "raw_start": 53.929,
+  "raw_end": 54.939
+ }
+]

@@ -1,10 +1,10 @@
-Every year, the laboratory looks back.
-Twelve months of resistance, condensed into one report.
-But an infection does not wait a year.
-This is AEI Pulse.
-A rolling, real-time window on antimicrobial resistance. Updated every day.
-Every ward. Every organism. Every antibiotic. Susceptible, or resistant.
-When a signal drifts from its baseline, Pulse raises the alert. Early, while the outcome can still change.
-For the doctor at the bedside: what still works. What has stopped.
-Not a report of the past. An instrument for the next decision.
-AEI Pulse. Tyks Laboratories. Surveillance, in real time.
+A silent pandemic is accelerating through modern medicine.
+Ten million lives a year. The miracle drugs of our century are failing.
+For a hundred years, antibiotics shielded humanity's greatest leaps: surgery, chemotherapy, childbirth.
+Without them, the shield breaks. And hospitals still fight back with annual PDF reports.
+An infection does not wait a year. This is AEI Pulse.
+A living surveillance radar. 1,212 acute isolates, tracked in real time.
+A 28-day rolling window sweeping every ward, every organism, every antibiotic.
+When a resistant clone surges, Pulse catches it. Z-score minus 5.8: intercepted before the outbreak spreads.
+At the bedside: knowing what still works. Protecting what remains.
+We are defending the shield that built the modern world. AEI Pulse. Tyks Laboratories.

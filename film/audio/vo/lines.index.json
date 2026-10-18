@@ -1,0 +1,92 @@
+[
+ {
+  "i": 1,
+  "text": "A silent pandemic is accelerating through modern medicine.",
+  "clip": "film/audio/vo/line01.wav",
+  "dur": 3.075,
+  "lead": 0.03,
+  "start": 0.044,
+  "end": 3.059
+ },
+ {
+  "i": 2,
+  "text": "Ten million lives a year. The miracle drugs of our century are failing.",
+  "clip": "film/audio/vo/line02.wav",
+  "dur": 4.035,
+  "lead": 0.03,
+  "start": 3.68,
+  "end": 7.655
+ },
+ {
+  "i": 3,
+  "text": "For a hundred years, antibiotics shielded humanity's greatest leaps: surgery, chemotherapy, childbirth.",
+  "clip": "film/audio/vo/line03.wav",
+  "dur": 6.782,
+  "lead": 0.03,
+  "start": 8.222,
+  "end": 14.944
+ },
+ {
+  "i": 4,
+  "text": "Without them, the shield breaks. And hospitals still fight back with annual PDF reports.",
+  "clip": "film/audio/vo/line04.wav",
+  "dur": 5.297,
+  "lead": 0.03,
+  "start": 15.514,
+  "end": 20.751
+ },
+ {
+  "i": 5,
+  "text": "An infection does not wait a year. This is AEI Pulse.",
+  "clip": "film/audio/vo/line05.wav",
+  "dur": 3.906,
+  "lead": 0.03,
+  "start": 21.252,
+  "end": 25.098
+ },
+ {
+  "i": 6,
+  "text": "A living surveillance radar. 1,212 acute isolates, tracked in real time.",
+  "clip": "film/audio/vo/line06.wav",
+  "dur": 5.787,
+  "lead": 0.03,
+  "start": 25.562,
+  "end": 31.289
+ },
+ {
+  "i": 7,
+  "text": "A 28-day rolling window sweeping every ward, every organism, every antibiotic.",
+  "clip": "film/audio/vo/line07.wav",
+  "dur": 5.15,
+  "lead": 0.03,
+  "start": 31.812,
+  "end": 36.902
+ },
+ {
+  "i": 8,
+  "text": "When a resistant clone surges, Pulse catches it. Z-score minus 5.8: intercepted before the outbreak spreads.",
+  "clip": "film/audio/vo/line08.wav",
+  "dur": 7.189,
+  "lead": 0.03,
+  "start": 37.55,
+  "end": 44.679
+ },
+ {
+  "i": 9,
+  "text": "At the bedside: knowing what still works. Protecting what remains.",
+  "clip": "film/audio/vo/line09.wav",
+  "dur": 3.641,
+  "lead": 0.03,
+  "start": 45.272,
+  "end": 48.853
+ },
+ {
+  "i": 10,
+  "text": "We are defending the shield that built the modern world. AEI Pulse. Tyks Laboratories.",
+  "clip": "film/audio/vo/line10.wav",
+  "dur": 5.275,
+  "lead": 0.03,
+  "start": 49.344,
+  "end": 54.559
+ }
+]

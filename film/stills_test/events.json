@@ -1,1 +1,584 @@
-[]
+[
+ {
+  "t": 0,
+  "frame": 0,
+  "type": "show",
+  "label": "#s1"
+ },
+ {
+  "t": 0.2,
+  "frame": 6,
+  "type": "enter",
+  "label": "#sheet-21"
+ },
+ {
+  "t": 0.6,
+  "frame": 18,
+  "type": "enter",
+  "label": "#sheet-22"
+ },
+ {
+  "t": 0.8,
+  "frame": 24,
+  "type": "enter",
+  "label": "Every"
+ },
+ {
+  "t": 0.8,
+  "frame": 24,
+  "type": "word",
+  "label": "Every"
+ },
+ {
+  "t": 0.9667,
+  "frame": 29,
+  "type": "enter",
+  "label": "year,"
+ },
+ {
+  "t": 0.9667,
+  "frame": 29,
+  "type": "word",
+  "label": "year,"
+ },
+ {
+  "t": 1,
+  "frame": 30,
+  "type": "enter",
+  "label": "#sheet-23"
+ },
+ {
+  "t": 1.1,
+  "frame": 33,
+  "type": "enter",
+  "label": "the"
+ },
+ {
+  "t": 1.1,
+  "frame": 33,
+  "type": "word",
+  "label": "the"
+ },
+ {
+  "t": 1.2667,
+  "frame": 38,
+  "type": "enter",
+  "label": "laboratory"
+ },
+ {
+  "t": 1.2667,
+  "frame": 38,
+  "type": "word",
+  "label": "laboratory"
+ },
+ {
+  "t": 1.4,
+  "frame": 42,
+  "type": "enter",
+  "label": "#sheet-24"
+ },
+ {
+  "t": 1.4,
+  "frame": 42,
+  "type": "enter",
+  "label": "looks"
+ },
+ {
+  "t": 1.4,
+  "frame": 42,
+  "type": "word",
+  "label": "looks"
+ },
+ {
+  "t": 1.6,
+  "frame": 48,
+  "type": "enter",
+  "label": "back."
+ },
+ {
+  "t": 1.6,
+  "frame": 48,
+  "type": "word",
+  "label": "back."
+ },
+ {
+  "t": 2.2667,
+  "frame": 68,
+  "type": "enter",
+  "label": "#sheet-24-stamp"
+ },
+ {
+  "t": 5,
+  "frame": 150,
+  "type": "cut",
+  "label": "hide #s1 show #s2"
+ },
+ {
+  "t": 5,
+  "frame": 150,
+  "type": "enter",
+  "label": "#s2-sheet"
+ },
+ {
+  "t": 5.5,
+  "frame": 165,
+  "type": "enter",
+  "label": "Twelve"
+ },
+ {
+  "t": 5.5,
+  "frame": 165,
+  "type": "word",
+  "label": "Twelve"
+ },
+ {
+  "t": 5.6333,
+  "frame": 169,
+  "type": "enter",
+  "label": "months"
+ },
+ {
+  "t": 5.6333,
+  "frame": 169,
+  "type": "word",
+  "label": "months"
+ },
+ {
+  "t": 5.7667,
+  "frame": 173,
+  "type": "enter",
+  "label": "of"
+ },
+ {
+  "t": 5.7667,
+  "frame": 173,
+  "type": "word",
+  "label": "of"
+ },
+ {
+  "t": 5.9,
+  "frame": 177,
+  "type": "enter",
+  "label": "resistance,"
+ },
+ {
+  "t": 5.9,
+  "frame": 177,
+  "type": "word",
+  "label": "resistance,"
+ },
+ {
+  "t": 6.0333,
+  "frame": 181,
+  "type": "enter",
+  "label": "condensed"
+ },
+ {
+  "t": 6.0333,
+  "frame": 181,
+  "type": "word",
+  "label": "condensed"
+ },
+ {
+  "t": 6.2,
+  "frame": 186,
+  "type": "enter",
+  "label": "into"
+ },
+ {
+  "t": 6.2,
+  "frame": 186,
+  "type": "word",
+  "label": "into"
+ },
+ {
+  "t": 6.3333,
+  "frame": 190,
+  "type": "enter",
+  "label": "one"
+ },
+ {
+  "t": 6.3333,
+  "frame": 190,
+  "type": "word",
+  "label": "one"
+ },
+ {
+  "t": 6.5333,
+  "frame": 196,
+  "type": "enter",
+  "label": "report."
+ },
+ {
+  "t": 6.5333,
+  "frame": 196,
+  "type": "word",
+  "label": "report."
+ },
+ {
+  "t": 11,
+  "frame": 330,
+  "type": "cut",
+  "label": "hide #s2 show #s3"
+ },
+ {
+  "t": 11.6667,
+  "frame": 350,
+  "type": "enter",
+  "label": "But"
+ },
+ {
+  "t": 11.6667,
+  "frame": 350,
+  "type": "word",
+  "label": "But"
+ },
+ {
+  "t": 11.8,
+  "frame": 354,
+  "type": "enter",
+  "label": "an"
+ },
+ {
+  "t": 11.8,
+  "frame": 354,
+  "type": "word",
+  "label": "an"
+ },
+ {
+  "t": 11.9333,
+  "frame": 358,
+  "type": "enter",
+  "label": "infection"
+ },
+ {
+  "t": 11.9333,
+  "frame": 358,
+  "type": "word",
+  "label": "infection"
+ },
+ {
+  "t": 12,
+  "frame": 360,
+  "type": "enter",
+  "label": "#stinger"
+ },
+ {
+  "t": 12.1,
+  "frame": 363,
+  "type": "enter",
+  "label": "does"
+ },
+ {
+  "t": 12.1,
+  "frame": 363,
+  "type": "word",
+  "label": "does"
+ },
+ {
+  "t": 12.2333,
+  "frame": 367,
+  "type": "enter",
+  "label": "not"
+ },
+ {
+  "t": 12.2333,
+  "frame": 367,
+  "type": "word",
+  "label": "not"
+ },
+ {
+  "t": 12.4,
+  "frame": 372,
+  "type": "enter",
+  "label": "wait"
+ },
+ {
+  "t": 12.4,
+  "frame": 372,
+  "type": "word",
+  "label": "wait"
+ },
+ {
+  "t": 12.5333,
+  "frame": 376,
+  "type": "enter",
+  "label": "a"
+ },
+ {
+  "t": 12.5333,
+  "frame": 376,
+  "type": "word",
+  "label": "a"
+ },
+ {
+  "t": 12.7667,
+  "frame": 383,
+  "type": "enter",
+  "label": "year."
+ },
+ {
+  "t": 12.7667,
+  "frame": 383,
+  "type": "word",
+  "label": "year."
+ },
+ {
+  "t": 16,
+  "frame": 480,
+  "type": "cut",
+  "label": "hide #s3 show #s4"
+ },
+ {
+  "t": 16,
+  "frame": 480,
+  "type": "enter",
+  "label": "#b4-frame"
+ },
+ {
+  "t": 16.8,
+  "frame": 504,
+  "type": "enter",
+  "label": "AEI"
+ },
+ {
+  "t": 16.8,
+  "frame": 504,
+  "type": "word",
+  "label": "AEI"
+ },
+ {
+  "t": 16.9333,
+  "frame": 508,
+  "type": "enter",
+  "label": "Pulse"
+ },
+ {
+  "t": 16.9333,
+  "frame": 508,
+  "type": "word",
+  "label": "Pulse"
+ },
+ {
+  "t": 17.6667,
+  "frame": 530,
+  "type": "enter",
+  "label": "#b4-tagline"
+ },
+ {
+  "t": 20,
+  "frame": 600,
+  "type": "cut",
+  "label": "hide #s4 show #s5"
+ },
+ {
+  "t": 20,
+  "frame": 600,
+  "type": "enter",
+  "label": ".kpi-row"
+ },
+ {
+  "t": 20.3333,
+  "frame": 610,
+  "type": "count",
+  "label": "start 840"
+ },
+ {
+  "t": 20.4667,
+  "frame": 614,
+  "type": "enter",
+  "label": ".chart-panel"
+ },
+ {
+  "t": 21.4,
+  "frame": 642,
+  "type": "count",
+  "label": "land 1212"
+ },
+ {
+  "t": 28,
+  "frame": 840,
+  "type": "cut",
+  "label": "hide #s5 show #s6"
+ },
+ {
+  "t": 28,
+  "frame": 840,
+  "type": "enter",
+  "label": ".b6-header"
+ },
+ {
+  "t": 28.4,
+  "frame": 852,
+  "type": "enter",
+  "label": ".lattice-table"
+ },
+ {
+  "t": 38,
+  "frame": 1140,
+  "type": "cut",
+  "label": "hide #s6 show #s7"
+ },
+ {
+  "t": 38,
+  "frame": 1140,
+  "type": "enter",
+  "label": ".b7-macro-chart"
+ },
+ {
+  "t": 41,
+  "frame": 1230,
+  "type": "enter",
+  "label": "#b7-alert-card"
+ },
+ {
+  "t": 41,
+  "frame": 1230,
+  "type": "snap",
+  "label": "#s7-cam"
+ },
+ {
+  "t": 48,
+  "frame": 1440,
+  "type": "cut",
+  "label": "hide #s7 show #s8"
+ },
+ {
+  "t": 48,
+  "frame": 1440,
+  "type": "enter",
+  "label": ".guidance-header"
+ },
+ {
+  "t": 48.5,
+  "frame": 1455,
+  "type": "enter",
+  "label": "#card-works"
+ },
+ {
+  "t": 49.1667,
+  "frame": 1475,
+  "type": "enter",
+  "label": "#card-stopped"
+ },
+ {
+  "t": 50,
+  "frame": 1500,
+  "type": "show",
+  "label": "#cursor"
+ },
+ {
+  "t": 52.3333,
+  "frame": 1570,
+  "type": "press",
+  "label": "#select-btn"
+ },
+ {
+  "t": 55.5,
+  "frame": 1665,
+  "type": "cut",
+  "label": "hide #s8 show #s9"
+ },
+ {
+  "t": 55.5,
+  "frame": 1665,
+  "type": "enter",
+  "label": "#past-sheet-recede"
+ },
+ {
+  "t": 55.8333,
+  "frame": 1675,
+  "type": "enter",
+  "label": "#live-instrument-advance"
+ },
+ {
+  "t": 62,
+  "frame": 1860,
+  "type": "cut",
+  "label": "hide #s9 show #s10"
+ },
+ {
+  "t": 62,
+  "frame": 1860,
+  "type": "enter",
+  "label": "#b10-mark"
+ },
+ {
+  "t": 62.8,
+  "frame": 1884,
+  "type": "enter",
+  "label": "AEI"
+ },
+ {
+  "t": 62.8,
+  "frame": 1884,
+  "type": "word",
+  "label": "AEI"
+ },
+ {
+  "t": 63,
+  "frame": 1890,
+  "type": "enter",
+  "label": "Pulse"
+ },
+ {
+  "t": 63,
+  "frame": 1890,
+  "type": "word",
+  "label": "Pulse"
+ },
+ {
+  "t": 65,
+  "frame": 1950,
+  "type": "enter",
+  "label": "#b10-lab"
+ },
+ {
+  "t": 66.3333,
+  "frame": 1990,
+  "type": "enter",
+  "label": "Surveillance,"
+ },
+ {
+  "t": 66.3333,
+  "frame": 1990,
+  "type": "word",
+  "label": "Surveillance,"
+ },
+ {
+  "t": 66.5,
+  "frame": 1995,
+  "type": "enter",
+  "label": "in"
+ },
+ {
+  "t": 66.5,
+  "frame": 1995,
+  "type": "word",
+  "label": "in"
+ },
+ {
+  "t": 66.6333,
+  "frame": 1999,
+  "type": "enter",
+  "label": "real"
+ },
+ {
+  "t": 66.6333,
+  "frame": 1999,
+  "type": "word",
+  "label": "real"
+ },
+ {
+  "t": 66.7667,
+  "frame": 2003,
+  "type": "enter",
+  "label": "time."
+ },
+ {
+  "t": 66.7667,
+  "frame": 2003,
+  "type": "word",
+  "label": "time."
+ }
+]
