@@ -1,0 +1,11 @@
+soundtrack.mp3 110.201905
+film/vo/01.mp3 2.739955
+film/vo/02.mp3 3.854512
+film/vo/03.mp3 2.275556
+film/vo/04.mp3 1.578957
+film/vo/05.mp3 5.944308
+film/vo/06.mp3 7.337506
+film/vo/07.mp3 7.709025
+film/vo/08.mp3 5.247710
+film/vo/09.mp3 4.597551
+film/vo/10.mp3 4.922630

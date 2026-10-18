@@ -17,8 +17,11 @@ import { Prisma } from "@prisma/client";
 
 import { db } from "./db";
 import {
+  AGE_BANDS,
+  ageBandToBirthYearRange,
   AntibiogramResponse,
   BASELINE_DAYS,
+  FILTER_ALL,
   MetaResponse,
   MIN_ISOLATES,
   OrganismRow,
@@ -34,7 +37,8 @@ import {
 export { BASELINE_DAYS, MIN_ISOLATES, ROLLING_DAYS };
 
 const DAY_MS = 86_400_000;
-const Z95 = 1.959963984540054;
+/** Two-sided 95% normal deviate (Wilson CIs, funnel 95% limits). */
+export const Z95 = 1.959963984540054;
 const TREND_MONTHS = 24;
 
 /** Sentinel ward value meaning "no ward filter" (hospital-wide). */
@@ -42,10 +46,13 @@ export const ALL_WARDS = "All wards";
 
 // ── Math helpers ─────────────────────────────────────────────────────
 
-const round1 = (x: number) => Math.round(x * 10) / 10;
+/** Round to one decimal (all reported percentages use 0.1 pp resolution). */
+export function round1(x: number): number {
+  return Math.round(x * 10) / 10;
+}
 
 /** Wilson score 95% CI on a binomial proportion, in percent. */
-function wilsonPct(successes: number, n: number): { lo: number; hi: number } {
+export function wilsonPct(successes: number, n: number): { lo: number; hi: number } {
   if (n === 0) return { lo: 0, hi: 0 };
   const p = successes / n;
   const z2 = Z95 * Z95;
@@ -56,7 +63,7 @@ function wilsonPct(successes: number, n: number): { lo: number; hi: number } {
 }
 
 /** Pooled two-proportion z-test: x1/n1 (window) vs x2/n2 (baseline). */
-function twoProportionZ(x1: number, n1: number, x2: number, n2: number): number {
+export function twoProportionZ(x1: number, n1: number, x2: number, n2: number): number {
   if (n1 === 0 || n2 === 0) return 0;
   const pooled = (x1 + x2) / (n1 + n2);
   const se = Math.sqrt(pooled * (1 - pooled) * (1 / n1 + 1 / n2));
@@ -71,57 +78,92 @@ export interface WindowRange {
   end: Date;
 }
 
-/** Resolve a window key to [start, end], anchored at the latest culture in the data. */
-export function windowRange(window: WindowKey, dataMax: Date | null): WindowRange {
-  const end = dataMax ?? new Date();
+/** Resolve a window key to [start, end], anchored at the latest culture in the data.
+ *  `asOf` (historical replay) clamps the anchor into the past: every window is
+ *  computed as if "now" were that instant. */
+export function windowRange(
+  window: WindowKey,
+  dataMax: Date | null,
+  asOf?: string | null,
+): WindowRange {
+  let end = dataMax ?? new Date();
+  if (asOf) {
+    const t = new Date(asOf);
+    if (!Number.isNaN(t.getTime()) && t.getTime() < end.getTime()) end = t;
+  }
   if (window === "4w") return { start: new Date(end.getTime() - ROLLING_DAYS * DAY_MS), end };
   // "1y": current calendar year (UTC) of the latest data.
   return { start: new Date(Date.UTC(end.getUTCFullYear(), 0, 1)), end };
 }
 
-function cultureWhere(ward?: string, sampleType?: string | null): Prisma.CultureWhereInput {
+function cultureWhere(
+  ward?: string,
+  sampleType?: string | null,
+  patient?: Prisma.PatientWhereInput,
+): Prisma.CultureWhereInput {
   const w = ward && ward !== ALL_WARDS ? ward : undefined;
   return {
     ...(w ? { ward: w } : {}),
     ...(sampleType ? { sampleType } : {}),
+    ...(patient ? { patient } : {}),
+  };
+}
+
+/** Patient demographics filter (sex + birth-year band) resolved against `refYear`
+ *  — age is approximated as refYear − birthYear, the dataset carries no birth dates. */
+function patientWhere(
+  sex?: string | null,
+  ageBandId?: string | null,
+  refYear?: number,
+): Prisma.PatientWhereInput | undefined {
+  const band = AGE_BANDS.find((b) => b.id === ageBandId);
+  const s = sex && sex !== FILTER_ALL ? sex : undefined;
+  if (!s && !band) return undefined;
+  return {
+    ...(s ? { sex: s } : {}),
+    ...(band && refYear !== undefined
+      ? { birthYear: ageBandToBirthYearRange(band, refYear) }
+      : {}),
   };
 }
 
 // ── Row fetchers (pull minimal joined rows, aggregate in JS) ─────────
 
-interface IsoRec {
+export interface IsoRec {
   id: string;
   organism: string;
   patientId: string;
   ward: string;
+  sampleType: string;
   takenAt: Date;
 }
 
-interface SusRec {
+export interface SusRec {
   isolateId: string;
   organism: string;
   antibiotic: string;
   result: string;
 }
 
-async function fetchIsolates(
+export async function fetchIsolates(
   start: Date,
   end: Date,
   endExclusive: boolean,
   ward?: string,
   sampleType?: string | null,
+  patient?: Prisma.PatientWhereInput,
 ): Promise<IsoRec[]> {
   const rows = await db.isolate.findMany({
     where: {
       culture: {
-        ...cultureWhere(ward, sampleType),
+        ...cultureWhere(ward, sampleType, patient),
         takenAt: endExclusive ? { gte: start, lt: end } : { gte: start, lte: end },
       },
     },
     select: {
       id: true,
       organism: true,
-      culture: { select: { patientId: true, ward: true, takenAt: true } },
+      culture: { select: { patientId: true, ward: true, sampleType: true, takenAt: true } },
     },
   });
   return rows.map((r) => ({
@@ -129,22 +171,24 @@ async function fetchIsolates(
     organism: r.organism,
     patientId: r.culture.patientId,
     ward: r.culture.ward,
+    sampleType: r.culture.sampleType,
     takenAt: r.culture.takenAt,
   }));
 }
 
-async function fetchSusceptibilities(
+export async function fetchSusceptibilities(
   start: Date,
   end: Date,
   endExclusive: boolean,
   ward?: string,
   sampleType?: string | null,
+  patient?: Prisma.PatientWhereInput,
 ): Promise<SusRec[]> {
   const rows = await db.susceptibility.findMany({
     where: {
       isolate: {
         culture: {
-          ...cultureWhere(ward, sampleType),
+          ...cultureWhere(ward, sampleType, patient),
           takenAt: endExclusive ? { gte: start, lt: end } : { gte: start, lte: end },
         },
       },
@@ -167,7 +211,7 @@ async function fetchSusceptibilities(
 // ── Dedupe & tally ───────────────────────────────────────────────────
 
 /** First isolate per (patient, organism) — earliest takenAt wins, isolate id breaks ties. */
-function firstIsolates(isolates: IsoRec[]): IsoRec[] {
+export function firstIsolates(isolates: IsoRec[]): IsoRec[] {
   const first = new Map<string, IsoRec>();
   for (const iso of [...isolates].sort(
     (a, b) => a.takenAt.getTime() - b.takenAt.getTime() || (a.id < b.id ? -1 : 1),
@@ -178,10 +222,10 @@ function firstIsolates(isolates: IsoRec[]): IsoRec[] {
   return [...first.values()];
 }
 
-type Tally = Map<string, Map<string, { s: number; r: number }>>;
+export type Tally = Map<string, Map<string, { s: number; r: number }>>;
 
 /** Count S/R results per (organism, antibiotic) over isolates in `ids`; "I" is ignored. */
-function tallySusceptibilities(rows: SusRec[], ids: Set<string>): Tally {
+export function tallySusceptibilities(rows: SusRec[], ids: Set<string>): Tally {
   const tally: Tally = new Map();
   for (const row of rows) {
     if (!ids.has(row.isolateId)) continue;
@@ -211,10 +255,23 @@ function memoize<T>(fn: () => Promise<T>): () => Promise<T> {
   };
 }
 
-const maxTakenAt = memoize(async () => {
+// NOT memoized: the simulated lab feed moves the newest timestamp, and this
+// aggregate (indexed on takenAt, ~ms) is the cache-invalidation marker.
+export async function maxTakenAt() {
   const agg = await db.culture.aggregate({ _max: { takenAt: true } });
   return agg._max.takenAt;
-});
+}
+
+/** The effective "now" for window anchoring: the historical-replay instant
+ *  (`asOf`) clamped to not exceed the newest sample, else the newest sample. */
+export async function resolveAnchor(asOf?: string | null): Promise<Date> {
+  const dataMax = await maxTakenAt();
+  const end = dataMax ?? new Date();
+  if (!asOf) return end;
+  const t = new Date(asOf);
+  if (Number.isNaN(t.getTime()) || t.getTime() >= end.getTime()) return end;
+  return t;
+}
 
 const distinctWards = memoize(async () => {
   const rows = await db.culture.findMany({
@@ -262,13 +319,21 @@ const distinctSampleTypes = memoize(async () => {
 let cacheDataMaxIso = "";
 const resultCache = new Map<string, Promise<unknown>>();
 
-async function cachedByDataMax<T>(args: unknown, compute: () => Promise<T>): Promise<T> {
+export async function cachedByDataMax<T>(
+  kind: string,
+  args: unknown,
+  compute: () => Promise<T>,
+): Promise<T> {
   const dataMaxIso = (await maxTakenAt())?.toISOString() ?? "";
   if (dataMaxIso !== cacheDataMaxIso) {
     resultCache.clear();
     cacheDataMaxIso = dataMaxIso;
   }
-  const key = `${dataMaxIso}|${JSON.stringify(args)}`;
+  // `kind` namespaces the key: two endpoints can receive identical filter
+  // args (e.g. `{}`), and a bare JSON key would collide — worse, a nested
+  // getter could resolve to the outer caller's own pending promise and
+  // deadlock on itself.
+  const key = `${kind}|${dataMaxIso}|${JSON.stringify(args)}`;
   const hit = resultCache.get(key);
   if (hit) return hit as Promise<T>;
   const promise = compute().catch((err) => {
@@ -282,22 +347,24 @@ async function cachedByDataMax<T>(args: unknown, compute: () => Promise<T>): Pro
 // ── Public API ───────────────────────────────────────────────────────
 
 export async function getMeta(): Promise<MetaResponse> {
-  return cachedByDataMax(null, computeMeta);
+  return cachedByDataMax("meta", null, computeMeta);
 }
 
 async function computeMeta(): Promise<MetaResponse> {
-  const [wards, sampleTypes, organisms, antibiotics, dates] = await Promise.all([
+  const [wards, sampleTypes, organisms, antibiotics, dates, patients] = await Promise.all([
     distinctWards(),
     distinctSampleTypes(),
     distinctOrganisms(),
     distinctAntibiotics(),
     db.culture.aggregate({ _min: { takenAt: true }, _max: { takenAt: true } }),
+    db.patient.findMany({ distinct: ["sex"], select: { sex: true }, orderBy: { sex: "asc" } }),
   ]);
   return {
     wards,
     organisms,
     antibiotics,
     sampleTypes,
+    sexes: patients.map((p) => p.sex),
     dateMin: dates._min.takenAt ? dates._min.takenAt.toISOString() : "",
     dateMax: dates._max.takenAt ? dates._max.takenAt.toISOString() : "",
     generatedAt: new Date().toISOString(),
@@ -307,21 +374,28 @@ async function computeMeta(): Promise<MetaResponse> {
 export async function getAntibiogram(opts: {
   ward?: string;
   sampleType?: string | null;
+  sex?: string | null;
+  ageBand?: string | null;
   window: WindowKey;
+  asOf?: string | null;
 }): Promise<AntibiogramResponse> {
-  return cachedByDataMax(opts, () => computeAntibiogram(opts));
+  return cachedByDataMax("antibiogram", opts, () => computeAntibiogram(opts));
 }
 
 async function computeAntibiogram(opts: {
   ward?: string;
   sampleType?: string | null;
+  sex?: string | null;
+  ageBand?: string | null;
   window: WindowKey;
+  asOf?: string | null;
 }): Promise<AntibiogramResponse> {
   const dataMax = await maxTakenAt();
-  const { start, end } = windowRange(opts.window, dataMax);
+  const { start, end } = windowRange(opts.window, dataMax, opts.asOf);
+  const patient = patientWhere(opts.sex, opts.ageBand, end.getUTCFullYear());
   const [isolates, susRows, antibioticOrder] = await Promise.all([
-    fetchIsolates(start, end, false, opts.ward, opts.sampleType),
-    fetchSusceptibilities(start, end, false, opts.ward, opts.sampleType),
+    fetchIsolates(start, end, false, opts.ward, opts.sampleType, patient),
+    fetchSusceptibilities(start, end, false, opts.ward, opts.sampleType, patient),
     distinctAntibiotics(),
   ]);
 
@@ -370,6 +444,8 @@ async function computeAntibiogram(opts: {
   return {
     ward: opts.ward || ALL_WARDS,
     sampleType: opts.sampleType || null,
+    sex: opts.sex || null,
+    ageBand: opts.ageBand || null,
     window: opts.window,
     windowStart: start.toISOString(),
     windowEnd: end.toISOString(),
@@ -378,14 +454,14 @@ async function computeAntibiogram(opts: {
   };
 }
 
-export async function getSignals(opts: { ward?: string } = {}): Promise<SignalsResponse> {
-  return cachedByDataMax(opts, () => computeSignals(opts));
+export async function getSignals(opts: { ward?: string; asOf?: string | null } = {}): Promise<SignalsResponse> {
+  return cachedByDataMax("signals", opts, () => computeSignals(opts));
 }
 
-async function computeSignals(opts: { ward?: string }): Promise<SignalsResponse> {
+async function computeSignals(opts: { ward?: string; asOf?: string | null }): Promise<SignalsResponse> {
   const scope = opts.ward && opts.ward !== ALL_WARDS ? opts.ward : undefined;
   const dataMax = await maxTakenAt();
-  const { start: windowStart, end: windowEnd } = windowRange("4w", dataMax);
+  const { start: windowStart, end: windowEnd } = windowRange("4w", dataMax, opts.asOf);
   const baselineStart = new Date(windowStart.getTime() - BASELINE_DAYS * DAY_MS);
 
   // One range query per table covering window + baseline; partition in JS.
@@ -467,8 +543,11 @@ export async function getTrend(opts: {
   organism: string;
   antibiotic: string;
   sampleType?: string | null;
+  sex?: string | null;
+  ageBand?: string | null;
+  asOf?: string | null;
 }): Promise<TrendResponse> {
-  return cachedByDataMax(opts, () => computeTrend(opts));
+  return cachedByDataMax("trend", opts, () => computeTrend(opts));
 }
 
 async function computeTrend(opts: {
@@ -476,18 +555,25 @@ async function computeTrend(opts: {
   organism: string;
   antibiotic: string;
   sampleType?: string | null;
+  sex?: string | null;
+  ageBand?: string | null;
+  asOf?: string | null;
 }): Promise<TrendResponse> {
   const { organism, antibiotic } = opts;
-  const anchor = (await maxTakenAt()) ?? new Date();
+  const anchor = await resolveAnchor(opts.asOf);
   const firstMonth = new Date(
     Date.UTC(anchor.getUTCFullYear(), anchor.getUTCMonth() - (TREND_MONTHS - 1), 1),
   );
+  const patient = patientWhere(opts.sex, opts.ageBand, anchor.getUTCFullYear());
 
   const [isolates, susRows] = await Promise.all([
     db.isolate.findMany({
       where: {
         organism,
-        culture: { ...cultureWhere(opts.ward, opts.sampleType), takenAt: { gte: firstMonth } },
+        culture: {
+          ...cultureWhere(opts.ward, opts.sampleType, patient),
+          takenAt: { gte: firstMonth },
+        },
       },
       select: { id: true, culture: { select: { patientId: true, takenAt: true } } },
     }),
@@ -496,7 +582,10 @@ async function computeTrend(opts: {
         antibiotic,
         isolate: {
           organism,
-          culture: { ...cultureWhere(opts.ward, opts.sampleType), takenAt: { gte: firstMonth } },
+          culture: {
+            ...cultureWhere(opts.ward, opts.sampleType, patient),
+            takenAt: { gte: firstMonth },
+          },
         },
       },
       select: { isolateId: true, result: true },
@@ -551,6 +640,8 @@ async function computeTrend(opts: {
     organism,
     antibiotic,
     sampleType: opts.sampleType || null,
+    sex: opts.sex || null,
+    ageBand: opts.ageBand || null,
     points,
   };
 }

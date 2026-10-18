@@ -19,6 +19,9 @@ export async function GET(request: Request) {
     organism,
     antibiotic,
     sampleType: params.get("sample") || null,
+    sex: params.get("sex") || null,
+    ageBand: params.get("age") || null,
+    asOf: params.get("asOf") || null,
   });
   return NextResponse.json(response);
 }

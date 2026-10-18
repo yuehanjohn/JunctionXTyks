@@ -1,0 +1,743 @@
+{
+ "url": "http://localhost:3777",
+ "finalUrl": "http://localhost:3777/",
+ "capturedAt": "2026-10-18T00:28:05.788Z",
+ "viewport": {
+  "w": 1920,
+  "h": 1080
+ },
+ "docHeight": 1478,
+ "name": "AEI Pulse",
+ "title": "AEI Pulse — AMR surveillance, Tyks Laboratories",
+ "description": "Rolling, real-time antimicrobial resistance surveillance for Tyks Laboratories",
+ "tagline": "Antimicrobial Resistance Overview",
+ "lang": "en",
+ "themeColorMeta": null,
+ "colorSchemeMeta": null,
+ "manifest": null,
+ "copy": {
+  "h1": [
+   "Antimicrobial Resistance Overview"
+  ],
+  "h2": [
+   "Resistance trend over time",
+   "8 significant alerts",
+   "Resistance by organism and antibiotic",
+   "Automated insights",
+   "Specimen type distribution",
+   "Top organisms",
+   "Recent isolates"
+  ],
+  "h3": [],
+  "heroLine": "Antimicrobial Resistance Overview",
+  "ctas": [],
+  "nav": [
+   "Overview",
+   "Early Warning",
+   "Antibiotic Guidance"
+  ],
+  "sentences": [
+   "Emerging signal — Escherichia coli resistance to Ciprofloxacin on ICU: susceptible share fell 37.8 pp to 37.3% in the last 4 weeks (z −5.8, n=51).",
+   "Comparative — Escherichia coli resistance to Ciprofloxacin on ICU is 62.7% in the current window, vs 25.3% hospital-wide (n=518).",
+   "Panel note — Meropenem remains the most active standard option against Escherichia coli in the current window (3.5% resistant, n=487)."
+  ]
+ },
+ "colors": {
+  "theme": "light",
+  "monochrome": false,
+  "ground": [
+   {
+    "hex": "#fcfcfd",
+    "share": 0.845,
+    "sources": [
+     "pixels",
+     "dom"
+    ]
+   },
+   {
+    "hex": "#eeeae9",
+    "share": 0.066,
+    "sources": [
+     "pixels",
+     "dom"
+    ]
+   }
+  ],
+  "ink": {
+   "hex": "#14171c",
+   "contrastOnGround": 17.52,
+   "source": "computed colour of the largest heading (h1 \"Antimicrobial Resistance Overview\", 20px)"
+  },
+  "inkSoft": {
+   "hex": "#5b6472",
+   "contrastOnGround": 5.83,
+   "note": "body copy"
+  },
+  "accentCandidates": {
+   "note": "saturated colours sampled from imagery (a CSS/DOM accent exists, these are extra)",
+   "items": [
+    {
+     "hex": "#2562e9",
+     "file": "screens/02.jpg",
+     "share": 0.00219,
+     "sharePct": 0.22
+    },
+    {
+     "hex": "#16a349",
+     "file": "screens/02.jpg",
+     "share": 0.00063,
+     "sharePct": 0.06
+    },
+    {
+     "hex": "#48878c",
+     "file": "screens/02.jpg",
+     "share": 0.00043,
+     "sharePct": 0.04
+    },
+    {
+     "hex": "#da2525",
+     "file": "screens/02.jpg",
+     "share": 0.00044,
+     "sharePct": 0.04
+    }
+   ]
+  },
+  "inkMuted": null,
+  "accents": [
+   {
+    "hex": "#0f6b7c",
+    "role": "accent (primary)",
+    "score": 131,
+    "sources": [
+     "css var --primary",
+     "logo",
+     "link",
+     "text",
+     "background"
+    ]
+   },
+   {
+    "hex": "#fde2b1",
+    "role": "accent 2",
+    "score": 22,
+    "sources": [
+     "screenshot pixels",
+     "background"
+    ]
+   }
+  ],
+  "ctaBg": null,
+  "link": "#5b6472",
+  "palette": [
+   {
+    "hex": "#fcfcfd",
+    "role": "ground (light theme)",
+    "share": 0.845
+   },
+   {
+    "hex": "#eeeae9",
+    "role": "surface/ground 2",
+    "share": 0.066
+   },
+   {
+    "hex": "#14171c",
+    "role": "ink (headline / logo ink)",
+    "contrast": 17.5
+   },
+   {
+    "hex": "#5b6472",
+    "role": "ink-soft (body copy)",
+    "contrast": 5.8
+   },
+   {
+    "hex": "#0f6b7c",
+    "role": "accent (primary)",
+    "sources": [
+     "css var --primary",
+     "logo",
+     "link",
+     "text",
+     "background"
+    ]
+   },
+   {
+    "hex": "#fde2b1",
+    "role": "accent 2",
+    "sources": [
+     "screenshot pixels",
+     "background"
+    ]
+   }
+  ],
+  "pixelPalette": [
+   {
+    "hex": "#fcfcfd",
+    "share": 0.724
+   },
+   {
+    "hex": "#eeeae9",
+    "share": 0.131
+   },
+   {
+    "hex": "#fde2b1",
+    "share": 0.04
+   },
+   {
+    "hex": "#d3d5d5",
+    "share": 0.035
+   },
+   {
+    "hex": "#f5bcaf",
+    "share": 0.013
+   },
+   {
+    "hex": "#fae9d4",
+    "share": 0.012
+   },
+   {
+    "hex": "#bfc1c1",
+    "share": 0.008
+   },
+   {
+    "hex": "#d3edec",
+    "share": 0.006
+   },
+   {
+    "hex": "#f0ccc8",
+    "share": 0.006
+   },
+   {
+    "hex": "#e3ca9c",
+    "share": 0.005
+   }
+  ],
+  "domBackgrounds": [
+   {
+    "hex": "#f5f6f7",
+    "share": 0.552
+   },
+   {
+    "hex": "#ffffff",
+    "share": 0.41
+   },
+   {
+    "hex": "#ffe1ad",
+    "share": 0.026
+   },
+   {
+    "hex": "#d4f2eb",
+    "share": 0.006
+   },
+   {
+    "hex": "#f8baaa",
+    "share": 0.004
+   },
+   {
+    "hex": "#b12727",
+    "share": 0.002
+   },
+   {
+    "hex": "#eef0f2",
+    "share": 0.001
+   },
+   {
+    "hex": "#146c80",
+    "share": 0
+   },
+   {
+    "hex": "#b3261e",
+    "share": 0
+   },
+   {
+    "hex": "#b1271d",
+    "share": 0
+   }
+  ],
+  "textColors": [
+   {
+    "hex": "#14171c",
+    "share": 0.495
+   },
+   {
+    "hex": "#5b6472",
+    "share": 0.493
+   },
+   {
+    "hex": "#0f6b7c",
+    "share": 0.005
+   },
+   {
+    "hex": "#b3261e",
+    "share": 0.005
+   },
+   {
+    "hex": "#177245",
+    "share": 0.002
+   }
+  ],
+  "cssVars": [
+   {
+    "name": "--background",
+    "value": "#f5f6f7",
+    "hex": "#f5f6f7"
+   },
+   {
+    "name": "--foreground",
+    "value": "#14171c",
+    "hex": "#14171c"
+   },
+   {
+    "name": "--card",
+    "value": "#fff",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "--card-foreground",
+    "value": "#14171c",
+    "hex": "#14171c"
+   },
+   {
+    "name": "--muted",
+    "value": "#eef0f2",
+    "hex": "#eef0f2"
+   },
+   {
+    "name": "--muted-foreground",
+    "value": "#5b6472",
+    "hex": "#5b6472"
+   },
+   {
+    "name": "--border",
+    "value": "#e3e6ea",
+    "hex": "#e3e6ea"
+   },
+   {
+    "name": "--primary",
+    "value": "#0f6b7c",
+    "hex": "#0f6b7c"
+   },
+   {
+    "name": "--primary-foreground",
+    "value": "#fff",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "--success",
+    "value": "#177245",
+    "hex": "#177245"
+   },
+   {
+    "name": "--warning",
+    "value": "#a85b00",
+    "hex": "#a85b00"
+   },
+   {
+    "name": "--danger",
+    "value": "#b3261e",
+    "hex": "#b3261e"
+   },
+   {
+    "name": "--ring",
+    "value": "#0f6b7c",
+    "hex": "#0f6b7c"
+   }
+  ]
+ },
+ "fonts": {
+  "roles": {
+   "heading": {
+    "family": "\"IBM Plex Sans\", \"IBM Plex Sans Fallback\", ui-sans-serif, system-ui, sans-serif",
+    "weight": "700",
+    "size": "20px",
+    "style": "normal",
+    "letterSpacing": "normal",
+    "lineHeight": "28px",
+    "textTransform": "none",
+    "color": "#14171c",
+    "primaryFamily": "IBM Plex Sans",
+    "file": null,
+    "fileWeight": null
+   },
+   "body": {
+    "family": "\"IBM Plex Sans\", \"IBM Plex Sans Fallback\", ui-sans-serif, system-ui, sans-serif",
+    "weight": "400",
+    "size": "13px",
+    "style": "normal",
+    "letterSpacing": "normal",
+    "lineHeight": "19.5px",
+    "textTransform": "none",
+    "color": "#5b6472",
+    "primaryFamily": "IBM Plex Sans",
+    "file": null,
+    "fileWeight": null
+   },
+   "nav": {
+    "family": "\"IBM Plex Sans\", \"IBM Plex Sans Fallback\", ui-sans-serif, system-ui, sans-serif",
+    "weight": "600",
+    "size": "13.5px",
+    "style": "normal",
+    "letterSpacing": "normal",
+    "lineHeight": "20.25px",
+    "textTransform": "none",
+    "color": "#0f6b7c",
+    "primaryFamily": "IBM Plex Sans",
+    "file": null,
+    "fileWeight": null
+   }
+  },
+  "faces": [
+   {
+    "family": "IBM Plex Sans",
+    "weight": "400",
+    "style": "normal",
+    "url": "http://localhost:3777/_next/static/media/26d4368bf94c0ec4-s.p.woff2",
+    "file": "fonts/ibm-plex-sans-400.woff2",
+    "bytes": 40240,
+    "used": true,
+    "range": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "400",
+    "style": "normal",
+    "url": "http://localhost:3777/_next/static/media/d3ebbfd689654d3a-s.p.woff2",
+    "file": "fonts/ibm-plex-mono-400.woff2",
+    "bytes": 10052,
+    "used": true,
+    "range": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+   }
+  ],
+  "loadedByPage": [
+   {
+    "family": "IBM Plex Sans",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "400",
+    "style": "normal",
+    "status": "loaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "500",
+    "style": "normal",
+    "status": "loaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "600",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "600",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "600",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "600",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "600",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "600",
+    "style": "normal",
+    "status": "loaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "700",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "700",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "700",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "700",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "700",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Sans",
+    "weight": "700",
+    "style": "normal",
+    "status": "loaded"
+   },
+   {
+    "family": "IBM Plex Sans Fallback",
+    "weight": "normal",
+    "style": "normal",
+    "status": "loaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "400",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "400",
+    "style": "normal",
+    "status": "loaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono",
+    "weight": "500",
+    "style": "normal",
+    "status": "unloaded"
+   },
+   {
+    "family": "IBM Plex Mono Fallback",
+    "weight": "normal",
+    "style": "normal",
+    "status": "loaded"
+   }
+  ],
+  "mostUsed": [
+   {
+    "key": "IBM Plex Sans|400",
+    "weight": 27586
+   },
+   {
+    "key": "IBM Plex Sans|500",
+    "weight": 9372
+   },
+   {
+    "key": "IBM Plex Sans|600",
+    "weight": 4133
+   },
+   {
+    "key": "IBM Plex Sans|700",
+    "weight": 915
+   },
+   {
+    "key": "IBM Plex Mono|400",
+    "weight": 836
+   }
+  ],
+  "platformFonts": {
+   "h1": [
+    {
+     "family": "IBM Plex Sans",
+     "custom": true,
+     "glyphs": 33
+    }
+   ],
+   "body": [
+    {
+     "family": "IBM Plex Sans",
+     "custom": true,
+     "glyphs": 93
+    }
+   ]
+  }
+ },
+ "logo": {
+  "file": "logo/logo.svg",
+  "kind": "svg",
+  "source": "inline svg (home-link,header,top)",
+  "fills": [
+   "#0f6b7c"
+  ],
+  "onDark": false,
+  "favicon": null,
+  "appIcon": null,
+  "text": null,
+  "candidates": [
+   {
+    "score": 9,
+    "why": [
+     "home-link",
+     "header",
+     "top"
+    ],
+    "members": [
+     "svg 17x17"
+    ],
+    "lockup": false
+   },
+   {
+    "score": 5,
+    "why": [
+     "header",
+     "top"
+    ],
+    "members": [
+     "svg 17x17"
+    ],
+    "lockup": false
+   },
+   {
+    "score": 4,
+    "why": [
+     "top"
+    ],
+    "members": [
+     "svg 34x34"
+    ],
+    "lockup": false
+   },
+   {
+    "score": 3,
+    "why": [
+     "header"
+    ],
+    "members": [
+     "svg 17x17"
+    ],
+    "lockup": false
+   }
+  ]
+ },
+ "ogImage": null,
+ "screens": [
+  {
+   "file": "screens/01.jpg",
+   "scrollY": 0
+  },
+  {
+   "file": "screens/02.jpg",
+   "scrollY": 398
+  }
+ ],
+ "media": [],
+ "mediaDropped": [],
+ "warnings": [
+  "page is short (1478px): only 2 screenshots",
+  "favicon fetch failed (http://localhost:3777/favicon.ico): HTTP 404",
+  "heading font \"IBM Plex Sans\" has no downloadable file (system font or blocked)",
+  "body font \"IBM Plex Sans\" has no downloadable file (system font or blocked)"
+ ]
+}

@@ -1,447 +1,385 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { MIN_ISOLATES } from "@/lib/types";
-import type { AntibiogramResponse, MetaResponse, SusCell, WindowKey } from "@/lib/types";
+import { useEffect, useId, useMemo, useState } from "react";
+
+import { AlertCard } from "@/components/overview/alert-card";
+import {
+  RecentIsolatesCard,
+  SpecimenCard,
+  TopOrganismsCard,
+} from "@/components/overview/bottom-row";
+import { HeatmapCard } from "@/components/overview/heatmap-card";
+import { InsightsCard } from "@/components/overview/insights-card";
+import { KpiRow } from "@/components/overview/kpi-cards";
+import { ALL_WARDS, fmtDayMonth, fmtTime, fmtWindow } from "@/components/overview/format";
+import { TrendChartCard } from "@/components/overview/trend-chart";
 import { Badge, Card, Select, type SelectOption } from "@/components/ui";
-import { AntibiogramMatrix, BestPickStrip, type CellFocus } from "@/components/antibiogram";
+import {
+  FILTER_ALL,
+  type AlertInvestigationResponse,
+  type HeatmapResponse,
+  type MetaResponse,
+  type OverviewResponse,
+} from "@/lib/types";
 
-const SAMPLE_ALL = "all";
-const DEFAULT_WARD = "ICU";
-const WARD_STORAGE_KEY = "aei-ward";
+// ── Fetch plumbing ────────────────────────────────────────────────────
 
-/** Static label table for the window toggle. */
-const WINDOW_OPTIONS: Record<WindowKey, string> = {
-  "4w": "Last 4 weeks",
-  "1y": "This year",
-};
-
-const fmtDateTime = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-});
-const fmtDayMonth = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" });
-const fmtFullDate = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-});
-
-function parseIso(value: string): Date {
-  // Date-only ISO strings are calendar dates; parse them in local time to avoid timezone drift.
-  return /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T00:00:00`) : new Date(value);
+async function fetchJson<T>(url: string, signal: AbortSignal): Promise<T> {
+  const res = await fetch(url, { signal });
+  if (!res.ok) throw new Error(`Request failed (${res.status} ${res.statusText})`);
+  return (await res.json()) as T;
 }
 
-function formatRange(startIso: string, endIso: string): string {
-  const start = parseIso(startIso);
-  const end = parseIso(endIso);
-  if (Number.isNaN(start.valueOf()) || Number.isNaN(end.valueOf())) return "—";
-  if (start.getFullYear() === end.getFullYear()) {
-    return `${fmtDayMonth.format(start)} – ${fmtDayMonth.format(end)} ${end.getFullYear()}`;
-  }
-  return `${fmtFullDate.format(start)} – ${fmtFullDate.format(end)}`;
+function isAbortError(err: unknown): boolean {
+  return err instanceof DOMException && err.name === "AbortError";
 }
 
-function readStoredWard(): string {
-  if (typeof window === "undefined") return DEFAULT_WARD;
-  try {
-    const stored = window.localStorage.getItem(WARD_STORAGE_KEY);
-    return stored && stored.length > 0 ? stored : DEFAULT_WARD;
-  } catch {
-    return DEFAULT_WARD;
-  }
+function errorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : "Unknown error";
 }
 
-function writeStoredWard(value: string): void {
-  try {
-    window.localStorage.setItem(WARD_STORAGE_KEY, value);
-  } catch {
-    // Storage can be unavailable (private mode, quota); persistence is best-effort.
-  }
+/** Shared filter query for Pulse endpoints. Sentinels are omitted here AND
+ *  normalized server-side (normSample) — belt and braces. */
+function filterQuery(ward: string, sample: string, asOf: string): string {
+  const params = new URLSearchParams();
+  if (ward && ward !== ALL_WARDS) params.set("ward", ward);
+  if (sample && sample !== FILTER_ALL) params.set("sample", sample);
+  if (asOf) params.set("asOf", asOf);
+  return params.toString();
 }
 
-function SummaryStat({
-  label,
-  value,
-  note,
-  valueClass = "text-xl font-semibold text-foreground",
-}: {
-  label: string;
-  value: string;
-  note?: string;
-  valueClass?: string;
-}) {
+// ── Static page furniture ─────────────────────────────────────────────
+
+function InfoIcon() {
   return (
-    <div>
-      <div className="text-[11px] font-medium text-muted-foreground">{label}</div>
-      <div className={`mt-0.5 font-mono tabular-nums ${valueClass}`}>{value}</div>
-      {note ? <div className="mt-0.5 text-[11px] text-muted-foreground">{note}</div> : null}
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-4" />
+      <path d="M12 8h.01" />
+    </svg>
+  );
+}
+
+function ErrorBanner({ message, onRetry }: { message: string; onRetry: () => void }) {
+  return (
+    <div className="flex items-center justify-between gap-4 rounded-[10px] border border-danger/30 bg-danger/5 px-4 py-2.5">
+      <p className="text-[13px] text-danger">Failed to load data: {message}</p>
+      <button
+        type="button"
+        onClick={onRetry}
+        className="shrink-0 rounded-lg border border-danger/40 px-3 py-1 text-xs font-semibold text-danger hover:bg-danger/10"
+      >
+        Retry
+      </button>
     </div>
   );
 }
 
-function FocusStat({
-  label,
-  value,
-  valueClass = "text-foreground",
-}: {
-  label: string;
-  value: string;
-  valueClass?: string;
-}) {
+function SkeletonGrid() {
+  const kpi = [0, 1, 2, 3];
   return (
-    <div>
-      <div className="text-[11px] font-medium text-muted-foreground">{label}</div>
-      <div className={`mt-0.5 font-mono text-[13px] font-semibold tabular-nums ${valueClass}`}>
-        {value}
+    <div className="flex flex-col gap-4" aria-hidden="true">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {kpi.map((i) => (
+          <div key={i} className="h-28 animate-pulse rounded-[10px] border border-border bg-card" />
+        ))}
+      </div>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+        <div className="h-80 animate-pulse rounded-[10px] border border-border bg-card xl:col-span-2" />
+        <div className="h-80 animate-pulse rounded-[10px] border border-border bg-card" />
+      </div>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+        <div className="h-64 animate-pulse rounded-[10px] border border-border bg-card xl:col-span-2" />
+        <div className="h-64 animate-pulse rounded-[10px] border border-border bg-card" />
       </div>
     </div>
   );
 }
 
-function AnnualStat({ cell, annual }: { cell: SusCell; annual: SusCell | null }) {
-  const label = (
-    <div className="text-[11px] font-medium text-muted-foreground">vs annual</div>
-  );
-  if (!cell.sufficient || !annual || !annual.sufficient) {
-    return (
-      <div>
-        {label}
-        <div className="mt-0.5 font-mono text-[13px] font-semibold tabular-nums text-muted-foreground">
-          —
-        </div>
-        <div className="mt-0.5 text-[11px] text-muted-foreground">
-          {!annual || !annual.sufficient
-            ? "no annual data"
-            : `window n < ${MIN_ISOLATES}`}
-        </div>
-      </div>
-    );
-  }
-  const diff = cell.sPct - annual.sPct;
-  const tone = diff > 0 ? "text-success" : diff < 0 ? "text-danger" : "text-muted-foreground";
-  return (
-    <div>
-      {label}
-      <div className={`mt-0.5 font-mono text-[13px] font-semibold tabular-nums ${tone}`}>
-        {diff >= 0 ? `+${diff.toFixed(1)}` : diff.toFixed(1)} pp
-      </div>
-      <div className="mt-0.5 font-mono text-[11px] tabular-nums text-muted-foreground">
-        {`1y ${annual.sPct.toFixed(1)}% · n=${annual.n.toLocaleString("en-US")}`}
-      </div>
-    </div>
-  );
-}
-
-function FocusFooter({
-  focus,
-  showAnnual,
-  onClear,
-}: {
-  focus: CellFocus;
-  showAnnual: boolean;
-  onClear: () => void;
-}) {
-  const cell = focus.cell;
-  return (
-    <div className="mt-5 rounded-lg bg-muted/50 p-4">
-      <div className="flex flex-wrap items-start gap-x-10 gap-y-3">
-        <div className="min-w-[190px]">
-          <div className="text-[11px] font-medium text-muted-foreground">Focused cell</div>
-          <div className="mt-0.5 text-[13px] font-semibold leading-snug">
-            {focus.organism} · {focus.antibiotic}
-          </div>
-        </div>
-        <FocusStat
-          label="Susceptible"
-          value={cell.sufficient ? `${cell.sPct.toFixed(1)}%` : `n < ${MIN_ISOLATES}`}
-          valueClass={cell.sufficient ? "text-foreground" : "text-muted-foreground"}
-        />
-        <FocusStat label="First isolates" value={`n=${cell.n.toLocaleString("en-US")}`} />
-        {cell.sufficient ? (
-          <FocusStat
-            label="95% CI (Wilson)"
-            value={`${cell.ciLo.toFixed(1)}–${cell.ciHi.toFixed(1)}%`}
-          />
-        ) : null}
-        {showAnnual ? <AnnualStat cell={cell} annual={focus.annual} /> : null}
-        <button
-          type="button"
-          onClick={onClear}
-          aria-label="Clear focused cell"
-          className="ml-auto h-8 w-8 shrink-0 rounded-lg border border-border text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
-        >
-          ✕
-        </button>
-      </div>
-      {!cell.sufficient ? (
-        <div className="mt-3">
-          <Badge tone="warning">{`n < ${MIN_ISOLATES} — percentage not reported; interpret with caution`}</Badge>
-        </div>
-      ) : null}
-    </div>
-  );
-}
+// ── Page ──────────────────────────────────────────────────────────────
 
 export default function Page() {
+  // Filters — every card on the page refetches through the API; no DOM-only filtering.
+  const [ward, setWard] = useState(ALL_WARDS);
+  const [sample, setSample] = useState(FILTER_ALL);
+  /** "YYYY-MM-DD" for historical replay; "" = live feed. */
+  const [asOf, setAsOf] = useState("");
+  const [retryNonce, setRetryNonce] = useState(0);
+
   const [meta, setMeta] = useState<MetaResponse | null>(null);
-  const [metaError, setMetaError] = useState(false);
-  const [ward, setWard] = useState(readStoredWard);
-  const [sample, setSample] = useState(SAMPLE_ALL);
-  const [windowKey, setWindowKey] = useState<WindowKey>("4w");
-  const [data, setData] = useState<AntibiogramResponse | null>(null);
-  const [annual, setAnnual] = useState<AntibiogramResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [overview, setOverview] = useState<OverviewResponse | null>(null);
+  const [heatmap, setHeatmap] = useState<HeatmapResponse | null>(null);
+  const [investigation, setInvestigation] = useState<{
+    id: string;
+    data: AlertInvestigationResponse;
+  } | null>(null);
+  /** Heatmap organism; defaults to the window's most common organism. */
+  const [organism, setOrganism] = useState<string | null>(null);
+
+  const [overviewBusy, setOverviewBusy] = useState(false);
+  const [heatmapBusy, setHeatmapBusy] = useState(false);
+  const [investigationBusy, setInvestigationBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [focus, setFocus] = useState<CellFocus | null>(null);
-  const [retryToken, setRetryToken] = useState<{ n: number }>({ n: 0 });
-  const metaLoadedRef = useRef(false);
 
-  // Validate the stored/selected ward once meta lands: keep it if listed,
-  // otherwise fall back to ICU (or the first listed ward) and persist that.
+  const replayId = useId();
+
+  // Meta is filter-independent: fetch once, retry via the error banner.
   useEffect(() => {
-    if (!meta || meta.wards.length === 0 || meta.wards.includes(ward)) return;
-    const fallback = meta.wards.includes(DEFAULT_WARD) ? DEFAULT_WARD : meta.wards[0];
-    setWard(fallback);
-    writeStoredWard(fallback);
-  }, [meta, ward]);
-
-  // Data loading. On mount /api/meta, the current-window antibiogram and the 1y
-  // comparison start in parallel (no meta-first waterfall); filter changes rerun
-  // this effect for the antibiogram calls only, with /api/meta cached in state.
-  // In 4w mode the 1y window feeds the per-cell annual comparison; its failure
-  // only hides that comparison.
-  useEffect(() => {
-    let cancelled = false;
-
-    // retryToken changes identity only on explicit retry, re-running this effect.
-    void retryToken;
-
-    // Fired synchronously alongside the data fetches below, so the first render
-    // dispatches every request at once. Skipped once meta has loaded; a failed
-    // meta request is re-attempted on the next run (retry or filter change).
-    const metaRequest = metaLoadedRef.current
-      ? null
-      : fetch("/api/meta")
-          .then(async (res) => {
-            if (!res.ok) throw new Error(`meta ${res.status}`);
-            return (await res.json()) as MetaResponse;
-          })
-          .then((m) => {
-            metaLoadedRef.current = true;
-            if (!cancelled) {
-              setMeta(m);
-              setMetaError(false);
-            }
-          })
-          .catch(() => {
-            if (!cancelled) setMetaError(true);
-          });
-    void metaRequest;
-
-    const url = (w: WindowKey) => {
-      const params = new URLSearchParams({ ward, window: w });
-      if (sample !== SAMPLE_ALL) params.set("sample", sample);
-      return `/api/antibiogram?${params.toString()}`;
-    };
-
-    async function loadJson(res: Response): Promise<AntibiogramResponse> {
-      if (!res.ok) throw new Error(`antibiogram ${res.status}`);
-      return (await res.json()) as AntibiogramResponse;
-    }
-
-    setLoading(true);
-    setError(null);
-    setFocus(null);
-
-    const current = fetch(url(windowKey)).then(loadJson);
-    const comparison =
-      windowKey === "4w"
-        ? fetch(url("1y"))
-            .then(loadJson)
-            .catch(() => null)
-        : Promise.resolve(null);
-
-    Promise.all([current, comparison])
-      .then(([cur, cmp]) => {
-        if (cancelled) return;
-        setData(cur);
-        setAnnual(cmp);
-        setLoading(false);
+    const ac = new AbortController();
+    fetchJson<MetaResponse>("/api/meta", ac.signal)
+      .then((data) => {
+        if (!ac.signal.aborted) {
+          setMeta(data);
+          setError(null);
+        }
       })
-      .catch(() => {
-        if (cancelled) return;
-        setError("The antibiogram service did not respond. The laboratory API may be unavailable.");
-        setLoading(false);
+      .catch((err: unknown) => {
+        if (!ac.signal.aborted && !isAbortError(err)) setError(errorMessage(err));
       });
+    return () => ac.abort();
+  }, [retryNonce]);
 
-    return () => {
-      cancelled = true;
-    };
-  }, [ward, sample, windowKey, retryToken]);
+  const topSignal = overview?.alerts[0] ?? null;
 
-  const wardOptions = useMemo<SelectOption[]>(() => {
-    if (meta && meta.wards.length > 0) {
-      return meta.wards.map((w) => ({ value: w, label: w }));
+  // Overview — refetch on every filter change; reconcile the heatmap organism default.
+  useEffect(() => {
+    const ac = new AbortController();
+    setOverviewBusy(true);
+    fetchJson<OverviewResponse>(`/api/overview?${filterQuery(ward, sample, asOf)}`, ac.signal)
+      .then((data) => {
+        if (ac.signal.aborted) return;
+        setOverview(data);
+        setOverviewBusy(false);
+        setError(null);
+        const top = data.topOrganisms.map((t) => t.organism);
+        setOrganism((prev) =>
+          prev && top.includes(prev)
+            ? prev
+            : (data.kpis.mostCommonOrganism?.organism ?? top[0] ?? null),
+        );
+      })
+      .catch((err: unknown) => {
+        if (ac.signal.aborted || isAbortError(err)) return;
+        setOverviewBusy(false);
+        setError(errorMessage(err));
+      });
+    return () => ac.abort();
+  }, [ward, sample, asOf, retryNonce]);
+
+  // Heatmap — needs an organism; the default resolves once the overview lands.
+  useEffect(() => {
+    if (!organism) return;
+    const ac = new AbortController();
+    setHeatmapBusy(true);
+    fetchJson<HeatmapResponse>(
+      `/api/heatmap?organism=${encodeURIComponent(organism)}&${filterQuery(ward, sample, asOf)}`,
+      ac.signal,
+    )
+      .then((data) => {
+        if (ac.signal.aborted) return;
+        setHeatmap(data);
+        setHeatmapBusy(false);
+        setError(null);
+      })
+      .catch((err: unknown) => {
+        if (ac.signal.aborted || isAbortError(err)) return;
+        setHeatmapBusy(false);
+        setError(errorMessage(err));
+      });
+    return () => ac.abort();
+  }, [ward, sample, asOf, organism, retryNonce]);
+
+  // Investigation — lazy: only the top signal, only when the alert card renders it.
+  const topSignalId = topSignal?.id ?? null;
+  useEffect(() => {
+    if (!topSignalId) {
+      setInvestigation(null);
+      return;
     }
-    return [{ value: ward, label: ward }];
-  }, [meta, ward]);
+    const ac = new AbortController();
+    setInvestigationBusy(true);
+    const params = new URLSearchParams({ id: topSignalId });
+    if (asOf) params.set("asOf", asOf);
+    fetchJson<AlertInvestigationResponse>(`/api/alerts/investigate?${params.toString()}`, ac.signal)
+      .then((data) => {
+        if (ac.signal.aborted) return;
+        setInvestigation({ id: topSignalId, data });
+        setInvestigationBusy(false);
+        setError(null);
+      })
+      .catch((err: unknown) => {
+        if (ac.signal.aborted || isAbortError(err)) return;
+        setInvestigationBusy(false);
+        setError(errorMessage(err));
+      });
+    return () => ac.abort();
+  }, [topSignalId, asOf, retryNonce]);
 
-  const sampleOptions = useMemo<SelectOption[]>(() => {
-    const types = meta?.sampleTypes ?? [];
-    return [
-      { value: SAMPLE_ALL, label: "All specimens" },
-      ...types.map((t) => ({
-        value: t,
-        label: t.length === 0 ? t : t.charAt(0).toUpperCase() + t.slice(1),
-      })),
-    ];
-  }, [meta]);
+  // Only show investigation data that belongs to the currently displayed top signal.
+  const investigationForTop =
+    investigation && topSignal && investigation.id === topSignal.id ? investigation.data : null;
 
-  const summary = useMemo(() => {
-    if (!data) return null;
-    const totalIsolates = data.rows.reduce((acc, row) => acc + row.n, 0);
-    let flagged = 0;
-    for (const row of data.rows) {
-      for (const cell of row.cells) {
-        if (cell.sufficient && Math.round(cell.sPct) < 60) flagged += 1;
-      }
-    }
-    return { totalIsolates, flagged };
-  }, [data]);
+  // Only show heatmap data for the organism the select displays right now.
+  const heatmapForOrganism = heatmap && organism && heatmap.organism === organism ? heatmap : null;
 
-  const showAnnual = windowKey === "4w" && annual !== null;
+  const wardOptions = useMemo<SelectOption[]>(
+    () =>
+      meta
+        ? [
+            { value: ALL_WARDS, label: "All wards" },
+            ...meta.wards
+              .filter((w) => w !== ALL_WARDS)
+              .map((w) => ({ value: w, label: w })),
+          ]
+        : [{ value: ward, label: "Loading…" }],
+    [meta, ward],
+  );
 
-  const contextLine =
-    !error && data && summary
-      ? `${ward} · ${WINDOW_OPTIONS[windowKey]} · ${formatRange(data.windowStart, data.windowEnd)} · ${summary.totalIsolates.toLocaleString("en-US")} first isolates · Updated ${fmtDateTime.format(parseIso(data.generatedAt))}`
-      : `${ward} · ${WINDOW_OPTIONS[windowKey]}`;
+  const sampleOptions = useMemo<SelectOption[]>(
+    () =>
+      meta
+        ? [
+            { value: FILTER_ALL, label: "All specimens" },
+            ...meta.sampleTypes.map((s) => ({
+              value: s,
+              label: s.charAt(0).toUpperCase() + s.slice(1),
+            })),
+          ]
+        : [{ value: sample, label: "Loading…" }],
+    [meta, sample],
+  );
+
+  const organismOptions = useMemo<SelectOption[]>(
+    () =>
+      overview && overview.topOrganisms.length > 0
+        ? overview.topOrganisms.map((t) => ({ value: t.organism, label: t.organism }))
+        : (meta?.organisms ?? []).map((o) => ({ value: o, label: o })),
+    [overview, meta],
+  );
+
+  const firstLoad = !overview;
 
   return (
-    <div>
-      <header className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight">Ward susceptibility</h1>
-          <p className="mt-1 font-mono text-xs tabular-nums text-muted-foreground" aria-live="polite">
-            {contextLine}
-          </p>
-        </div>
+    <div className="flex flex-col gap-5">
+      <header>
+        <h1 className="text-xl font-bold text-foreground">Antimicrobial Resistance Overview</h1>
+        <p className="text-[13px] text-muted-foreground">
+          Real-time surveillance from Tyks Laboratories · first isolate per patient, minimum 30
+          isolates
+        </p>
+      </header>
+
+      {error ? <ErrorBanner message={error} onRetry={() => setRetryNonce((n) => n + 1)} /> : null}
+
+      <Card className="flex flex-wrap items-end gap-4">
         <Select
           label="Ward"
           value={ward}
           options={wardOptions}
-          onChange={(nextWard) => {
-            setWard(nextWard);
-            writeStoredWard(nextWard);
-          }}
-          className="min-w-[190px]"
+          onChange={setWard}
+          className="w-44"
         />
-      </header>
-
-      <div className="mb-4 flex flex-wrap items-end gap-x-4 gap-y-3">
         <Select
           label="Specimen type"
           value={sample}
           options={sampleOptions}
           onChange={setSample}
-          className="min-w-[170px]"
+          className="w-44"
         />
         <div>
-          <div className="mb-1 text-[12px] font-medium text-muted-foreground">Window</div>
-          <div
-            className="flex h-9 items-center gap-0.5 rounded-lg bg-muted p-0.5"
-            role="group"
-            aria-label="Time window"
-          >
-            {(Object.entries(WINDOW_OPTIONS) as [WindowKey, string][]).map(([value, label]) => (
+          <label htmlFor={replayId} className="mb-1 block text-[12px] font-medium text-muted-foreground">
+            Historical replay
+          </label>
+          <div className="flex items-center gap-2">
+            <input
+              id={replayId}
+              type="date"
+              value={asOf}
+              min={meta && meta.dateMin ? meta.dateMin.slice(0, 10) : undefined}
+              max={meta && meta.dateMax ? meta.dateMax.slice(0, 10) : undefined}
+              onChange={(event) => setAsOf(event.target.value)}
+              className="h-9 rounded-lg border border-border bg-card px-3 text-[13px] font-medium text-foreground tabular-nums focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+            />
+            <span
+              className="cursor-help text-muted-foreground"
+              title="Historical replay: every card is recomputed as if 'now' were the chosen date — windows, KPIs, alerts and heatmaps all shift. Clear the date to return to the live feed."
+            >
+              <InfoIcon />
+            </span>
+            {asOf ? (
               <button
-                key={value}
                 type="button"
-                aria-pressed={windowKey === value}
-                onClick={() => setWindowKey(value)}
-                className={`h-8 rounded-lg border px-3 text-[13px] font-medium ${
-                  windowKey === value
-                    ? "border-border bg-card text-foreground"
-                    : "border-transparent text-muted-foreground hover:text-foreground"
-                }`}
+                onClick={() => setAsOf("")}
+                className="text-xs font-medium text-primary hover:underline"
               >
-                {label}
+                Live
               </button>
-            ))}
+            ) : null}
           </div>
         </div>
-        {metaError ? <Badge tone="neutral">Ward list unavailable</Badge> : null}
-      </div>
-
-      <Card padding="p-6">
-        {loading ? (
-          <div aria-hidden>
-            <div className="h-3 w-28 animate-pulse rounded bg-muted" />
-            <div className="mt-5 space-y-2">
-              {Array.from({ length: 5 }, (_, i) => (
-                <div key={i} className="h-11 w-full animate-pulse rounded bg-muted" />
-              ))}
-            </div>
-          </div>
-        ) : error ? (
-          <div className="flex flex-col items-start gap-3 py-10">
-            <Badge tone="neutral">Request failed</Badge>
-            <p className="max-w-lg text-[13px] leading-relaxed text-muted-foreground">{error}</p>
-            <button
-              type="button"
-              onClick={() => setRetryToken({ n: retryToken.n + 1 })}
-              className="h-9 rounded-lg bg-primary px-4 text-[13px] font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              Try again
-            </button>
-          </div>
-        ) : data && summary ? (
-          <>
-            {summary.totalIsolates > 0 ? (
-              <SummaryStat
-                label="Flagged cells"
-                value={String(summary.flagged)}
-                valueClass={
-                  summary.flagged > 0
-                    ? "text-xl font-semibold text-danger"
-                    : "text-xl font-semibold text-foreground"
-                }
-                note={`S < 60%, n ≥ ${MIN_ISOLATES}`}
-              />
-            ) : null}
-
-            <div className="mt-5">
-              {summary.totalIsolates === 0 ? (
-                <div className="flex flex-col items-center gap-1.5 py-14 text-center">
-                  <p className="text-sm font-semibold">No isolates in this period</p>
-                  <p className="max-w-md text-[13px] leading-relaxed text-muted-foreground">
-                    No first isolates matched the selected ward, specimen type and window. Try
-                    “All specimens”, a different ward, or switch the window to “This year”.
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <BestPickStrip data={data} />
-                  <AntibiogramMatrix
-                    data={data}
-                    annual={annual}
-                    showAnnual={showAnnual}
-                    focus={focus}
-                    onSelect={setFocus}
-                  />
-                </>
-              )}
-            </div>
-
-            {focus ? (
-              <FocusFooter focus={focus} showAnnual={showAnnual} onClear={() => setFocus(null)} />
-            ) : null}
-          </>
-        ) : null}
+        <div className="ml-auto flex items-center gap-2 self-center pb-1.5">
+          <span className="text-[13px] text-muted-foreground tabular-nums">
+            Window:{" "}
+            {overview ? fmtWindow(overview.windowStart, overview.windowEnd) : "—"} · compared to
+            previous 4 weeks
+          </span>
+          {asOf ? <Badge tone="warning">Historical replay</Badge> : null}
+          {overviewBusy && overview ? (
+            <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+              Updating…
+            </span>
+          ) : null}
+        </div>
       </Card>
+
+      {firstLoad || !overview ? (
+        <SkeletonGrid />
+      ) : (
+        <>
+          <KpiRow overview={overview} />
+
+          <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+            <div className="min-w-0 xl:col-span-2">
+              <TrendChartCard series={overview.series} busy={overviewBusy} />
+            </div>
+            <AlertCard
+              alertCount={overview.alertCount}
+              topSignal={topSignal}
+              investigation={investigationForTop}
+              busy={investigationBusy}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+            <div className="min-w-0 xl:col-span-2">
+              <HeatmapCard
+                heatmap={heatmapForOrganism}
+                organism={organism}
+                organismOptions={organismOptions}
+                onOrganismChange={setOrganism}
+                busy={heatmapBusy}
+              />
+            </div>
+            <InsightsCard
+              overview={overview}
+              investigation={investigationForTop}
+              heatmap={heatmapForOrganism}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <SpecimenCard specimen={overview.specimen} />
+            <TopOrganismsCard topOrganisms={overview.topOrganisms} />
+            <RecentIsolatesCard recentIsolates={overview.recentIsolates} />
+          </div>
+
+          <footer className="text-[11px] text-muted-foreground">
+            Last updated {fmtTime(overview.generatedAt)} · data through{" "}
+            {fmtDayMonth(overview.windowEnd)} · all data synthetic
+          </footer>
+        </>
+      )}
     </div>
   );
 }

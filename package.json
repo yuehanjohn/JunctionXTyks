@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start -p 3777",
     "lint": "next lint",
+    "test": "vitest run",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "db:reset": "prisma db push --force-reset && tsx prisma/seed.ts"
@@ -15,9 +16,15 @@
     "seed": "tsx prisma/seed.ts"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@prisma/client", "prisma", "@tailwindcss/oxide", "sharp"]
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "prisma",
+      "@tailwindcss/oxide",
+      "sharp"
+    ]
   },
   "dependencies": {
+    "@napi-rs/canvas": "^1.0.11",
     "@prisma/client": "^6.16.2",
     "next": "^15.5.4",
     "react": "^19.1.1",
@@ -29,10 +36,29 @@
     "@types/node": "^22.18.6",
     "@types/react": "^19.1.14",
     "@types/react-dom": "^19.1.9",
+    "playwright-core": "^1.64.1",
     "postcss": "^8.5.6",
     "prisma": "^6.16.2",
     "tailwindcss": "^4.1.13",
     "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
-  }
+    "typescript": "^5.9.2",
+    "vitest": "^5.0.5"
+  },
+  "description": "Rolling, real-time antimicrobial resistance (AMR) surveillance **and early outbreak warning** for Tyks Laboratories (Junction x Tyks challenge mock-up).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuehanjohn/JunctionXTyks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yuehanjohn/JunctionXTyks/issues"
+  },
+  "homepage": "https://github.com/yuehanjohn/JunctionXTyks#readme"
 }

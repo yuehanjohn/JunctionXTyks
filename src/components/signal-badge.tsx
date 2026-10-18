@@ -31,9 +31,14 @@ export default function SignalBadge() {
         .catch(() => {});
     load();
     const timer = setInterval(load, 120_000);
+    // New samples landing (lab-feed demo) re-score signals server-side; refresh
+    // immediately instead of waiting for the next poll.
+    const onRefresh = () => load();
+    window.addEventListener("aei:refresh-signals", onRefresh);
     return () => {
       alive = false;
       clearInterval(timer);
+      window.removeEventListener("aei:refresh-signals", onRefresh);
     };
   }, []);
 

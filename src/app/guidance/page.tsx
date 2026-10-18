@@ -177,7 +177,7 @@ export default function AdvisorPage() {
     <div className="flex h-[calc(100vh-4rem)] flex-col overflow-hidden rounded-[10px] border border-border bg-card">
       <div className="flex items-end justify-between gap-4 border-b border-border px-5 py-4">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">AI advisor</h1>
+          <h1 className="text-xl font-semibold tracking-tight">Antibiotic Guidance</h1>
           <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">
             answers computed from the current dataset · not a treatment guideline
           </p>

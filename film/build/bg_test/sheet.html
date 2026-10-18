@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#0a0e12;font-family:monospace}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px}
+.c{position:relative}
+.c img{width:100%;display:block}
+.c span{position:absolute;top:2px;left:2px;color:#0f0;background:#0008;padding:1px 4px;font-size:11px}
+</style></head><body><div class="g" id="g"></div>
+<script>
+const g=document.getElementById('g');
+for(let i=0;i<12;i++){
+ const d=document.createElement('div');d.className='c';
+ d.innerHTML=`<img src="f${String(i).padStart(5,'0')}.png"><span>${String(i).padStart(5,'0')}</span>`;
+ g.appendChild(d);
+}
+</script></body></html>

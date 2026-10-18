@@ -49,6 +49,8 @@ function CellButton({
   annual,
   showAnnual,
   selected,
+  flash,
+  flashNonce,
   onSelect,
 }: {
   organism: string;
@@ -57,6 +59,10 @@ function CellButton({
   annual: SusCell | null;
   showAnnual: boolean;
   selected: boolean;
+  /** true when this cell's susceptibility just moved (lab-feed animation) */
+  flash: boolean;
+  /** bumps on every data refresh so the CSS animation restarts */
+  flashNonce: number;
   onSelect: (focus: CellFocus | null) => void;
 }) {
   const sufficient = cell.sufficient;
@@ -84,7 +90,8 @@ function CellButton({
     >
       {sufficient ? (
         <span
-          className="block font-mono text-[15px] font-semibold leading-tight tabular-nums"
+          key={`v-${flashNonce}`}
+          className={`block font-mono text-[15px] font-semibold leading-tight tabular-nums${flash ? " cell-flash" : ""}`}
           style={{ color: valueColorFor(cell) }}
         >
           {Math.round(cell.sPct)}
@@ -181,6 +188,7 @@ export function AntibiogramMatrix({
   annual,
   showAnnual,
   focus,
+  flash,
   onSelect,
 }: {
   data: AntibiogramResponse;
@@ -188,6 +196,8 @@ export function AntibiogramMatrix({
   annual: AntibiogramResponse | null;
   showAnnual: boolean;
   focus: CellFocus | null;
+  /** Cells whose susceptibility moved on the latest lab-feed refresh. */
+  flash?: { nonce: number; keys: Set<string> };
   onSelect: (focus: CellFocus | null) => void;
 }) {
   const { rows, antibiotics, cellsByOrganism, annualByKey } = useMemo(() => {
@@ -296,6 +306,8 @@ export function AntibiogramMatrix({
                               focus.organism === row.organism &&
                               focus.antibiotic === antibiotic
                             }
+                            flash={flash?.keys.has(`${row.organism}|${antibiotic}`) ?? false}
+                            flashNonce={flash?.nonce ?? 0}
                             onSelect={onSelect}
                           />
                         ) : (

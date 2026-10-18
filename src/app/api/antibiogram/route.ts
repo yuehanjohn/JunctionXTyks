@@ -16,7 +16,10 @@ export async function GET(request: Request) {
   const response = await getAntibiogram({
     ward: params.get("ward") ?? undefined,
     sampleType: params.get("sample") || null,
+    sex: params.get("sex") || null,
+    ageBand: params.get("age") || null,
     window,
+    asOf: params.get("asOf") || null,
   });
   return NextResponse.json(response);
 }
